@@ -7,7 +7,7 @@ var actionHarvest = {
         
         var sources = srcs || [STRUCTURE_CONTAINER, FIND_DROPPED_RESOURCES, STRUCTURE_STORAGE];
 
-        // console.log(creep, sources);
+        console.log(creep, sources);
 
         var target = false;
 

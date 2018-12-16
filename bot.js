@@ -32,7 +32,7 @@ var bot = {
                 }
             }
         }else{
-            if(actionHarvest.do(creep)){
+            if(actionHarvest.do(creep, sources)){
                 return true;
             }
         }
