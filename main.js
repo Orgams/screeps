@@ -6,6 +6,9 @@ var infoPerf = require('info.perf');
 var bot = require('bot');
 
 module.exports.loop = function () {
+
+    // Je suis sur github ^^
+
     var scriptName = "main";
     infoPerf.init(scriptName,false);
     
