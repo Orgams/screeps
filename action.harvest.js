@@ -5,7 +5,7 @@ var actionHarvest = {
     do: function(creep, srcs){
         
         
-        var sources = srcs || [STRUCTURE_CONTAINER, STRUCTURE_STORAGE];
+        var sources = srcs || [STRUCTURE_CONTAINER, FIND_DROPPED_RESOURCES, STRUCTURE_STORAGE];
 
         var target = false;
 
@@ -18,15 +18,6 @@ var actionHarvest = {
                 }
                 return true;
             }
-        }
-        
-        var targets = creep.room.find(FIND_DROPPED_RESOURCES).
-        target = creep.pos.findClosestByRange(targets);
-        if(target){
-            if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
-                actionMove.do(creep, target);
-            }
-            return true;
         }
         
         // Recolter sur les sources si il n'y a pas le bon nombre de mineur
