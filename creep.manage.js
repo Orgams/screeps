@@ -21,7 +21,7 @@ var fonc_manage_creep = function(room){
     configs.push(new Config('upgrader',   4, 1, 1, 1,  oneWorkTreeCarry, "#0000ff"));
     configs.push(new Config('janitor',    5, 0, 0, 0,  oneWorkTreeCarry, "#00ffff"));
     configs.push(new Config('repairer',   6, 0, 0, 0,  oneWorkTreeCarry, "#ffff00"));
-    configs.push(new Config('claimer',    7, 0, 0, 1,  small,            "#ffffff"), true);
+    configs.push(new Config('claimer',    7, 0, 0, 1,  small,            "#ffffff", true));
     infoPerf.log(scriptName, "Init configs");
     
     // Initialisation for this room
@@ -64,7 +64,6 @@ var fonc_manage_creep = function(room){
     // Eliminer les configuration qui sont arriver à leur max de population
     configs = configs.filter((config) => config.maxOk());
     infoPerf.log(scriptName, "Delete conf in max");
-
     
     // Initialiser totalRestePopOpti : l'adition de toutes les population optimal qui ne sont pas à leur max
     for (var indexConfig in configs){
