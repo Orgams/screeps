@@ -2,7 +2,7 @@ var bot = require('bot');
 
 var role = {
     run: function(creep) {
-    	console.log("claimer")
+    	//console.log("claimer")
         //return bot.run(creep, ['build', 'repair','transfer', 'storager']);
         if(false){
 			if(creep.room.controller && !creep.room.controller.my) {

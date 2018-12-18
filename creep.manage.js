@@ -56,7 +56,16 @@ var fonc_manage_creep = function(room){
     for (var indexConfig in configs){
         var config = configs[indexConfig];
         config.nb = _.sum(roomCreeps, (c) => c.memory.role == config.role);
+        if (config.nb === undefined) config.nb = 0;
         room.memory.nb[config.role]=config.nb;
+    }
+    for(var name in Game.spawns) {
+        var spawn = Game.spawns[name];
+        if (spawn.spawning != null){
+            let roleCur = spawn.spawning.name.replace(/[0-9]/g, '');
+            let confCur = configs.filter((config) => config.role === roleCur)[0];
+            confCur.nb++;
+        }
     }
     //console.log(room.memory.nb.builder)
     infoPerf.log(scriptName, "Init nb for each type creep");
