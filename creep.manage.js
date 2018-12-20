@@ -37,7 +37,6 @@ var fonc_manage_creep = function(room){
     configMineur.min = nbMiners;
     configMineur.max = nbMiners;
     configMineur.popOpti = nbMiners;
-    configMineur.strict = true;
     infoPerf.log(scriptName, "Init miner");
     
     // Initialiser la configuration du builder au nombre au total site de construction / 1000 de la salle
@@ -69,7 +68,14 @@ var fonc_manage_creep = function(room){
         }
     }
     var configClaimer = configs.find((config) => config.role == 'claimer');
-    configClaimer.nb = _.sum(Game.creeps, (creep) => creep.memory.role == 'claimer');
+    if(Game.gcl.level > Object.keys(Game.rooms).length){
+        configClaimer.nb = _.sum(Game.creeps, (creep) => creep.memory.role == 'claimer');
+    }else{
+        configClaimer.min = 0;
+        configClaimer.max = 0;
+        configClaimer.popOpti = 0;
+    }
+    
     //console.log(room.memory.nb.builder)
     infoPerf.log(scriptName, "Init nb for each type creep");
     
