@@ -6,6 +6,7 @@ const fullWork = [WORK, WORK, WORK, WORK, WORK, WORK];
 const carryWork = [CARRY, WORK, MOVE, CARRY, MOVE, WORK, MOVE];
 const oneWorkTreeCarry = [WORK, CARRY, CARRY, MOVE, CARRY, MOVE];
 const small = [WORK, CARRY]
+const claim = [CLAIM, CARRY]
 
 const freqAffichage = 1;
 
@@ -21,7 +22,7 @@ var fonc_manage_creep = function(room){
     configs.push(new Config('upgrader',   4, 1, 1, 1,  oneWorkTreeCarry, "#0000ff"));
     configs.push(new Config('janitor',    5, 0, 0, 0,  oneWorkTreeCarry, "#00ffff"));
     configs.push(new Config('repairer',   6, 0, 0, 0,  oneWorkTreeCarry, "#ffff00"));
-    configs.push(new Config('claimer',    7, 0, 0, 1,  small,            "#ffffff", true));
+    configs.push(new Config('claimer',    7, 0, 0, 1,  claim,            "#ffffff", true));
     infoPerf.log(scriptName, "Init configs");
     
     // Initialisation for this room
