@@ -68,6 +68,8 @@ var fonc_manage_creep = function(room){
             confCur.nb++;
         }
     }
+    var configClaimer = configs.find((config) => config.role == 'claimer');
+    configClaimer.nb = _.sum(Game.creeps, (creep) => creep.memory.role == 'claimer');
     //console.log(room.memory.nb.builder)
     infoPerf.log(scriptName, "Init nb for each type creep");
     

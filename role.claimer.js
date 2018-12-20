@@ -6,9 +6,6 @@ var role = {
         //return bot.run(creep, ['build', 'repair','transfer', 'storager']);
         let rooms = Game.map.describeExits("W3N24");
 
-        for(var roomName in rooms) {
-        	console.log(roomName);
-        }
         if(false){
 			if(creep.room.controller && !creep.room.controller.my) {
 				if(creep.attackController(creep.room.controller) == ERR_NOT_IN_RANGE) {
