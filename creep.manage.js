@@ -6,7 +6,7 @@ const fullWork = [WORK, WORK, WORK, WORK, WORK, WORK];
 const carryWork = [CARRY, WORK, MOVE, CARRY, MOVE, WORK, MOVE];
 const oneWorkTreeCarry = [WORK, CARRY, CARRY, MOVE, CARRY, MOVE];
 const small = [WORK, CARRY]
-const claim = [CLAIM, CARRY]
+const claim = [CLAIM]
 
 const freqAffichage = 1;
 
