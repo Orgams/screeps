@@ -23,8 +23,6 @@ var fonc_create_creep = function(roleCreep, model, spawn, colorCreep, strict){
     costBody = 0;
     body = [];
     
-    add_part(MOVE);
-    
     var okLaunchSpawn = false;
 
     if (strict){
