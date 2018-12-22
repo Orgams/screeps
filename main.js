@@ -54,7 +54,7 @@ module.exports.loop = function () {
     
     try{
         // Create necessary creeps for all rooms
-        if (Game.time%1 == 0){
+        if (Game.time%10 == 0){
 
             var room = Game.rooms["W2N24"];;
 
