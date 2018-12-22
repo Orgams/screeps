@@ -19,18 +19,7 @@ let actionHarvest = {
                 return true;
             }
         }
-        
-        // Recolter sur les sources si il n'y a pas le bon nombre de mineur
-        if( Memory["nb.containers"] > Memory["nb.miner"]){
-            let targets = creep.room.find(FIND_SOURCES_ACTIVE);
-            target = creep.pos.findClosestByRange(targets);
-            if(target){
-                if(creep.harvest(target) == ERR_NOT_IN_RANGE) {
-                    actionMove.do(creep, target);
-                }
-                return true;
-            }
-        }
+
         return false;
         
     }
@@ -69,7 +58,10 @@ let findTarget = function(creep, source){
         targets = creep.room.find(FIND_DROPPED_RESOURCES);
     }
     if ([FIND_SOURCES_ACTIVE].includes(source)){
-        
+        // Recolter sur les sources si il n'y a pas le bon nombre de mineur
+        if( Memory["nb.containers"] > Memory["nb.miner"]){
+            let targets = creep.room.find(FIND_SOURCES_ACTIVE);
+        }
     }
     if (targets.length === 0){
         return false;

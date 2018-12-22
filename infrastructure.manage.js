@@ -1,5 +1,5 @@
 let infrastructureContainer  = require('infrastructure.container');
-let infrastructureRoadbinder = require('infrastructure.roadbinder');
+let infrastructurebind_structure_to_source = require('infrastructure.bind_structure_to_source');
 let infrastructurePerif = require('infrastructure.perif');
 
 let infoPerf = require('info.perf');
@@ -34,7 +34,7 @@ let infrastructure = {
         
         // relier Les structures et les sources par des routes
         if(!newSite){
-            newSite = infrastructureRoadbinder.build(room, sources)
+            newSite = infrastructurebind_structure_to_source.build(room, sources)
             infoPerf.log(scriptName, "Ajouter des routes entre les sources et les batiments");
         }
         
