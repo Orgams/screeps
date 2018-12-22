@@ -60,7 +60,6 @@ module.exports.loop = function() {
     }
 
     Memory["nb.containers"] = _.filter(structs, (structure) => structure.structureType == STRUCTURE_CONTAINER).length;
-    console.log(structs);
 
     try {
         // Create necessary creeps for all rooms
