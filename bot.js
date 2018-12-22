@@ -18,11 +18,11 @@ var bot = {
         // Se mettre en mode recherche d'énergie si on est en mode travail et que l'on n'a plus assez d'énergie
         if(!creep.memory.harvest && creep.carry.energy == 0) {
             creep.memory.harvest = true;
-            creep.say('harvest');
+            //creep.say('harvest');
         }
         if(creep.memory.harvest && creep.carry.energy == creep.carryCapacity) {
             creep.memory.harvest = false;
-            creep.say(creep.memory.role);
+            //creep.say(creep.memory.role);
         }
 
         if(!creep.memory.harvest){
