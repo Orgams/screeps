@@ -1,5 +1,6 @@
 var action = {
     do: function(creep, target){
+        if(target === null)return
         var energyDroped = creep.pos.findInRange(FIND_DROPPED_RESOURCES, 1);
         if(energyDroped.length > 0 && creep.carry.energy != creep.carryCapacity){
             creep.pickup(energyDroped[0]);
