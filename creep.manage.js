@@ -46,14 +46,15 @@ var fonc_manage_creep = function(room){
         var constr = constrs[i];
         rafConstr += constr.progressTotal - constr.progress;
     }
-    var nbBuilders = Math.max(1, rafConstr/10000);
+    nbRoom = Object.keys(Game.rooms).length;
+    var nbBuilders = Math.max(nbRoom, rafConstr/10000);
     var configBuilder = configs.find((config) => config.role == 'builder');
     configBuilder.popOpti = nbBuilders;
     infoPerf.log(scriptName, "Init builder");
 
     // Initialiser la configuration du claimer
     var configClaimer = configs.find((config) => config.role == 'claimer');
-    if(Game.gcl.level > Object.keys(Game.rooms).length){
+    if(Game.gcl.level > nbRoom){
         configClaimer.max = 1;
     }
 
