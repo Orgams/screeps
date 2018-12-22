@@ -30,7 +30,7 @@ var role = {
             var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (structure) => {
                     if (structure.structureType == STRUCTURE_CONTAINER) {
-                        if (structure.pos.findInRange(FIND_MY_CREEPS, 0) === 0) {
+                        if (structure.pos.findInRange(FIND_MY_CREEPS, 0).length === 0) {
                             return true;
                         } else {
                             return false;
