@@ -53,13 +53,20 @@ module.exports.loop = function() {
     }
 
     // Initialiser la mémoire
-    let structs = [];
-    for (room of Object.values(Game.rooms)) {
-        roomStruct = room.find(FIND_STRUCTURES);
-        structs = structs.concat(roomStruct);
-    }
+    if (Game.time % 1 == 0) {
+        let structs = [];
+        let sources = [];
+        for (room of Object.values(Game.rooms)) {
+            roomStruct = room.find(FIND_STRUCTURES);
+            structs = structs.concat(roomStruct);
 
-    Memory["nb.containers"] = _.filter(structs, (structure) => structure.structureType == STRUCTURE_CONTAINER).length;
+            roomSources = room.find(FIND_SOURCES_ACTIVE);
+            sources = sources.concat(roomSources);
+        }
+        Memory["nb.containers"] = _.filter(structs, (structure) => structure.structureType == STRUCTURE_CONTAINER).length;
+        Memory["sources"] = sources;
+        infoPerf.log(scriptName, "Initialiser la mémoire");
+    }
 
     try {
         // Create necessary creeps for all rooms
