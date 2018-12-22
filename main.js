@@ -67,6 +67,8 @@ module.exports.loop = function() {
 
         Memory["nb.containers"] = containers.length;
 
+        //Game.getObjectById
+        //Memory["structures"] = structs;
         Memory["containers"] = containers;
         Memory["sources"] = sources;
         infoPerf.log(scriptName, "Initialiser la mémoire");
@@ -91,7 +93,7 @@ module.exports.loop = function() {
     }
 
     try {
-        if (Game.time % 5 == 0) {
+        if (Game.time % 20 == 0) {
             for (let roomName in Game.rooms) {
                 let room = Game.rooms[roomName];
                 structManage.manage(room);

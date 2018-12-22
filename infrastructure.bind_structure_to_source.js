@@ -11,7 +11,7 @@ let infrastructure = {
             let source = sources[i];
             for (let j = structs.length -1 ; j >= 0; j--) {
                 let struct = structs[j];
-                let path = source.pos.findPathTo(struct,{ignoreCreeps: true});
+                let path = source.pos.findPathTo(struct,{ignoreCreeps: true, swampCost: 1});
                 for (let k = path.length - 2 ; k >= 0; k--) {
                     let point = path[k];
                     let pos = new RoomPosition(point.x, point.y, room.name);
