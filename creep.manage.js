@@ -50,6 +50,7 @@ let fonc_manage_creep = function(room){
     let nbBuilders = Math.max(nbRoom, rafConstr/10000);
     let configBuilder = configs.find((config) => config.role == 'builder');
     configBuilder.popOpti = nbBuilders;
+    configBuilder.max = nbBuilders;
     infoPerf.log(scriptName, "Init builder");
 
     // Initialiser la configuration du claimer
@@ -85,6 +86,13 @@ let fonc_manage_creep = function(room){
     configs = configs.filter((config) => config.maxOk());
     infoPerf.log(scriptName, "Delete conf in max");
     
+    // Initialiser totalRestePopOpti : l'adition de toutes les population optimal qui ne sont pas à leur max
+    for (let indexConfig in configs){
+        let config = configs[indexConfig];
+        totalRestePopOpti += config.popOpti;
+    }
+    infoPerf.log(scriptName, "Init totalRestePopOpti");
+
     // Initialiser 
     //    config.ratio : le ratio optimal des creep de ce type par rapport au total des population optimal qui ne sont pas à leur max
     //    totalCreeps : le total des creeps de type qui ne sont pas à leur max
@@ -118,13 +126,6 @@ let fonc_manage_creep = function(room){
         }
     }
     infoPerf.log(scriptName, "Create creep by min");
-
-    // Initialiser totalRestePopOpti : l'adition de toutes les population optimal qui ne sont pas à leur max
-    for (let indexConfig in configs){
-        let config = configs[indexConfig];
-        totalRestePopOpti += config.popOpti;
-    }
-    infoPerf.log(scriptName, "Init totalRestePopOpti");
 
     // Initialiser config.actualRatio : le ratio actuel des creeps de ce type par rapport au total de population actuel qui ne sont pas à leur max
     for (let indexConfig in configs){
