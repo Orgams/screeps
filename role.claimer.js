@@ -8,7 +8,6 @@ var role = {
 		//return bot.run(creep, ['build', 'repair','transfer', 'storager']);
 
 		// Verifier si on peut controler plus de Salles
-		if(!Game.gcl.level > Object.keys(Game.rooms).length)return;
 
 		if(creep.room.controller.my){
 			if (creep.memory.target === undefined){
@@ -30,16 +29,19 @@ var role = {
 		}else{
 			if(creep.room.controller) {
 				let ret = creep.attackController(creep.room.controller)
-				console.log(creep, creep.room.controller, ret)
+				
 				if(ret == ERR_NOT_IN_RANGE) {
 					actionMove.do(creep, creep.room.controller);
 				}
-				// if(creep.claimController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-				// 	creep.moveTo(creep.room.controller);
-				// }
-				// if(creep.reserveController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-				// 	creep.moveTo(creep.room.controller);
-				// }
+				ret = creep.claimController(creep.room.controller);
+				console.log(creep, creep.room.controller, ret)
+				if(ret == ERR_NOT_IN_RANGE) {
+				 	creep.moveTo(creep.room.controller);
+				}
+				ret = creep.reserveController(creep.room.controller);
+				if(ret == ERR_NOT_IN_RANGE) {
+				 	creep.moveTo(creep.room.controller);
+				}
 			}
 		}
 	}
