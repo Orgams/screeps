@@ -21,8 +21,7 @@ var actionHarvest = {
         }
         
         // Recolter sur les sources si il n'y a pas le bon nombre de mineur
-        //console.log ("nb.containers", creep.room.memory.nb.containers, "nb.miner", creep.room.memory.nb.miner, creep.room.memory.nb.containers > creep.room.memory.nb.miner)
-        if( creep.room.memory.nb.containers > creep.room.memory.nb.miner){
+        if( Memory["nb.containers"] > Memory["nb.miner"]){
             var targets = creep.room.find(FIND_SOURCES_ACTIVE);
             target = creep.pos.findClosestByRange(targets);
             if(target){

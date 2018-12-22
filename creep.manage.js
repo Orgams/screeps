@@ -32,7 +32,7 @@ var fonc_manage_creep = function(room){
     infoPerf.log(scriptName, "Init vars");
     
     // Initialiser le minimum du minier au nombre de conteneur de la salle
-    var nbMiners = room.memory.nb.containers;
+    var nbMiners = Memory["nb.containers"];
     var configMineur = configs.find((config) => config.role == 'miner');
     configMineur.min = nbMiners;
     configMineur.max = nbMiners;
@@ -63,7 +63,7 @@ var fonc_manage_creep = function(room){
         var config = configs[indexConfig];
         config.nb = _.sum(creeps, (c) => c.memory.role == config.role);
         if (config.nb === undefined) config.nb = 0;
-        room.memory.nb[config.role]=config.nb;
+        Memory["nb."+config.role]=config.nb;
     }
     for(var name in Game.spawns) {
         var spawn = Game.spawns[name];
@@ -78,8 +78,6 @@ var fonc_manage_creep = function(room){
         configClaimer.max = 0;
         configClaimer.popOpti = 0;
     }
-    
-    //console.log(room.memory.nb.builder)
     infoPerf.log(scriptName, "Init nb for each type creep");
     
     // Eliminer les configuration qui sont arriver à leur max de population

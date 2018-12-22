@@ -3,108 +3,115 @@ var structManage = require('infrastructure.manage');
 
 var infoPerf = require('info.perf');
 
-var memory = require('memory');
-
 var bot = require('bot');
 
-module.exports.loop = function () {
+module.exports.loop = function() {
 
     // Je suis sur github ^^
 
     var scriptName = "main";
-    infoPerf.init(scriptName,false);
-    
+    infoPerf.init(scriptName, false);
+
     try {
         var towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
-        towers.forEach(function(tower){
+        towers.forEach(function(tower) {
             var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-            if(closestHostile) {
+            if (closestHostile) {
                 tower.attack(closestHostile);
-            }else if (tower.energy > tower.energyCapacity/2) {
-                
+            } else if (tower.energy > tower.energyCapacity / 2) {
+
                 var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => structure.hits < structure.hitsMax/2 && structure.structureType != STRUCTURE_WALL
+                    filter: (structure) => structure.hits < structure.hitsMax / 2 && structure.structureType != STRUCTURE_WALL
                 });
-                if(closestDamagedStructure) {
+                if (closestDamagedStructure) {
                     tower.repair(closestDamagedStructure);
-                }else{
-                    
+                } else {
+
                     var closestAlly = tower.pos.findClosestByRange(FIND_CREEPS, {
                         filter: (target) => target.hits < target.hitsMax
                     });
-                    if(closestAlly){
+                    if (closestAlly) {
                         tower.heal(closestAlly);
                     }
                 }
             }
         })
         infoPerf.log(scriptName, "towers");
-    } catch(error) {
-      console.log("[main] towers : ", error);
+    } catch (error) {
+        console.log("[main] towers : ", error);
     }
-    
-    try{
+
+    try {
         // Assign all role
-        for(var name in Game.creeps) {
+        for (var name in Game.creeps) {
             var creep = Game.creeps[name];
-            require('role.'+creep.memory.role).run(creep);
+            require('role.' + creep.memory.role).run(creep);
         }
         infoPerf.log(scriptName, "creeps work");
-    } catch(error) {
-      console.log("[main] creeps work : ", error);
+    } catch (error) {
+        console.log("[main] creeps work : ", error);
     }
-    
-    try{
+
+    // Initialiser la mémoire
+    let structs = [];
+    for (room of Object.values(Game.rooms)) {
+        roomStruct = room.find(FIND_STRUCTURES);
+        structs = structs.concat(roomStruct);
+    }
+
+    Memory["nb.containers"] = _.filter(structs, (structure) => structure.structureType == STRUCTURE_CONTAINER).length;
+    console.log(structs);
+
+    try {
         // Create necessary creeps for all rooms
-        if (Game.time%1 == 0){
+        if (Game.time % 10 == 0) {
 
             var room = Game.rooms["W2N24"];
 
-            console.log(_.filter(Object.values(Game.structures), (structure) => structure.structureType == STRUCTURE_CONTAINER))
-            Memory["nb.containers"]=_.filter(Object.values(Game.structures), (structure) => structure.structureType == STRUCTURE_CONTAINER).length;;
 
-            if(room.memory.nb === undefined)room.memory.nb={};
+
+            if (room.memory.nb === undefined) room.memory.nb = {};
             room.memory.nb.containers = _.filter(room.find(FIND_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER).length;
             creepManage.manage_creep(room);
 
             infoPerf.log(scriptName, "creeps creation");
         }
-    } catch(error) {
-      console.log("[main] creeps creation : ", error);
+    } catch (error) {
+        console.log("[main] creeps creation : ", error);
     }
-    
-    try{
-        if (Game.time%20 == 0){
-            for(var roomName in Game.rooms) {
+
+    try {
+        if (Game.time % 20 == 0) {
+            for (var roomName in Game.rooms) {
                 var room = Game.rooms[roomName];
                 structManage.manage(room);
             }
             infoPerf.log(scriptName, "structures");
         }
-    } catch(error) {
-      console.log("[main] structures : ", error);
+    } catch (error) {
+        console.log("[main] structures : ", error);
     }
-    
-    try{
+
+    try {
         // Clean up creeps dead memory (RIP)
-        for(var i in Memory.creeps) {
-            if(!Game.creeps[i]) {
+        for (var i in Memory.creeps) {
+            if (!Game.creeps[i]) {
                 delete Memory.creeps[i];
             }
         }
         infoPerf.log(scriptName, "clean memory");
-    } catch(error) {
-      console.log("[main] clean memory : ", error);
+    } catch (error) {
+        console.log("[main] clean memory : ", error);
     }
     infoPerf.finish(scriptName);
-    
+
     //var scriptName = "";
     //infoPerf.init(scriptName,true);
     //infoPerf.log(scriptName, "");
     //infoPerf.finish(scriptName);
-    
+
     //console.log(Game.time,"--------------------------------------------------");
-    
+
     //if(creep.memory.role == 'transferer') {
     //    console.log(creep.name,targets)
     //}
