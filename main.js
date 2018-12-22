@@ -56,13 +56,17 @@ module.exports.loop = function () {
         // Create necessary creeps for all rooms
         if (Game.time%10 == 0){
 
-            var room = Game.rooms["W2N24"];;
+            var room = Game.rooms["W2N24"];
+
+            Memory.nb={};
+            Memory.nb.containers=3;
+
 
             if(room.memory.nb === undefined)room.memory.nb={};
             room.memory.nb.containers = _.filter(room.find(FIND_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER).length;
             creepManage.manage_creep(room);
 
-        infoPerf.log(scriptName, "creeps creation");
+            infoPerf.log(scriptName, "creeps creation");
         }
     } catch(error) {
       console.log("[main] creeps creation : ", error);

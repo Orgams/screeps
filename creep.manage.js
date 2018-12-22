@@ -13,13 +13,13 @@ const freqAffichage = 1;
 var fonc_manage_creep = function(room){
     var scriptName = "creep.manage";
     infoPerf.init(scriptName, false);
-    var roomCreeps = room.find(FIND_MY_CREEPS);
+    var creeps = Object.values(Game.creeps);
 
     var configs = [];
     configs.push(new Config('transferer', 1, 0, 0, 0,  oneWorkTreeCarry, "#00ff00"));
     configs.push(new Config('janitor',    2, 1, 1, 1,  oneWorkTreeCarry, "#00ffff"));
     configs.push(new Config('miner',      3, 0, 0, 0,  fullWork,         "#ff00ff", true));
-    //configs.push(new Config('builder',    4, 0, 1, 1,  carryWork,        "#ff0000"));
+    configs.push(new Config('builder',    4, 0, 1, 1,  carryWork,        "#ff0000"));
     configs.push(new Config('upgrader',   5, 1, 1, 1,  oneWorkTreeCarry, "#0000ff"));
     configs.push(new Config('repairer',   6, 0, 0, 0,  oneWorkTreeCarry, "#ffff00"));
     configs.push(new Config('claimer',    7, 0, 0, 0,  claim,            "#ffffff"));
@@ -61,7 +61,7 @@ var fonc_manage_creep = function(room){
     // Initialiser config.nb : le nombre actuel de creep de ce type
     for (var indexConfig in configs){
         var config = configs[indexConfig];
-        config.nb = _.sum(roomCreeps, (c) => c.memory.role == config.role);
+        config.nb = _.sum(creeps, (c) => c.memory.role == config.role);
         if (config.nb === undefined) config.nb = 0;
         room.memory.nb[config.role]=config.nb;
     }
@@ -73,9 +73,7 @@ var fonc_manage_creep = function(room){
             confCur.nb++;
         }
     }
-    if(Game.gcl.level > Object.keys(Game.rooms).length){
-        configClaimer.nb = _.sum(Game.creeps, (creep) => creep.memory.role == 'claimer');
-    }else{
+    if(Game.gcl.level <= Object.keys(Game.rooms).length){
         configClaimer.min = 0;
         configClaimer.max = 0;
         configClaimer.popOpti = 0;
