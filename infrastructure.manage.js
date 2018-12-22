@@ -41,7 +41,7 @@ var infrastructure = {
         // Creer des perifieriques
         if(!newSite){
             // Creer des perifieriques autour des sources
-            newSite = infrastructurePerif.build(room, sources,1);
+            //newSite = infrastructurePerif.build(room, sources,1);
             infoPerf.log(scriptName, "Creer les perifieriques sources 1");
             if(!newSite){
                 newSite = infrastructurePerif.build(room, sources,2);
