@@ -2,11 +2,11 @@ var creepCreate = require('creep.create');
 
 var infoPerf = require('info.perf');
 
-const fullWork =         [MOVE, WORK, WORK, WORK, WORK, WORK, WORK];
-const carryWork =        [MOVE, CARRY, WORK, MOVE, CARRY, MOVE, WORK, MOVE];
-const oneWorkTreeCarry = [MOVE, WORK, CARRY, CARRY, MOVE, CARRY, MOVE];
-const small =            [MOVE, WORK, CARRY]
-const claim =            [MOVE, CLAIM]
+const fullWork =         [WORK, WORK, WORK, MOVE, WORK, WORK, WORK, MOVE];
+const carryWork =        [CARRY, WORK, MOVE, CARRY, MOVE, WORK, MOVE, MOVE];
+const oneWorkTreeCarry = [WORK, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE];
+const small =            [WORK, CARRY, MOVE]
+const claim =            [CLAIM, MOVE]
 
 const freqAffichage = 1;
 

@@ -53,7 +53,7 @@ module.exports.loop = function() {
     }
 
     // Initialiser la mémoire
-    if (Game.time % 1 == 0) {
+    if (Game.time % 60 == 0) {
         let structs = [];
         let sources = [];
         for (room of Object.values(Game.rooms)) {
@@ -63,7 +63,11 @@ module.exports.loop = function() {
             roomSources = room.find(FIND_SOURCES_ACTIVE);
             sources = sources.concat(roomSources);
         }
-        Memory["nb.containers"] = _.filter(structs, (structure) => structure.structureType == STRUCTURE_CONTAINER).length;
+        let containers = _.filter(structs, (structure) => structure.structureType == STRUCTURE_CONTAINER)
+
+        Memory["nb.containers"] = containers.length;
+
+        Memory["containers"] = containers;
         Memory["sources"] = sources;
         infoPerf.log(scriptName, "Initialiser la mémoire");
     }
