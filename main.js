@@ -3,6 +3,8 @@ var structManage = require('infrastructure.manage');
 
 var infoPerf = require('info.perf');
 
+var memory = require('memory');
+
 var bot = require('bot');
 
 module.exports.loop = function () {
@@ -54,13 +56,12 @@ module.exports.loop = function () {
     
     try{
         // Create necessary creeps for all rooms
-        if (Game.time%10 == 0){
+        if (Game.time%1 == 0){
 
             var room = Game.rooms["W2N24"];
 
-            Memory.nb={};
-            Memory.nb.containers=3;
-
+            console.log(_.filter(Object.values(Game.structures), (structure) => structure.structureType == STRUCTURE_CONTAINER))
+            Memory["nb.containers"]=_.filter(Object.values(Game.structures), (structure) => structure.structureType == STRUCTURE_CONTAINER).length;;
 
             if(room.memory.nb === undefined)room.memory.nb={};
             room.memory.nb.containers = _.filter(room.find(FIND_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER).length;
