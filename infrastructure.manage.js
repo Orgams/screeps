@@ -1,24 +1,24 @@
-var infrastructureContainer  = require('infrastructure.container');
-var infrastructureRoadbinder = require('infrastructure.roadbinder');
-var infrastructurePerif = require('infrastructure.perif');
+let infrastructureContainer  = require('infrastructure.container');
+let infrastructureRoadbinder = require('infrastructure.roadbinder');
+let infrastructurePerif = require('infrastructure.perif');
 
-var infoPerf = require('info.perf');
+let infoPerf = require('info.perf');
 
-var infrastructure = {
+let infrastructure = {
     manage: function(room){
         
-        var scriptName = "infrastructure.manage";
+        let scriptName = "infrastructure.manage";
         infoPerf.init(scriptName,false);
         
-        var sites = room.find(FIND_CONSTRUCTION_SITES);
-        var newSite = sites.length != 0;
-        var sources = room.find(FIND_SOURCES);
+        let sites = room.find(FIND_CONSTRUCTION_SITES);
+        let newSite = sites.length != 0;
+        let sources = room.find(FIND_SOURCES);
         
         // Détruire tout les site de constructions
         if(false){
-            var sites = room.find(FIND_CONSTRUCTION_SITES)
-            for (var i = sites.length - 1; i >= 0; i--) {
-                var site = sites[i];
+            let sites = room.find(FIND_CONSTRUCTION_SITES)
+            for (let i = sites.length - 1; i >= 0; i--) {
+                let site = sites[i];
                 site.remove();
             }
         }
@@ -53,7 +53,7 @@ var infrastructure = {
             }
             // Creer des perifieriques autour des storages
             if(!newSite){
-                var containers = room.find(FIND_STRUCTURES, { filter: (struct) => struct.structureType == STRUCTURE_STORAGE });
+                let containers = room.find(FIND_STRUCTURES, { filter: (struct) => struct.structureType == STRUCTURE_STORAGE });
                 newSite = infrastructurePerif.build(room, containers, 3);
                 infoPerf.log(scriptName, "Creer les perifieriques containers 3");
             }

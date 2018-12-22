@@ -1,6 +1,6 @@
-var creepCreate = require('creep.create');
+let creepCreate = require('creep.create');
 
-var infoPerf = require('info.perf');
+let infoPerf = require('info.perf');
 
 const fullWork =         [WORK, WORK, WORK, MOVE, WORK, WORK, WORK, MOVE];
 const carryWork =        [CARRY, WORK, MOVE, CARRY, MOVE, WORK, MOVE, MOVE];
@@ -10,12 +10,12 @@ const claim =            [CLAIM, MOVE]
 
 const freqAffichage = 1;
 
-var fonc_manage_creep = function(room){
-    var scriptName = "creep.manage";
+let fonc_manage_creep = function(room){
+    let scriptName = "creep.manage";
     infoPerf.init(scriptName, false);
-    var creeps = Object.values(Game.creeps);
+    let creeps = Object.values(Game.creeps);
 
-    var configs = [];
+    let configs = [];
     configs.push(new Config('transferer', 1, 0, 0, 0,  oneWorkTreeCarry, "#00ff00"));
     configs.push(new Config('janitor',    2, 1, 1, 1,  oneWorkTreeCarry, "#00ffff"));
     configs.push(new Config('miner',      3, 0, 0, 0,  fullWork,         "#ff00ff", true));
@@ -26,48 +26,48 @@ var fonc_manage_creep = function(room){
     infoPerf.log(scriptName, "Init configs");
     
     // Initialisation for this room
-    var totalCreeps = 0;
-    var totalRestePopOpti = 0;
-    var allMinOk = true;
+    let totalCreeps = 0;
+    let totalRestePopOpti = 0;
+    let allMinOk = true;
     infoPerf.log(scriptName, "Init vars");
     
     // Initialiser le minimum du minier au nombre de conteneur de la salle
-    var nbMiners = Memory["nb.containers"];
-    var configMineur = configs.find((config) => config.role == 'miner');
+    let nbMiners = Memory["nb.containers"];
+    let configMineur = configs.find((config) => config.role == 'miner');
     configMineur.min = nbMiners;
     configMineur.max = nbMiners;
     configMineur.popOpti = nbMiners;
     infoPerf.log(scriptName, "Init miner");
     
     // Initialiser la configuration du builder au nombre au total site de construction / 1000 de la salle
-    var constrs = room.find(FIND_MY_CONSTRUCTION_SITES);
-    var rafConstr = 0;
-    for (var i = constrs.length - 1; i >= 0; i--) {
-        var constr = constrs[i];
+    let constrs = room.find(FIND_MY_CONSTRUCTION_SITES);
+    let rafConstr = 0;
+    for (let i = constrs.length - 1; i >= 0; i--) {
+        let constr = constrs[i];
         rafConstr += constr.progressTotal - constr.progress;
     }
-    nbRoom = Object.keys(Game.rooms).length;
-    var nbBuilders = Math.max(nbRoom, rafConstr/10000);
-    var configBuilder = configs.find((config) => config.role == 'builder');
+    let nbRoom = Object.keys(Game.rooms).length;
+    let nbBuilders = Math.max(nbRoom, rafConstr/10000);
+    let configBuilder = configs.find((config) => config.role == 'builder');
     configBuilder.popOpti = nbBuilders;
     infoPerf.log(scriptName, "Init builder");
 
     // Initialiser la configuration du claimer
-    var configClaimer = configs.find((config) => config.role == 'claimer');
+    let configClaimer = configs.find((config) => config.role == 'claimer');
     if(Game.gcl.level > nbRoom){
         configClaimer.max = 1;
     }
 
     /// Inisialiser les données de configs spécifique à cette salle
     // Initialiser config.nb : le nombre actuel de creep de ce type
-    for (var indexConfig in configs){
-        var config = configs[indexConfig];
+    for (let indexConfig in configs){
+        let config = configs[indexConfig];
         config.nb = _.sum(creeps, (c) => c.memory.role == config.role);
         if (config.nb === undefined) config.nb = 0;
         Memory["nb."+config.role]=config.nb;
     }
-    for(var name in Game.spawns) {
-        var spawn = Game.spawns[name];
+    for(let name in Game.spawns) {
+        let spawn = Game.spawns[name];
         if (spawn.spawning != null){
             let roleCur = spawn.spawning.name.replace(/[0-9]/g, '');
             let confCur = configs.filter((config) => config.role === roleCur)[0];
@@ -88,8 +88,8 @@ var fonc_manage_creep = function(room){
     // Initialiser 
     //    config.ratio : le ratio optimal des creep de ce type par rapport au total des population optimal qui ne sont pas à leur max
     //    totalCreeps : le total des creeps de type qui ne sont pas à leur max
-    for (var indexConfig in configs){
-        var config = configs[indexConfig];
+    for (let indexConfig in configs){
+        let config = configs[indexConfig];
         if(config.ratio === null)config.ratio=0;
         if(totalRestePopOpti === 0){
             config.ratio=0;
@@ -103,11 +103,11 @@ var fonc_manage_creep = function(room){
     
     // Create the necessary stuff that does not have its minimum for this room
     if (!allMinOk){
-        for(var name in Game.spawns) {
-            var spawn = Game.spawns[name];
+        for(let name in Game.spawns) {
+            let spawn = Game.spawns[name];
             if (spawn.spawning == null){
-                for (var indexConfig in configs){
-                    var config = configs[indexConfig];
+                for (let indexConfig in configs){
+                    let config = configs[indexConfig];
                     if (!config.minOk()){
                         console.log(config.role,": le minimum n'est pas respecter :",config.nb,"/",config.min)
                         creepCreate.create_creep(config.role, config.model, spawn, config.color, config.strict);
@@ -120,15 +120,15 @@ var fonc_manage_creep = function(room){
     infoPerf.log(scriptName, "Create creep by min");
 
     // Initialiser totalRestePopOpti : l'adition de toutes les population optimal qui ne sont pas à leur max
-    for (var indexConfig in configs){
-        var config = configs[indexConfig];
+    for (let indexConfig in configs){
+        let config = configs[indexConfig];
         totalRestePopOpti += config.popOpti;
     }
     infoPerf.log(scriptName, "Init totalRestePopOpti");
 
     // Initialiser config.actualRatio : le ratio actuel des creeps de ce type par rapport au total de population actuel qui ne sont pas à leur max
-    for (var indexConfig in configs){
-        var config = configs[indexConfig];
+    for (let indexConfig in configs){
+        let config = configs[indexConfig];
         if(totalCreeps === 0){
             config.actualRatio=0;
         }else{
@@ -140,11 +140,11 @@ var fonc_manage_creep = function(room){
 
     
     // Create the necessary stuff that does not have their popOpti without removing the maximum for this room
-    for(var name in Game.spawns) {
-        var spawn = Game.spawns[name];
+    for(let name in Game.spawns) {
+        let spawn = Game.spawns[name];
         if (spawn.spawning == null){
-            for (var indexConfig in configs){
-                var config = configs[indexConfig];
+            for (let indexConfig in configs){
+                let config = configs[indexConfig];
                 console.log(config.role,"maxOk", config.maxOk(), "ratioOk", config.ratioOk(), "config.ratio", config.ratio, "config.actualRatio", config.actualRatio)
                 if (config.maxOk() && config.ratioOk()){
                     //console.log(config.role,": le maximum et le ratio ne sont pas atteint (",config.nb,"/",config.max," et ", config.printableActualRatio(),"/", config.printableRatio(),")");

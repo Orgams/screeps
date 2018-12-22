@@ -1,8 +1,8 @@
-var actionMove = require('action.move');
+let actionMove = require('action.move');
 
-var actionRepair = {
+let actionRepair = {
     do: function(creep){
-    	var targets = creep.room.find(FIND_STRUCTURES, {
+    	let targets = creep.room.find(FIND_STRUCTURES, {
     		filter: struct =>{
     		    if(struct.structureType == STRUCTURE_WALL)
     		        return false;
@@ -24,7 +24,7 @@ var actionRepair = {
     	
     	targets = targets.slice(0, Math.ceil(targets.length/4));
 
-        var target = creep.pos.findClosestByRange(targets);
+        let target = creep.pos.findClosestByRange(targets);
         
         
         

@@ -1,8 +1,8 @@
-var actionHarvest = require('action.harvest');
-var actionMove = require('action.move');
-var actionMine = require('action.mine')
+let actionHarvest = require('action.harvest');
+let actionMove = require('action.move');
+let actionMine = require('action.mine')
 
-var role = {
+let role = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
@@ -19,15 +19,15 @@ var role = {
         }
 
         // Recuperer les containers
-        var containers = _.filter(creep.pos.lookFor(LOOK_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER);
-        var onContainer = containers.length != 0;
+        let containers = _.filter(creep.pos.lookFor(LOOK_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER);
+        let onContainer = containers.length != 0;
         if (onContainer) {
-            var container = containers[0];
+            let container = containers[0];
             if (container.store[RESOURCE_ENERGY] < container.storeCapacity) {
                 actionMine.do(creep)
             }
         } else {
-            var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+            let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (structure) => {
                     if (structure.structureType == STRUCTURE_CONTAINER) {
                         if (structure.pos.findInRange(FIND_MY_CREEPS, 0).length === 0) {

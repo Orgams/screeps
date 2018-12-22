@@ -1,9 +1,9 @@
-var actionMove = require('action.move');
+let actionMove = require('action.move');
 
-var action = {
+let action = {
 	do: function(creep){
-		var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-		var target = creep.pos.findClosestByRange(targets);
+		let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+		let target = creep.pos.findClosestByRange(targets);
 
 		if(target == null){
 			targets = Game.constructionSites;

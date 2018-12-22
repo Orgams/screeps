@@ -1,21 +1,21 @@
-var roadCreate = require('road.create');
+let roadCreate = require('road.create');
 
-var infrastructure = {
+let infrastructure = {
     build: function(room, sources){
-        var structs = room.find(FIND_STRUCTURES, {
+        let structs = room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return structure.structureType != STRUCTURE_ROAD;
             }
         });
-        for (var i = sources.length - 1; i >= 0; i--) {
-            var source = sources[i];
-            for (var j = structs.length -1 ; j >= 0; j--) {
-                var struct = structs[j];
-                var path = source.pos.findPathTo(struct,{ignoreCreeps: true});
-                for (var k = path.length - 2 ; k >= 0; k--) {
-                    var point = path[k];
-                    var pos = new RoomPosition(point.x, point.y, room.name);
-                    var ret = roadCreate.create(pos)
+        for (let i = sources.length - 1; i >= 0; i--) {
+            let source = sources[i];
+            for (let j = structs.length -1 ; j >= 0; j--) {
+                let struct = structs[j];
+                let path = source.pos.findPathTo(struct,{ignoreCreeps: true});
+                for (let k = path.length - 2 ; k >= 0; k--) {
+                    let point = path[k];
+                    let pos = new RoomPosition(point.x, point.y, room.name);
+                    let ret = roadCreate.create(pos)
                     if (ret == OK){
                         return true;
                     }

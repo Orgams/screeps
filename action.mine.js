@@ -1,8 +1,8 @@
-var action = {
+let action = {
     do: function(creep, colorCreep){
 
-        var sources = creep.room.find(FIND_SOURCES_ACTIVE);
-        var source = creep.pos.findClosestByRange(sources);
+        let sources = creep.room.find(FIND_SOURCES_ACTIVE);
+        let source = creep.pos.findClosestByRange(sources);
         if(source != null){
             creep.harvest(source);
             return true;

@@ -1,8 +1,8 @@
-var bot = require('bot');
+let bot = require('bot');
 
-var actionMove = require('action.move');
+let actionMove = require('action.move');
 
-var role = {
+let role = {
 	run: function(creep) {
 		//console.log("claimer")
 		//return bot.run(creep, ['build', 'repair','transfer', 'storager']);

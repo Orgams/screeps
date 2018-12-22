@@ -1,10 +1,10 @@
-var costBody = 0;
-var body = [];
-var spawn;
-var energyAvailabl
+let costBody = 0;
+let body = [];
+let spawn;
+let energyAvailabl
 
-var add_part = function(part) {
-    var cost_part = BODYPART_COST[part];
+let add_part = function(part) {
+    let cost_part = BODYPART_COST[part];
     if (costBody + cost_part <= energyAvailabl && body.length < 50){
         body.push(part);
         costBody += cost_part;
@@ -12,7 +12,7 @@ var add_part = function(part) {
     }
     return false;
 }
-var fonc_create_creep = function(roleCreep, model, spawn, colorCreep, strict){
+let fonc_create_creep = function(roleCreep, model, spawn, colorCreep, strict){
     
     console.log("test")
     
@@ -23,12 +23,12 @@ var fonc_create_creep = function(roleCreep, model, spawn, colorCreep, strict){
     costBody = 0;
     body = [];
     
-    var okLaunchSpawn = false;
+    let okLaunchSpawn = false;
 
     if (strict){
         model.forEach((module) => okLaunchSpawn = add_part(module))
     }else{
-        var indexSpe = 0;
+        let indexSpe = 0;
         while (add_part(model[indexSpe])) {
             indexSpe = (indexSpe + 1)%model.length;
         }

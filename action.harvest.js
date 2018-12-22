@@ -1,16 +1,16 @@
-var actionMove = require('action.move');
-var actionPickup = require('action.pickup');
+let actionMove = require('action.move');
+let actionPickup = require('action.pickup');
 
-var actionHarvest = {
+let actionHarvest = {
     do: function(creep, srcs){
         
         
-        var sources = srcs || [STRUCTURE_CONTAINER, FIND_DROPPED_RESOURCES, STRUCTURE_STORAGE];
+        let sources = srcs || [STRUCTURE_CONTAINER, FIND_DROPPED_RESOURCES, STRUCTURE_STORAGE];
 
-        var target = false;
+        let target = false;
 
-        for (var source of sources) {
-            var res = findTarget(creep, source);
+        for (let source of sources) {
+            let res = findTarget(creep, source);
             if(res){
                 //if(creep.withdraw(res, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 if(take(creep, source, res) == ERR_NOT_IN_RANGE) {
@@ -22,7 +22,7 @@ var actionHarvest = {
         
         // Recolter sur les sources si il n'y a pas le bon nombre de mineur
         if( Memory["nb.containers"] > Memory["nb.miner"]){
-            var targets = creep.room.find(FIND_SOURCES_ACTIVE);
+            let targets = creep.room.find(FIND_SOURCES_ACTIVE);
             target = creep.pos.findClosestByRange(targets);
             if(target){
                 if(creep.harvest(target) == ERR_NOT_IN_RANGE) {
@@ -36,7 +36,7 @@ var actionHarvest = {
     }
 };
 
-var take = function(creep, source, target){
+let take = function(creep, source, target){
     if ([STRUCTURE_CONTAINER, STRUCTURE_STORAGE].includes(source)){
         return creep.withdraw(target, RESOURCE_ENERGY);
     }
@@ -48,16 +48,16 @@ var take = function(creep, source, target){
     }
 }
 
-var findTarget = function(creep, source){
+let findTarget = function(creep, source){
     
-    var targets = [];
+    let targets = [];
     if ([STRUCTURE_CONTAINER, STRUCTURE_STORAGE].includes(source)){
         targets = creep.room.find(FIND_STRUCTURES, {filter: (structure) => {
             if (structure.structureType == source) {
-                var path = creep.pos.findPathTo(structure,{ignoreCreeps: true});
-                var coutDist = path.length * 10;
-                var stockRest = creep.carryCapacity - creep.carry[RESOURCE_ENERGY];
-                var energy_min = stockRest + coutDist;
+                let path = creep.pos.findPathTo(structure,{ignoreCreeps: true});
+                let coutDist = path.length * 10;
+                let stockRest = creep.carryCapacity - creep.carry[RESOURCE_ENERGY];
+                let energy_min = stockRest + coutDist;
                 if (structure.store[RESOURCE_ENERGY] > energy_min) {
                     return true;
                 }

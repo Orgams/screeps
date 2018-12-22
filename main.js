@@ -1,33 +1,33 @@
-var creepManage = require('creep.manage');
-var structManage = require('infrastructure.manage');
+let creepManage = require('creep.manage');
+let structManage = require('infrastructure.manage');
 
-var infoPerf = require('info.perf');
+let infoPerf = require('info.perf');
 
-var bot = require('bot');
+let bot = require('bot');
 
 module.exports.loop = function() {
 
     // Je suis sur github ^^
 
-    var scriptName = "main";
+    let scriptName = "main";
     infoPerf.init(scriptName, false);
 
     try {
-        var towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
+        let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
         towers.forEach(function(tower) {
-            var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+            let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             if (closestHostile) {
                 tower.attack(closestHostile);
             } else if (tower.energy > tower.energyCapacity / 2) {
 
-                var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+                let closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => structure.hits < structure.hitsMax / 2 && structure.structureType != STRUCTURE_WALL
                 });
                 if (closestDamagedStructure) {
                     tower.repair(closestDamagedStructure);
                 } else {
 
-                    var closestAlly = tower.pos.findClosestByRange(FIND_CREEPS, {
+                    let closestAlly = tower.pos.findClosestByRange(FIND_CREEPS, {
                         filter: (target) => target.hits < target.hitsMax
                     });
                     if (closestAlly) {
@@ -43,8 +43,8 @@ module.exports.loop = function() {
 
     try {
         // Assign all role
-        for (var name in Game.creeps) {
-            var creep = Game.creeps[name];
+        for (let name in Game.creeps) {
+            let creep = Game.creeps[name];
             require('role.' + creep.memory.role).run(creep);
         }
         infoPerf.log(scriptName, "creeps work");
@@ -76,7 +76,7 @@ module.exports.loop = function() {
         // Create necessary creeps for all rooms
         if (Game.time % 10 == 0) {
 
-            var room = Game.rooms["W2N24"];
+            let room = Game.rooms["W2N24"];
 
 
 
@@ -92,8 +92,8 @@ module.exports.loop = function() {
 
     try {
         if (Game.time % 20 == 0) {
-            for (var roomName in Game.rooms) {
-                var room = Game.rooms[roomName];
+            for (let roomName in Game.rooms) {
+                let room = Game.rooms[roomName];
                 structManage.manage(room);
             }
             infoPerf.log(scriptName, "structures");
@@ -104,7 +104,7 @@ module.exports.loop = function() {
 
     try {
         // Clean up creeps dead memory (RIP)
-        for (var i in Memory.creeps) {
+        for (let i in Memory.creeps) {
             if (!Game.creeps[i]) {
                 delete Memory.creeps[i];
             }
@@ -115,7 +115,7 @@ module.exports.loop = function() {
     }
     infoPerf.finish(scriptName);
 
-    //var scriptName = "";
+    //let scriptName = "";
     //infoPerf.init(scriptName,true);
     //infoPerf.log(scriptName, "");
     //infoPerf.finish(scriptName);

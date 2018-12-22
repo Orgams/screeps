@@ -1,6 +1,6 @@
-var actionMove = require('action.move');
+let actionMove = require('action.move');
 
-var action = {
+let action = {
     do: function(creep){
     	
         if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {

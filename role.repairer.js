@@ -1,6 +1,6 @@
-var bot = require('bot');
+let bot = require('bot');
 
-var role = {
+let role = {
     run: function(creep) {
         return bot.run(creep, ['repair','transfer', 'storager', 'build']);
     }

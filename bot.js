@@ -1,8 +1,8 @@
-var actionHarvest = require('action.harvest');
+let actionHarvest = require('action.harvest');
 
-var actionMove = require('action.move');
+let actionMove = require('action.move');
 
-var bot = {
+let bot = {
 
     /** @param {Creep} creep **/
     run: function(creep, actions, sources) {
@@ -26,7 +26,7 @@ var bot = {
         }
 
         if(!creep.memory.harvest){
-            for(var action of actions) {
+            for(let action of actions) {
                 if(require('action.'+action).do(creep)){
                     return true;
                 }

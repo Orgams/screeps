@@ -1,8 +1,8 @@
-var times = {};
-var start = {};
-var activate = {};
+let times = {};
+let start = {};
+let activate = {};
 
-var info = {
+let info = {
     init:function(script, activation) {
         activate[script] = activation;
         if(activate[script]){
@@ -13,14 +13,14 @@ var info = {
     },
     finish:function(script) {
         if(activate[script]){
-            var now = new Date().getTime();
+            let now = new Date().getTime();
             console.log("["+script+"]","-------- Total :",now-start[script]+" ms");
         }
     },
     log: function(script, message) {
         if(activate[script]){
-            var old = times[script];
-            var now = new Date().getTime();
+            let old = times[script];
+            let now = new Date().getTime();
             if(!old){
                 old = now;
             }
