@@ -34,7 +34,7 @@ var infrastructure = {
         
         // relier Les structures et les sources par des routes
         if(!newSite){
-            //newSite = infrastructureRoadbinder.build(room, sources)
+            newSite = infrastructureRoadbinder.build(room, sources)
             infoPerf.log(scriptName, "Ajouter des routes entre les sources et les batiments");
         }
         
