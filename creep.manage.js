@@ -22,7 +22,7 @@ var fonc_manage_creep = function(room){
     configs.push(new Config('builder',    4, 0, 1, 1,  carryWork,        "#ff0000"));
     configs.push(new Config('upgrader',   5, 1, 1, 1,  oneWorkTreeCarry, "#0000ff"));
     configs.push(new Config('repairer',   6, 0, 0, 0,  oneWorkTreeCarry, "#ffff00"));
-    configs.push(new Config('claimer',    7, 0, 0, 1,  claim,            "#ffffff", true));
+    configs.push(new Config('claimer',    7, 0, 0, 0,  claim,            "#ffffff", true));
     infoPerf.log(scriptName, "Init configs");
     
     // Initialisation for this room
@@ -51,6 +51,12 @@ var fonc_manage_creep = function(room){
     configBuilder.popOpti = nbBuilders;
     infoPerf.log(scriptName, "Init builder");
 
+    // Initialiser la configuration du claimer
+    var configClaimer = configs.find((config) => config.role == 'claimer');
+    if(Game.gcl.level > Object.keys(Game.rooms).length){
+        configClaimer.max = 1;
+    }
+
     /// Inisialiser les données de configs spécifique à cette salle
     // Initialiser config.nb : le nombre actuel de creep de ce type
     for (var indexConfig in configs){
@@ -67,7 +73,6 @@ var fonc_manage_creep = function(room){
             confCur.nb++;
         }
     }
-    var configClaimer = configs.find((config) => config.role == 'claimer');
     if(Game.gcl.level > Object.keys(Game.rooms).length){
         configClaimer.nb = _.sum(Game.creeps, (creep) => creep.memory.role == 'claimer');
     }else{
