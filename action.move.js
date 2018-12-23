@@ -9,7 +9,7 @@ let action = {
                 target = target.pos;
             }
             const pos = new RoomPosition(target.x, target.y, target.roomName);
-            //console.log(creep, target, pos)
+            //infoPerf.simpleLog(scriptName, creep + target + pos)
         	let ret = creep.moveTo(pos, {visualizePathStyle: {
         	    stroke: creep.memory.color,
                 fill: 'transparent',

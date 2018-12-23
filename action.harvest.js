@@ -52,7 +52,6 @@ let findTarget = function(creep, source) {
                     for (let amountTypeCarry of Object.values(creep.carry)){
                         totalCarry += amountTypeCarry;
                     }
-                    console.log(totalCarry)
                     let stockRest = creep.carryCapacity - totalCarry;
                     let energy_min = stockRest + coutDist;
                     if (structure.store[RESOURCE_ENERGY] > energy_min) {
@@ -62,12 +61,6 @@ let findTarget = function(creep, source) {
                 return false;
             }
         });
-        // if (targets.length === 0) {
-        //     targets = _.filter(Memory["structures"], (structure) => structure.structureType == source)
-
-        //     console.log("creep", creep, "find a source", source, "in other room ?", targets)
-        //     return targets[0];
-        // }
     }
     if ([FIND_DROPPED_RESOURCES].includes(source)) {
         targets = creep.room.find(FIND_DROPPED_RESOURCES);

@@ -4,11 +4,8 @@ let actionMove = require('action.move');
 
 let role = {
 	run: function(creep) {
-		//console.log("claimer")
-		//return bot.run(creep, ['build', 'repair','transfer', 'storager']);
-
+		
 		// Verifier si on peut controler plus de Salles
-
 		if(creep.room.controller.my){
 			if (creep.memory.target === undefined){
 				let rooms = Game.map.describeExits(creep.room.name);

@@ -117,8 +117,8 @@ let fonc_manage_creep = function(room){
                 for (let indexConfig in configs){
                     let config = configs[indexConfig];
                     if (!config.minOk()){
-                        console.log(config.role,": le minimum n'est pas respecter :",config.nb,"/",config.min)
-                        creepCreate.create_creep(config.role, config.model, spawn, config.color, config.strict);
+                        infoPerf.simpleLog(scriptName, config.role + " : le minimum n'est pas respecter : " + config.nb + " / " + config.min)
+                        creepCreate.create_creep(config, spawn);
                         return; 
                     }
                 }
@@ -135,7 +135,7 @@ let fonc_manage_creep = function(room){
         }else{
             config.actualRatio = config.nb/totalCreeps;
         }
-        //console.log(config.nb, config.role, "(de",config.min,"à",config.max,"au mieux " + config.popOpti + ")", "(",config.printableActualRatio(),"/",config.printableRatio(),")");
+        //infoPerf.simpleLog(scriptName, config.nb + " " + config.role " (de " + config.min + " à " + config.max + " au mieux " + config.popOpti + ") " + " (" + config.printableActualRatio() + "/" + config.printableRatio() + ")");
     }
     infoPerf.log(scriptName, "Init actual ratio");
 
@@ -146,10 +146,10 @@ let fonc_manage_creep = function(room){
         if (spawn.spawning == null){
             for (let indexConfig in configs){
                 let config = configs[indexConfig];
-                console.log(config.role,"maxOk", config.maxOk(), "ratioOk", config.ratioOk(), "config.ratio", config.ratio, "config.actualRatio", config.actualRatio)
+                infoPerf.simpleLog(scriptName, config.role + " maxOk " + config.maxOk() + " ratioOk " + config.ratioOk() + " config.ratio " + config.ratio + " config.actualRatio " + config.actualRatio)
                 if (config.maxOk() && config.ratioOk()){
-                    //console.log(config.role,": le maximum et le ratio ne sont pas atteint (",config.nb,"/",config.max," et ", config.printableActualRatio(),"/", config.printableRatio(),")");
-                    creepCreate.create_creep(config.role, config.model, spawn, config.color, config.strict);
+                    //infoPerf.simpleLog(scriptName, config.role + " : le maximum et le ratio ne sont pas atteint (" + config.nb + "/" + config.max + " et " + config.printableActualRatio() + "/" + config.printableRatio() + ")");
+                    creepCreate.create_creep(config, spawn);
                     return;
                 }
             }

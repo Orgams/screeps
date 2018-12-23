@@ -38,7 +38,7 @@ module.exports.loop = function() {
         })
         infoPerf.log(scriptName, "towers");
     } catch (error) {
-        console.log("[main] towers : ", error);
+        infoPerf.simpleLog(scriptName, "[main] towers : " + error);
     }
 
     try {
@@ -49,7 +49,7 @@ module.exports.loop = function() {
         }
         infoPerf.log(scriptName, "creeps work");
     } catch (error) {
-        console.log("[main] creeps work : ", error);
+        infoPerf.simpleLog(scriptName, "[main] creeps work : " + error);
     }
 
     // Initialiser la mémoire
@@ -89,7 +89,7 @@ module.exports.loop = function() {
             infoPerf.log(scriptName, "creeps creation");
         }
     } catch (error) {
-        console.log("[main] creeps creation : ", error);
+        infoPerf.simpleLog(scriptName,"[main] creeps creation : " + error);
     }
 
     try {
@@ -101,7 +101,7 @@ module.exports.loop = function() {
             infoPerf.log(scriptName, "structures");
         }
     } catch (error) {
-        console.log("[main] structures : ", error);
+        infoPerf.simpleLog(scriptName, "[main] structures : " + error);
     }
 
     try {
@@ -113,7 +113,7 @@ module.exports.loop = function() {
         }
         infoPerf.log(scriptName, "clean memory");
     } catch (error) {
-        console.log("[main] clean memory : ", error);
+        infoPerf.simpleLog(scriptName, "[main] clean memory : " + error);
     }
     infoPerf.finish(scriptName);
 
@@ -122,9 +122,5 @@ module.exports.loop = function() {
     //infoPerf.log(scriptName, "");
     //infoPerf.finish(scriptName);
 
-    //console.log(Game.time,"--------------------------------------------------");
-
-    //if(creep.memory.role == 'transferer') {
-    //    console.log(creep.name,targets)
-    //}
+    //infoPerf.simpleLog(scriptName, Game.time + "--------------------------------------------------");
 }
