@@ -29,8 +29,8 @@ let info = {
 		}
 		
 	},
-	simpleLog: function(script, message) {
-		console.log("["+script+"]",message);
+	simpleLog: function(script, ...messages) {
+		console.log("["+script+"]",messages);
 	}
 };
 
