@@ -16,13 +16,13 @@ let fonc_manage_creep = function(room){
     let creeps = Object.values(Game.creeps);
 
     let configs = [];
-    configs.push(new Config('transferer', 1, 1, 1, 1,  oneWorkTreeCarry, "#00ff00"));
-    configs.push(new Config('janitor',    2, 1, 1, 1,  oneWorkTreeCarry, "#00ffff"));
-    configs.push(new Config('miner',      3, 0, 0, 0,  fullWork,         "#ff00ff", true));
-    configs.push(new Config('builder',    4, 0, 1, 1,  carryWork,        "#ff0000"));
-    configs.push(new Config('upgrader',   5, 1, 1, 1,  oneWorkTreeCarry, "#0000ff"));
-    configs.push(new Config('repairer',   6, 1, 1, 1,  oneWorkTreeCarry, "#ffff00"));
-    configs.push(new Config('claimer',    7, 0, 0, 0,  claim,            "#ffffff"));
+    configs.push(new Config('transferer', 1, 1, 1, 1,  oneWorkTreeCarry, "#00ff00", "local"));
+    configs.push(new Config('janitor',    2, 1, 1, 1,  oneWorkTreeCarry, "#00ffff", "local"));
+    configs.push(new Config('miner',      3, 0, 0, 0,  fullWork,         "#ff00ff", "global", true));
+    configs.push(new Config('builder',    4, 0, 1, 1,  carryWork,        "#ff0000", "global"));
+    configs.push(new Config('upgrader',   5, 1, 1, 1,  oneWorkTreeCarry, "#0000ff", "local"));
+    configs.push(new Config('repairer',   6, 1, 1, 1,  oneWorkTreeCarry, "#ffff00", "local"));
+    configs.push(new Config('claimer',    7, 0, 0, 0,  claim,            "#ffffff", "local"));
     infoPerf.log(scriptName, "Init configs");
     
     // Initialisation for this room
@@ -159,7 +159,7 @@ let fonc_manage_creep = function(room){
 
 }
 
-function Config (role, priority, min, popOpti, max, model, color, strict) {
+function Config (role, priority, min, popOpti, max, model, color, range, strict) {
     this.role = role;
     this.priority = priority;
     this.min = min;
@@ -168,6 +168,7 @@ function Config (role, priority, min, popOpti, max, model, color, strict) {
     this.model = model;
     this.color = color;
     this.strict = strict;
+    this.range = range
     this.minOk = function(){
         if (this.nb == undefined) return undefined;
         return this.nb >= this.min;
