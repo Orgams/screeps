@@ -16,7 +16,7 @@ let fonc_manage_creep = function(room){
     let creeps = Object.values(Game.creeps);
 
     let configs = [];
-    configs.push(new Config('transferer', 1, 0, 0, 0,  oneWorkTreeCarry, "#00ff00"));
+    configs.push(new Config('transferer', 1, 1, 1, 1,  oneWorkTreeCarry, "#00ff00"));
     configs.push(new Config('janitor',    2, 1, 1, 1,  oneWorkTreeCarry, "#00ffff"));
     configs.push(new Config('miner',      3, 0, 0, 0,  fullWork,         "#ff00ff", true));
     configs.push(new Config('builder',    4, 0, 1, 1,  carryWork,        "#ff0000"));
