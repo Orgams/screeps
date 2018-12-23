@@ -48,7 +48,12 @@ let findTarget = function(creep, source) {
                         ignoreCreeps: true
                     });
                     let coutDist = path.length * 10;
-                    let stockRest = creep.carryCapacity - creep.carry[RESOURCE_ENERGY];
+                    let totalCarry = 0;
+                    for (let amountTypeCarry of Object.values(creep.carry)){
+                        totalCarry += amountTypeCarry;
+                    }
+                    console.log(totalCarry)
+                    let stockRest = creep.carryCapacity - totalCarry;
                     let energy_min = stockRest + coutDist;
                     if (structure.store[RESOURCE_ENERGY] > energy_min) {
                         return true;
