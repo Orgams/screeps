@@ -16,13 +16,13 @@ let fonc_manage_creep = function(room){
     let creeps = Object.values(Game.creeps);
 
     let configs = [];
-    configs.push(new Config('transferer', 1, 1, 1, 1,  oneWorkTreeCarry, "#00ff00", "local"));
-    configs.push(new Config('janitor',    2, 1, 1, 1,  oneWorkTreeCarry, "#00ffff", "local"));
+    configs.push(new Config('transferer', 1, 1, 1, 1,  oneWorkTreeCarry, "#00ff00", "autre",  false));
+    configs.push(new Config('janitor',    2, 1, 1, 1,  oneWorkTreeCarry, "#00ffff", "autre",  false));
     configs.push(new Config('miner',      3, 0, 0, 0,  fullWork,         "#ff00ff", "global", true));
-    configs.push(new Config('builder',    4, 0, 1, 1,  carryWork,        "#ff0000", "global"));
-    configs.push(new Config('upgrader',   5, 1, 1, 1,  oneWorkTreeCarry, "#0000ff", "local"));
-    configs.push(new Config('repairer',   6, 1, 1, 1,  oneWorkTreeCarry, "#ffff00", "local"));
-    configs.push(new Config('claimer',    7, 0, 0, 0,  claim,            "#ffffff", "local"));
+    configs.push(new Config('builder',    4, 0, 1, 1,  carryWork,        "#ff0000", "global", false));
+    configs.push(new Config('upgrader',   5, 1, 1, 1,  oneWorkTreeCarry, "#0000ff", "local",  false));
+    configs.push(new Config('repairer',   6, 1, 1, 1,  oneWorkTreeCarry, "#ffff00", "autre",  false));
+    configs.push(new Config('claimer',    7, 0, 0, 0,  claim,            "#ffffff", "autre",  false));
     infoPerf.log(scriptName, "Init configs");
     
     // Initialisation for this room

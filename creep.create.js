@@ -46,7 +46,8 @@ let fonc_create_creep = function(config, spawn) {
         spawn.spawnCreep(body, config.role + Game.time, {
             memory: {
                 role: config.role,
-                color: config.color
+                color: config.color,
+                range: config.range
             }
         });
     } else {
