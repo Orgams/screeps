@@ -1,13 +1,16 @@
 let creepManage = require('creep.manage');
 let structManage = require('infrastructure.manage');
 
+let memoire = require('memoire');
+
 let infoPerf = require('info.perf');
 
 let bot = require('bot');
 
 module.exports.loop = function() {
 
-    // Je suis sur github ^^
+    //memoire.set("test.test1.test2", 27, undefined, 5);
+    console.log(memoire.get("test.test1.test2"));
 
     let scriptName = "main";
     infoPerf.init(scriptName, false);
