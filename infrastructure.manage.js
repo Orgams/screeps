@@ -3,6 +3,8 @@ let bind_structure_to_source = require('infrastructure.bind_structure_to_source'
 let bind_contoller = require('infrastructure.bind_contoller')
 let Perif = require('infrastructure.perif');
 
+let infrastructure_spawner = require('infrastructure_spawner');
+
 let infoPerf = require('info.perf');
 
 let infrastructure = {
@@ -29,7 +31,7 @@ let infrastructure = {
         /// ajouter des conteneurs autour des sources qui n'en ont pas
         // Parcourir les sources
         if (!newSite) {
-            newSite = Container.build(room, sources)
+            newSite = Container.build(room, sources);
             infoPerf.log(scriptName, "Ajouter des conteneurs autour des sources qui n'en ont pas");
         }
 
@@ -37,6 +39,12 @@ let infrastructure = {
         if (!newSite) {
             newSite = bind_contoller.build(room);
             infoPerf.log(scriptName, "Ajouter des routes entre les controllers");
+        }
+
+        // Creer un nouveau Spawner
+        if (!newSite) {
+            newSite = infrastructure_spawner.build(room, sources);
+
         }
 
         // relier Les structures et les sources par des routes
