@@ -19,7 +19,7 @@ let fonc_manage_creep = function(room){
     let configs = [];
     configs.push(new Config('transferer', 1, 1, 1, 1,  oneWorkTreeCarry, "#00ff00", "autre",  false));
     configs.push(new Config('janitor',    2, 1, 1, 1,  oneWorkTreeCarry, "#00ffff", "autre",  false));
-    configs.push(new Config('miner',      3, 2, 0, 0,  fullWork,         "#ff00ff", "autre",  true));
+    configs.push(new Config('miner',      3, 0, 0, 0,  fullWork,         "#ff00ff", "autre",  true));
     configs.push(new Config('builder',    4, 0, 1, 1,  carryWork,        "#ff0000", "local",  false));
     configs.push(new Config('upgrader',   5, 1, 1, 1,  oneWorkTreeCarry, "#0000ff", "local",  false));
     configs.push(new Config('repairer',   6, 1, 1, 1,  oneWorkTreeCarry, "#ff9900", "autre",  false));
@@ -44,9 +44,7 @@ let fonc_manage_creep = function(room){
     // Initialiser le minimum du minier au nombre de conteneur de la salle
     let nbMiners = Memory["nb.containers"];
     let configMineur = configs.find((config) => config.role == 'miner');
-    if (nbMiners < 2){
-        configMineur.min = nbMiners;
-    }
+    configMineur.min = nbMiners;
     configMineur.max = nbMiners;
     configMineur.popOpti = nbMiners;
     infoPerf.log(scriptName, "Init miner");
