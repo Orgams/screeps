@@ -67,7 +67,6 @@ let fonc_create_creep = function(config, spawn) {
                     nbCreepsRoom = 0;
                 }
                 let nb_max_creep_by_room = config.max/info_room.get_nb_room();
-                infoPerf.simpleLog(scriptName, room_key, nbCreepsRoom, config.max, info_room.get_nb_room(), nb_max_creep_by_room)
                 if(nbCreepsRoom < nb_max_creep_by_room){
                     home = room_key;
                     break;
