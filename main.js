@@ -1,5 +1,4 @@
 let creepManage = require('creep.manage');
-let creep_info = require('creep.info');
 
 let structManage = require('infrastructure.manage');
 

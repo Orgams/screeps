@@ -1,6 +1,6 @@
 let infoPerf = require('info.perf');
 
-let creep_info = require('creep.info');
+let info_creep = require('info.creep');
 
 let costBody = 0;
 let body = [];
@@ -45,7 +45,7 @@ let fonc_create_creep = function(config, spawn) {
     console.log("config.strict", config.strict, "okLaunchSpawn", okLaunchSpawn)
     if (okLaunchSpawn) {
         if (config.range === "local") {
-            let creeps = creep_info.get_creeps('miner');
+            let creeps = info_creep.get_creeps('miner');
             let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
             for (let keyCreepsGroupByHome in creepsGroupByHome){
                 let nbCreepsGroupByHome = creepsGroupByHome[keyCreepsGroupByHome].length
