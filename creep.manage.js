@@ -26,6 +26,19 @@ let fonc_manage_creep = function(room){
     configs.push(new Config('claimer',    7, 0, 0, 0,  claim,            "#ffff00", "autre",  false));
     infoPerf.log(scriptName, "Init configs");
 
+    // Supprimer les configuration dont le role a déjà un creep en création
+    let creepCreating = new Set();
+    for (spawn of Object.values(Game.spawns)){
+        if (spawn.spawning !== null){
+            let roleCur = spawn.spawning.name.replace(/[0-9]/g, '');
+            creepCreating.add(roleCur);
+        }
+        
+    }
+    console.log("avant", configs.length)
+    configs = configs.filter((config) => !creepCreating.has(config.role));
+    console.log("apres", configs.length)
+
     // prise en compte des local
     for(config of configs){
         if (config.range === "local"){
@@ -49,24 +62,12 @@ let fonc_manage_creep = function(room){
     configMineur.popOpti = nbMiners;
     infoPerf.log(scriptName, "Init miner");
 
-    // // Initialiser la configuration du builder au nombre au total site de construction / 1000 de la salle
-    // let constrs = room.find(FIND_MY_CONSTRUCTION_SITES);
-    // let rafConstr = 0;
-    // for (let i = constrs.length - 1; i >= 0; i--) {
-    //     let constr = constrs[i];
-    //     rafConstr += constr.progressTotal - constr.progress;
-    // }
-    // let nbBuilders = Math.max(config.popOpti, rafConstr/10000);
-    // let configBuilder = configs.find((config) => config.role == 'builder');
-    // configBuilder.popOpti = nbBuilders;
-    // configBuilder.max = nbBuilders;
-    // infoPerf.log(scriptName, "Init builder");
-
     // Initialiser la configuration du claimer
     let configClaimer = configs.find((config) => config.role == 'claimer');
     if(Game.gcl.level > info_room.get_nb_room()){
         configClaimer.max = 1;
     }
+    infoPerf.log(scriptName, "Initialiser la configuration du claimer");
 
     /// Inisialiser les données de configs spécifique à cette salle
     // Initialiser config.nb : le nombre actuel de creep de ce type
@@ -76,20 +77,15 @@ let fonc_manage_creep = function(room){
         if (config.nb === undefined) config.nb = 0;
         Memory["nb."+config.role]=config.nb;
     }
-    for(let name in Game.spawns) {
-        let spawn = Game.spawns[name];
-        if (spawn.spawning != null){
-            let roleCur = spawn.spawning.name.replace(/[0-9]/g, '');
-            let confCur = configs.filter((config) => config.role === roleCur)[0];
-            confCur.nb++;
-        }
-    }
+    infoPerf.log(scriptName, "Initialiser config.nb : le nombre actuel de creep de ce type");
+
+    // Stopper la production de claimer si on ne peut pas avoir de nouvelle salle
     if(Game.gcl.level <= Object.keys(Game.rooms).length){
         configClaimer.min = 0;
         configClaimer.max = 0;
         configClaimer.popOpti = 0;
     }
-    infoPerf.log(scriptName, "Init nb for each type creep");
+    infoPerf.log(scriptName, "Stopper la production de claimer si on ne peut pas avoir de nouvelle salle");
     
     // Eliminer les configuration qui sont arriver à leur max de population
     configs = configs.filter((config) => config.maxOk());
