@@ -1,6 +1,7 @@
 let infoPerf = require('info.perf');
 
 let info_creep = require('info.creep');
+let info_room = require('info.room');
 
 let costBody = 0;
 let body = [];
@@ -44,21 +45,35 @@ let fonc_create_creep = function(config, spawn) {
     }
     console.log("config.strict", config.strict, "okLaunchSpawn", okLaunchSpawn)
     if (okLaunchSpawn) {
+        let home;
         if (config.range === "local") {
-            let creeps = info_creep.get_creeps('miner');
+            let creeps = info_creep.get_creeps(config.role);
             let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
-            for (let keyCreepsGroupByHome in creepsGroupByHome){
-                let nbCreepsGroupByHome = creepsGroupByHome[keyCreepsGroupByHome].length
-                console.log(keyCreepsGroupByHome, nbCreepsGroupByHome)
+
+            for (room_key of info_room.get_room_keys()){
+                let creepsRoom = creepsGroupByHome[room_key];
+                let nbCreepsRoom;
+                if (creepsRoom !== undefined){
+                    nbCreepsRoom = creepsRoom.length;
+                }else{
+                    nbCreepsRoom = 0;
+                }
+                let nb_max_creep_by_room = config.max/info_room.get_nb_room();
+                infoPerf.simpleLog(scriptName, room_key, nbCreepsRoom, config.max, info_room.get_nb_room(), nb_max_creep_by_room)
+                if(nbCreepsRoom < nb_max_creep_by_room){
+                    home = room_key;
+                    break;
+                }
             }
-            console.log(Object.values(creepsGroupByHome['W2N24']))
+            //console.log(Object.values(creepsGroupByHome['W2N24']))
         }
 
         spawn.spawnCreep(body, config.role + Game.time, {
             memory: {
                 role: config.role,
                 color: config.color,
-                range: config.range
+                range: config.range,
+                home: home
             }
         });
     } else {

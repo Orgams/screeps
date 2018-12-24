@@ -29,6 +29,12 @@ let info = {
 		}
 		
 	},
+	logWithoutTimer: function(script, ...messages) {
+		if(activate[script]){
+			console.log("["+script+"]",message);
+		}
+		
+	},
 	simpleLog: function(script, ...messages) {
 		console.log("["+script+"]",messages);
 	}

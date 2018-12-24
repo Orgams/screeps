@@ -1,5 +1,6 @@
 let creepCreate = require('creep.create');
 
+let info_room = require('info.room');
 let infoPerf = require('info.perf');
 
 const fullWork =         [WORK, WORK, WORK, MOVE, WORK, WORK, WORK, MOVE];
@@ -18,12 +19,21 @@ let fonc_manage_creep = function(room){
     let configs = [];
     configs.push(new Config('transferer', 1, 1, 1, 1,  oneWorkTreeCarry, "#00ff00", "autre",  false));
     configs.push(new Config('janitor',    2, 1, 1, 1,  oneWorkTreeCarry, "#00ffff", "autre",  false));
-    configs.push(new Config('miner',      3, 0, 0, 0,  fullWork,         "#ff00ff", "global", true));
+    configs.push(new Config('miner',      3, 2, 0, 0,  fullWork,         "#ff00ff", "global", true));
     configs.push(new Config('builder',    4, 0, 1, 1,  carryWork,        "#ff0000", "global", false));
-    configs.push(new Config('upgrader',   5, 1, 4, 4,  oneWorkTreeCarry, "#0000ff", "local",  true));
+    configs.push(new Config('upgrader',   5, 1, 1, 1,  oneWorkTreeCarry, "#0000ff", "local",  false));
     configs.push(new Config('repairer',   6, 1, 1, 1,  oneWorkTreeCarry, "#ff9900", "autre",  false));
     configs.push(new Config('claimer',    7, 0, 0, 0,  claim,            "#ffff00", "autre",  false));
     infoPerf.log(scriptName, "Init configs");
+
+    // prise en compte des local
+    for(config of configs){
+        if (config.range === "local"){
+            let nb_room = info_room.get_nb_room();
+            config.popOpti = config.popOpti * nb_room;
+            config.max = config.max * nb_room;
+        }
+    }
     
     // Initialisation for this room
     let totalCreeps = 0;
@@ -34,7 +44,9 @@ let fonc_manage_creep = function(room){
     // Initialiser le minimum du minier au nombre de conteneur de la salle
     let nbMiners = Memory["nb.containers"];
     let configMineur = configs.find((config) => config.role == 'miner');
-    configMineur.min = nbMiners;
+    if (nbMiners < 2){
+        configMineur.min = nbMiners;
+    }
     configMineur.max = nbMiners;
     configMineur.popOpti = nbMiners;
     infoPerf.log(scriptName, "Init miner");

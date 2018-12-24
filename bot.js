@@ -2,6 +2,8 @@ let actionHarvest = require('action.harvest');
 
 let actionMove = require('action.move');
 
+let info_room = require('info.room');
+
 let bot = {
 
     /** @param {Creep} creep **/
@@ -17,6 +19,14 @@ let bot = {
         if (Game.flags[creep.memory.role] != undefined) {
             actionMove.do(creep, Game.flags[creep.memory.role]);
             return;
+        }
+
+        // Aller dans ma salle si je suis local et que je ne suis pas dans ma salle
+        if (creep.memory.range === "local"){
+            if(creep.room.name !== creep.memory.home){
+                actionMove.do(creep, info_room.get_pos_center(creep.memory.home));
+                return true;
+            }
         }
 
         // Calculer combien porte le creep
