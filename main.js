@@ -15,6 +15,7 @@ module.exports.loop = function() {
     //console.log(memoire.get("test.test1.test2"));
 
     creep_info.get_creeps("builder");
+    creep_info.get_creeps("transerer");
 
     let scriptName = "main";
     infoPerf.init(scriptName, false);

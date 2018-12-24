@@ -55,7 +55,7 @@ let getRecur = function(obj, keyCur, keyParts) {
 	} else {
 		if(obj[keyCur+"ttl"] !== undefined && obj[keyCur+"ttl"] < Game.time){
 			//infoPerf.simpleLog(scriptName, "data out to date");
-			return null
+			return undefined
 		}
 		return obj[keyCur];
 	}

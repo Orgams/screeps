@@ -46,7 +46,7 @@ let fonc_manage_creep = function(room){
         let constr = constrs[i];
         rafConstr += constr.progressTotal - constr.progress;
     }
-    let nbRoom = Object.keys(Game.rooms).length;
+    let nbRoom = 1;//Object.keys(Game.rooms).length;
     let nbBuilders = Math.max(nbRoom, rafConstr/10000);
     let configBuilder = configs.find((config) => config.role == 'builder');
     configBuilder.popOpti = nbBuilders;
