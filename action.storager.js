@@ -4,7 +4,7 @@ let do_out = function(creep){
     targets = creep.room.find(FIND_MY_STRUCTURES, {
         filter: (structure) =>  {
             if (structure.structureType == STRUCTURE_STORAGE){
-                structure.store[RESOURCE_ENERGY] < structure.storeCapacity
+                _.sum(structure.store) < structure.storeCapacity
                 return true;
             }
         }
