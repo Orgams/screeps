@@ -1,5 +1,7 @@
 let infoPerf = require('info.perf');
 
+let creep_info = require('creep.info');
+
 let costBody = 0;
 let body = [];
 let spawn;
@@ -15,7 +17,6 @@ let add_part = function(part) {
     return false;
 }
 let fonc_create_creep = function(config, spawn) {
-//creepCreate.create_creep(config.role, config.config.model, spawn, config.color, config.config.strict);
 
     let scriptName = "creep.create";
 
@@ -43,6 +44,16 @@ let fonc_create_creep = function(config, spawn) {
     }
     console.log("config.strict", config.strict, "okLaunchSpawn", okLaunchSpawn)
     if (okLaunchSpawn) {
+        if (config.range === "local") {
+            let creeps = creep_info.get_creeps('miner');
+            let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
+            for (let keyCreepsGroupByHome in creepsGroupByHome){
+                let nbCreepsGroupByHome = creepsGroupByHome[keyCreepsGroupByHome].length
+                console.log(keyCreepsGroupByHome, nbCreepsGroupByHome)
+            }
+            console.log(Object.values(creepsGroupByHome['W2N24']))
+        }
+
         spawn.spawnCreep(body, config.role + Game.time, {
             memory: {
                 role: config.role,
