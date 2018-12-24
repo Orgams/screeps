@@ -22,10 +22,7 @@ let role = {
         let containers = _.filter(creep.pos.lookFor(LOOK_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER);
         let onContainer = containers.length != 0;
         if (onContainer) {
-            let container = containers[0];
-            if (container.store[RESOURCE_ENERGY] < container.storeCapacity) {
-                actionMine.do(creep)
-            }
+            actionMine.do(creep);
         } else {
             let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (structure) => {
