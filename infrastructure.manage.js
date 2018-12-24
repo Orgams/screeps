@@ -4,6 +4,8 @@ let bind_contoller = require('infrastructure.bind_contoller')
 let Perif = require('infrastructure.perif');
 
 let infrastructure_spawner = require('infrastructure_spawner');
+let infrastructure_road_contournement = require('infrastructure_road_contournement');
+
 
 let infoPerf = require('info.perf');
 
@@ -44,7 +46,7 @@ let infrastructure = {
         // Creer un nouveau Spawner
         if (!newSite) {
             newSite = infrastructure_spawner.build(room, sources);
-
+            infoPerf.log(scriptName, "Creer un nouveau Spawner");
         }
 
         // relier Les structures et les sources par des routes
@@ -52,6 +54,14 @@ let infrastructure = {
             newSite = bind_structure_to_source.build(room, sources)
             infoPerf.log(scriptName, "Ajouter des routes entre les sources et les batiments");
         }
+
+        // Creer des voies de contournement
+        
+        if (!newSite) {
+            newSite = infrastructure_road_contournement.build(room, sources)
+            infoPerf.log(scriptName, "Creer des voies de contournement");
+        }
+
 
         // Creer des perifieriques
         if (!newSite) {
