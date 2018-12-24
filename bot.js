@@ -30,11 +30,10 @@ let bot = {
         }
 
         // Calculer combien porte le creep
-        let totalCarryEnergie = creep.carry[RESOURCE_ENERGY];
         let totalCarry = _.sum(creep.carry);
 
         // Se mettre en mode recherche d'énergie si on est en mode travail et que l'on n'a plus assez d'énergie
-        if (!creep.memory.harvest && totalCarryEnergie == 0) {
+        if (!creep.memory.harvest && totalCarry == 0) {
             creep.memory.harvest = true;
             //creep.say('harvest');
         }
