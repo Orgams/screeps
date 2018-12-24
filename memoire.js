@@ -54,7 +54,7 @@ let getRecur = function(obj, keyCur, keyParts) {
 		return getRecur(obj, keyCur, keyParts);
 	} else {
 		if(obj[keyCur+"ttl"] !== undefined && obj[keyCur+"ttl"] < Game.time){
-			console.log ("donnée périmé");
+			//infoPerf.simpleLog(scriptName, "data out to date");
 			return null
 		}
 		return obj[keyCur];
