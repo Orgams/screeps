@@ -24,7 +24,7 @@ let info = {
 			if(!old){
 				old = now;
 			}
-			console.log("["+script+"]",message+ " :", now - old+ "ms");
+			console.log("["+script+"] -> ",message+ " :", now - old+ "ms");
 			times[script] = now;
 		}
 		

@@ -15,7 +15,6 @@ let do_out = function(creep) {
             let nbCarry = creep.carry[typeCarry];
 
             if (nbCarry > 0) {
-                console.log(typeCarry, creep.carry[typeCarry])
                 if (creep.transfer(target, typeCarry) == ERR_NOT_IN_RANGE) {
                     actionMove.do(creep, target);
                 }

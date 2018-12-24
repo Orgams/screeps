@@ -12,7 +12,6 @@ let actionHarvest = {
         for (let source of sources) {
             let res = findTarget(creep, source);
             if (res) {
-                //if(creep.withdraw(res, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 if (take(creep, source, res) == ERR_NOT_IN_RANGE) {
                     actionMove.do(creep, res);
                 }

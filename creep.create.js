@@ -20,6 +20,7 @@ let add_part = function(part) {
 let fonc_create_creep = function(config, spawn) {
 
     let scriptName = "creep.create";
+    infoPerf.init(scriptName, true);
 
     if (spawn == undefined) return;
     if (config.strict == undefined) config.strict = false;
@@ -30,6 +31,8 @@ let fonc_create_creep = function(config, spawn) {
 
     let okLaunchSpawn = false;
 
+    infoPerf.log(scriptName, "Initialisation de variable");
+
     if (config.strict) {
         config.model.forEach((module) => okLaunchSpawn = add_part(module))
     } else {
@@ -38,14 +41,19 @@ let fonc_create_creep = function(config, spawn) {
             indexSpe = (indexSpe + 1) % config.model.length;
         }
     }
+    infoPerf.log(scriptName, "construction du body");
+
     infoPerf.simpleLog(scriptName, config.role + " (" + body.length + " parts : " + body + ") (" + costBody + "/" + energyAvailabl + " energy)");
 
     if (!config.strict) {
         okLaunchSpawn = body.length >= 3
+        infoPerf.log(scriptName, "vérification de la taille mini du body");
     }
-    console.log("config.strict", config.strict, "okLaunchSpawn", okLaunchSpawn)
+
+    infoPerf.simpleLog(scriptName, "config.strict", config.strict, "okLaunchSpawn", okLaunchSpawn)
     if (okLaunchSpawn) {
         let home;
+
         if (config.range === "local") {
             let creeps = info_creep.get_creeps(config.role);
             let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
@@ -65,8 +73,9 @@ let fonc_create_creep = function(config, spawn) {
                     break;
                 }
             }
-            //console.log(Object.values(creepsGroupByHome['W2N24']))
+            infoPerf.log(scriptName, "assignation de la salle");
         }
+
 
         spawn.spawnCreep(body, config.role + Game.time, {
             memory: {
@@ -76,13 +85,16 @@ let fonc_create_creep = function(config, spawn) {
                 home: home
             }
         });
+        infoPerf.log(scriptName, "spaw du creep");
     } else {
         if (config.strict) {
             infoPerf.simpleLog(scriptName, config.role + " : config.model non respecté (move," + config.model + ")");
         } else {
             infoPerf.simpleLog(scriptName, config.role + " : ressource insuffisante");
         }
+        infoPerf.log(scriptName, "message erreur");
     }
+    infoPerf.finish(scriptName);
 }
 
 module.exports = {
