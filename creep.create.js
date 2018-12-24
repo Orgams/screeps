@@ -20,7 +20,7 @@ let add_part = function(part) {
 let fonc_create_creep = function(config, spawn) {
 
     let scriptName = "creep.create";
-    infoPerf.init(scriptName, true);
+    infoPerf.init(scriptName, false);
 
     if (spawn == undefined) return;
     if (config.strict == undefined) config.strict = false;
