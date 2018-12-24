@@ -23,7 +23,7 @@ let bot = {
 
         // Aller dans ma salle si je suis local et que je ne suis pas dans ma salle
         if (creep.memory.range === "local"){
-            if(creep.room.name !== creep.memory.home){
+            if(creep.memory.home !== undefined && creep.room.name !== creep.memory.home){
                 actionMove.do(creep, info_room.get_pos_center(creep.memory.home));
                 return true;
             }
