@@ -6,18 +6,26 @@ let info_room = require('info.room');
 let costBody = 0;
 let body = [];
 let spawn;
-let energyAvailabl
+let energyAvailable
 
 let add_part = function(part) {
     let cost_part = BODYPART_COST[part];
-    if (costBody + cost_part <= energyAvailabl && body.length < 50) {
+    if (costBody + cost_part <= energyAvailable && body.length < 50) {
         body.push(part);
         costBody += cost_part;
         return true;
     }
     return false;
 }
-let fonc_create_creep = function(config, spawn) {
+
+let try_create_creep = function(config) {
+    for (let name in Game.spawns) {
+        let spawn = Game.spawns[name];
+        return creepCreate.create_creep(config, spawn);
+    }
+}
+
+let create_creep = function(config, spawn) {
 
     let scriptName = "creep.create";
     infoPerf.init(scriptName, false);
@@ -25,7 +33,7 @@ let fonc_create_creep = function(config, spawn) {
     if (spawn == undefined) return;
     if (config.strict == undefined) config.strict = false;
 
-    energyAvailabl = spawn.room.energyAvailable;
+    energyAvailable = spawn.room.energyAvailable;
     costBody = 0;
     body = [];
 
@@ -43,7 +51,7 @@ let fonc_create_creep = function(config, spawn) {
     }
     infoPerf.log(scriptName, "construction du body");
 
-    infoPerf.simpleLog(scriptName, config.role + " (" + body.length + " parts : " + body + ") (" + costBody + "/" + energyAvailabl + " energy)");
+    infoPerf.simpleLog(scriptName, config.role + " (" + body.length + " parts : " + body + ") (" + costBody + "/" + energyAvailable + " energy)");
 
     if (!config.strict) {
         okLaunchSpawn = body.length >= 3
@@ -58,16 +66,16 @@ let fonc_create_creep = function(config, spawn) {
             let creeps = info_creep.get_creeps(config.role);
             let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
 
-            for (room_key of info_room.get_room_keys()){
+            for (room_key of info_room.get_room_keys()) {
                 let creepsRoom = creepsGroupByHome[room_key];
                 let nbCreepsRoom;
-                if (creepsRoom !== undefined){
+                if (creepsRoom !== undefined) {
                     nbCreepsRoom = creepsRoom.length;
-                }else{
+                } else {
                     nbCreepsRoom = 0;
                 }
-                let nb_max_creep_by_room = config.max/info_room.get_nb_room();
-                if(nbCreepsRoom < nb_max_creep_by_room){
+                let nb_max_creep_by_room = config.max / info_room.get_nb_room();
+                if (nbCreepsRoom < nb_max_creep_by_room) {
                     home = room_key;
                     break;
                 }
@@ -97,5 +105,6 @@ let fonc_create_creep = function(config, spawn) {
 }
 
 module.exports = {
-    create_creep: fonc_create_creep
+    create_creep: create_creep,
+    try_create_creep: try_create_creep
 };
