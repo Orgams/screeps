@@ -35,9 +35,7 @@ let fonc_manage_creep = function(room) {
         }
 
     }
-    console.log("avant", configs.length)
     configs = configs.filter((config) => !creepCreating.has(config.role));
-    console.log("apres", configs.length)
 
     // prise en compte des local
     for (config of configs) {
