@@ -3,17 +3,20 @@ let actionPickup = require('action.pickup');
 
 let actionHarvest = {
     do: function(creep, srcs) {
+        let sources = srcs;
 
-
-        let sources = srcs || [STRUCTURE_CONTAINER, FIND_DROPPED_RESOURCES, STRUCTURE_STORAGE];
+        if (sources === undefined) {
+            sources = [STRUCTURE_CONTAINER, FIND_DROPPED_RESOURCES, STRUCTURE_STORAGE];
+        }
 
         let target = false;
 
         for (let source of sources) {
-            let res = findTarget(creep, source);
-            if (res) {
-                if (take(creep, source, res) == ERR_NOT_IN_RANGE) {
-                    actionMove.do(creep, res);
+            target = findTarget(creep, source);
+            if (target) {
+                console.log(creep, source, target)
+                if (take(creep, source, target) == ERR_NOT_IN_RANGE) {
+                    actionMove.do(creep, target);
                 }
                 return true;
             }
@@ -48,7 +51,7 @@ let findTarget = function(creep, source) {
                     });
                     let coutDist = path.length * 10;
                     let totalCarry = 0;
-                    for (let amountTypeCarry of Object.values(creep.carry)){
+                    for (let amountTypeCarry of Object.values(creep.carry)) {
                         totalCarry += amountTypeCarry;
                     }
                     let stockRest = creep.carryCapacity - totalCarry;
