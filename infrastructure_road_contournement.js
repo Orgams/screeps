@@ -1,4 +1,4 @@
-let roadCreate = require('road.create');
+let infrastructure_create = require('infrastructure_create');
 let infrastructureGet = require('infrastructure.get');
 
 let infrastructure = {
@@ -8,7 +8,7 @@ let infrastructure = {
         for (let struct of structs) {
             let poss = infrastructureGet.ortho(struct, 1, room)
             for (let pos of poss) {
-                let ret = roadCreate.create(pos);
+                let ret = infrastructure_create.create(pos, STRUCTURE_ROAD);
                 if (ret === OK) {
                     return true;
                 }

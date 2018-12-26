@@ -1,4 +1,4 @@
-let roadCreate = require('road.create');
+let infrastructure_create = require('infrastructure_create');
 
 let infrastructure = {
     build: function(source) {
@@ -13,7 +13,7 @@ let infrastructure = {
                 for (let i = path.length - 2; i >= 0; i--) {
                     let point = path[i];
                     let pos = new RoomPosition(point.x, point.y, source.name);
-                    let ret = roadCreate.create(pos)
+                    let ret = infrastructure_create.create(pos, STRUCTURE_ROAD);
                     if (ret == OK) {
                         return true;
                     }

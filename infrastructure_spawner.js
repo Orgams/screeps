@@ -1,3 +1,5 @@
+let infrastructure_create = require('infrastructure_create');
+
 let infrastructure = {
     build: function(room, sources) {
         for (source of room.find(sources)) {
@@ -25,7 +27,7 @@ let infrastructure = {
 
                 let pos = new RoomPosition(target.x, target.y, room.name);
 
-                room.createConstructionSite(pos, STRUCTURE_SPAWN);
+                let ret = infrastructure_create.create(pos, STRUCTURE_SPAWN);
                 return true;
             }
         }

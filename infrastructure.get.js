@@ -14,10 +14,10 @@ let perif = function(target, dist, room) {
 
 let diago = function(target, dist, room) {
     res = [];
-    res.push(new RoomPosition(target.pos.x + dist, target.pos.y, room.name));
-    res.push(new RoomPosition(target.pos.x - dist, target.pos.y, room.name));
-    res.push(new RoomPosition(target.pos.x, target.pos.y + dist, room.name));
-    res.push(new RoomPosition(target.pos.x, target.pos.y - dist, room.name));
+    res.push(new RoomPosition(target.pos.x + dist, target.pos.y + dist, room.name));
+    res.push(new RoomPosition(target.pos.x - dist, target.pos.y + dist, room.name));
+    res.push(new RoomPosition(target.pos.x + dist, target.pos.y - dist, room.name));
+    res.push(new RoomPosition(target.pos.x - dist, target.pos.y - dist, room.name));
     return res;
 }
 
