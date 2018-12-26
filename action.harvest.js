@@ -14,7 +14,7 @@ let actionHarvest = {
         for (let source of sources) {
             target = findTarget(creep, source);
             if (target) {
-                console.log(creep, source, target)
+                //console.log(creep, source, target)
                 if (take(creep, source, target) == ERR_NOT_IN_RANGE) {
                     actionMove.do(creep, target);
                 }
