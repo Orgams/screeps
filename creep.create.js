@@ -19,11 +19,12 @@ let add_part = function(part) {
 }
 
 let try_create_creep = function(config) {
+    let ret = false;
     for (let name in Game.spawns) {
         let spawn = Game.spawns[name];
-        create_creep(config, spawn);
+        ret = create_creep(config, spawn);
     }
-    return false
+    return ret;
 }
 
 let create_creep = function(config, spawn) {
@@ -33,6 +34,8 @@ let create_creep = function(config, spawn) {
 
     if (spawn == undefined) return;
     if (config.strict == undefined) config.strict = false;
+
+    let ret = false;
 
     energyAvailable = spawn.room.energyAvailable;
     costBody = 0;
@@ -85,7 +88,7 @@ let create_creep = function(config, spawn) {
         }
 
 
-        spawn.spawnCreep(body, config.role + Game.time, {
+        let ret = spawn.spawnCreep(body, config.role + Game.time, {
             memory: {
                 role: config.role,
                 color: config.color,
@@ -96,13 +99,15 @@ let create_creep = function(config, spawn) {
         infoPerf.log(scriptName, "spaw du creep");
     } else {
         if (config.strict) {
-            infoPerf.simpleLog(scriptName, config.role + " : config.model non respecté (move," + config.model + ")");
+            //infoPerf.simpleLog(scriptName, config.role + " : config.model non respecté (move," + config.model + ")");
         } else {
-            infoPerf.simpleLog(scriptName, config.role + " : ressource insuffisante");
+            //infoPerf.simpleLog(scriptName, config.role + " : ressource insuffisante");
         }
         infoPerf.log(scriptName, "message erreur");
     }
     infoPerf.finish(scriptName);
+
+    return ret;
 }
 
 module.exports = {
