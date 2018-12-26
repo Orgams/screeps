@@ -6,7 +6,7 @@ let infrastructureGet = require('infrastructure.get');
 let build = function(room, sources) {
 
     let containers = room.find(FIND_MY_STRUCTURES, {
-            filter: (structure) => structure.structureType == STRUCTURE_CONTAINER);
+        filter: (structure) => structure.structureType == STRUCTURE_CONTAINER
     });
 
     for (let container of containers) {
