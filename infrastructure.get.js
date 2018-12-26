@@ -12,16 +12,26 @@ let perif = function(target, dist, room) {
     return res;
 }
 
-let ortho = function(target, room) {
+let diago = function(target, dist, room) {
     res = [];
-    res.push(new RoomPosition(target.pos.x + 1, target.pos.y, room.name));
-    res.push(new RoomPosition(target.pos.x - 1, target.pos.y, room.name));
-    res.push(new RoomPosition(target.pos.x, target.pos.y + 1, room.name));
-    res.push(new RoomPosition(target.pos.x, target.pos.y - 1, room.name));
+    res.push(new RoomPosition(target.pos.x + dist, target.pos.y, room.name));
+    res.push(new RoomPosition(target.pos.x - dist, target.pos.y, room.name));
+    res.push(new RoomPosition(target.pos.x, target.pos.y + dist, room.name));
+    res.push(new RoomPosition(target.pos.x, target.pos.y - dist, room.name));
+    return res;
+}
+
+let ortho = function(target, dist, room) {
+    res = [];
+    res.push(new RoomPosition(target.pos.x + dist, target.pos.y, room.name));
+    res.push(new RoomPosition(target.pos.x - dist, target.pos.y, room.name));
+    res.push(new RoomPosition(target.pos.x, target.pos.y + dist, room.name));
+    res.push(new RoomPosition(target.pos.x, target.pos.y - dist, room.name));
     return res;
 }
 
 module.exports = {
     perif: perif,
+    diago: diago,
     ortho: ortho
 }

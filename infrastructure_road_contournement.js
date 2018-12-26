@@ -6,7 +6,7 @@ let infrastructure = {
         let structs = room.find(FIND_MY_STRUCTURES);
 
         for (let struct of structs) {
-            let poss = infrastructureGet.ortho(struct, room)
+            let poss = infrastructureGet.ortho(struct, 1, room)
             for (let pos of poss) {
                 let ret = roadCreate.create(pos);
                 if (ret === OK) {
