@@ -21,7 +21,7 @@ let add_part = function(part) {
 let try_create_creep = function(config) {
     for (let name in Game.spawns) {
         let spawn = Game.spawns[name];
-        return creepCreate.create_creep(config, spawn);
+        return create_creep(config, spawn);
     }
 }
 
