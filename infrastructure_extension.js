@@ -5,10 +5,10 @@ let infrastructureGet = require('infrastructure.get');
 
 let build = function(room, sources) {
 
-    let containers = room.find(FIND_MY_STRUCTURES, {
+    let containers = room.find(FIND_STRUCTURES, {
         filter: (structure) => structure.structureType == STRUCTURE_CONTAINER
     });
-
+    console.log(containers)
     for (let container of containers) {
         let poss = infrastructureGet.diago(container, 2, room);
         poss.push(infrastructureGet.ortho(container, 2, room));

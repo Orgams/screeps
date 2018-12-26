@@ -5,6 +5,8 @@ let Perif = require('infrastructure.perif');
 
 let infrastructure_spawner = require('infrastructure_spawner');
 let infrastructure_road_contournement = require('infrastructure_road_contournement');
+let infrastructure_extension = require('infrastructure_extension');
+
 
 
 let infoPerf = require('info.perf');
@@ -59,6 +61,12 @@ let infrastructure = {
         if (!newSite) {
             newSite = infrastructure_road_contournement.build(room, sources)
             infoPerf.log(scriptName, "Creer des voies de contournement");
+        }
+
+        // Creer les extensions
+        if (!newSite) {
+            newSite = infrastructure_extension.build(room, sources)
+            infoPerf.log(scriptName, "Creer les extensions");
         }
 
         // Creer des perifieriques
