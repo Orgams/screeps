@@ -13,7 +13,6 @@ let actionHarvest = {
 
         for (let source of sources) {
             target = findTarget(creep, source);
-            console.log(creep, source, target)
             if (target) {
                 if (take(creep, source, target) == ERR_NOT_IN_RANGE) {
                     actionMove.do(creep, target);
@@ -73,8 +72,6 @@ let findTarget = function(creep, source) {
             targets = creep.room.find(FIND_SOURCES_ACTIVE);
         //}
     }
-    console.log("liste des sources actives", targets.length, creep.pos, targets)
-    console.log (targets.length === 0, targets.length == 0)
     if (targets.length === 0) {
         return false;
     }

@@ -11,7 +11,7 @@ let bot = require('bot');
 module.exports.loop = function() {
 
     let scriptName = "main";
-    infoPerf.init(scriptName, true);
+    infoPerf.init(scriptName, false);
 
     try {
         let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
