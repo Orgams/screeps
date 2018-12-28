@@ -68,9 +68,9 @@ let findTarget = function(creep, source) {
     }
     if ([FIND_SOURCES_ACTIVE].includes(source)) {
         // Recolter sur les sources si il n'y a pas le bon nombre de mineur
-        //if (Memory["nb.containers"] > Memory["nb.miner"]) {
+        if (Memory["nb.containers"] > Memory["nb.miner"]) {
             targets = creep.room.find(FIND_SOURCES_ACTIVE);
-        //}
+        }
     }
     if (targets.length === 0) {
         return false;

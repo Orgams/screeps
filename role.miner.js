@@ -39,7 +39,7 @@ let role = {
             if (target === null) {
                 targets = Memory["containers"];
                 targets = _.filter(targets, (structure) => {
-                    let pos = new RoomPosition(structure.pos.x, structure.pos.y, structure.pos.roomName);
+                    let pos = new RoomPosition(structure.pos.x, structure.pos.y, structure.room.roomName);
                     return pos.findInRange(FIND_MY_CREEPS, 0).length === 0
                 })
                 target = targets[0];

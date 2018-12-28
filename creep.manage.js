@@ -117,7 +117,7 @@ let fonc_manage_creep = function(room) {
         for (let indexConfig in configs) {
             let config = configs[indexConfig];
             if (!config.minOk()) {
-                //infoPerf.simpleLog(scriptName, config.role + " : le minimum n'est pas respecter : " + config.nb + " / " + config.min)
+                infoPerf.logWithoutTimer(scriptName, config.role + " : le minimum n'est pas respecter : " + config.nb + " / " + config.min)
                 return creepCreate.try_create_creep(config);
             }
         }
@@ -143,9 +143,9 @@ let fonc_manage_creep = function(room) {
     //     if (spawn.spawning == null) {
              for (let indexConfig in configs) {
                  let config = configs[indexConfig];
-                 infoPerf.simpleLog(scriptName, config.role + " maxOk " + config.maxOk() + " ratioOk " + config.ratioOk() + " config.ratio " + config.ratio + " config.actualRatio " + config.actualRatio)
+                 infoPerf.logWithoutTimer(scriptName, config.role + " maxOk " + config.maxOk() + " ratioOk " + config.ratioOk() + " config.ratio " + config.ratio + " config.actualRatio " + config.actualRatio)
                  if (config.maxOk() && config.ratioOk()) {
-                     infoPerf.simpleLog(scriptName, config.role + " : le maximum et le ratio ne sont pas atteint (" + config.nb + "/" + config.max + " et " + config.printableActualRatio() + "/" + config.printableRatio() + ")");
+                     infoPerf.logWithoutTimer(scriptName, config.role + " : le maximum et le ratio ne sont pas atteint (" + config.nb + "/" + config.max + " et " + config.printableActualRatio() + "/" + config.printableRatio() + ")");
                      return creepCreate.try_create_creep(config);
                  }
              }
