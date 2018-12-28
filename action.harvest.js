@@ -6,15 +6,15 @@ let actionHarvest = {
         let sources = srcs;
 
         if (sources === undefined) {
-            sources = [STRUCTURE_CONTAINER, FIND_DROPPED_RESOURCES, STRUCTURE_STORAGE];
+            sources = [STRUCTURE_CONTAINER, FIND_DROPPED_RESOURCES, STRUCTURE_STORAGE, FIND_SOURCES_ACTIVE];
         }
 
         let target = false;
 
         for (let source of sources) {
             target = findTarget(creep, source);
+            console.log(creep, source, target)
             if (target) {
-                //console.log(creep, source, target)
                 if (take(creep, source, target) == ERR_NOT_IN_RANGE) {
                     actionMove.do(creep, target);
                 }
@@ -69,14 +69,20 @@ let findTarget = function(creep, source) {
     }
     if ([FIND_SOURCES_ACTIVE].includes(source)) {
         // Recolter sur les sources si il n'y a pas le bon nombre de mineur
-        if (Memory["nb.containers"] > Memory["nb.miner"]) {
-            let targets = creep.room.find(FIND_SOURCES_ACTIVE);
-        }
+        //if (Memory["nb.containers"] > Memory["nb.miner"]) {
+            targets = creep.room.find(FIND_SOURCES_ACTIVE);
+        //}
     }
+    console.log("liste des sources actives", targets.length, creep.pos, targets)
+    console.log (targets.length === 0, targets.length == 0)
     if (targets.length === 0) {
         return false;
     }
-    return creep.pos.findClosestByPath(targets);
+    let ret = creep.pos.findClosestByPath(targets);
+
+    
+
+    return ret;
 }
 
 module.exports = actionHarvest;

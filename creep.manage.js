@@ -167,6 +167,8 @@ let fonc_manage_creep = function(room) {
     // }
     // infoPerf.log(scriptName, "Create creep by opti");
 
+    infoPerf.finish(scriptName);
+
 }
 
 function Config(role, priority, min, popOpti, max, model, color, range, strict) {

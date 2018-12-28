@@ -19,9 +19,15 @@ let add_part = function(part) {
 }
 
 let try_create_creep = function(config) {
+
+    let scriptName = "creep.create";
+    infoPerf.init(scriptName, false);
+
     let ret = false;
 
     let homes = [];
+
+    infoPerf.log(scriptName, "Init variables");
 
     if (config.range === "local") {
         let creeps = info_creep.get_creeps(config.role);
@@ -41,16 +47,21 @@ let try_create_creep = function(config) {
             }
         }
     }
+    infoPerf.log(scriptName, "Init liste home");
 
     for (let home of homes){
-        console.log(creep, home)
+        //console.log(creep, home)
     }
+    infoPerf.log(scriptName, "");
 
 
     for (let name in Game.spawns) {
         let spawn = Game.spawns[name];
         ret = create_creep(config, spawn);
     }
+    infoPerf.log(scriptName, "Création du creep");
+
+    infoPerf.finish(scriptName);
     return ret;
 }
 
