@@ -39,12 +39,6 @@ let infrastructure = {
             infoPerf.log(scriptName, "Ajouter des conteneurs autour des sources qui n'en ont pas");
         }
 
-        // relier Les controllers par des routes
-        if (!newSite) {
-            newSite = bind_contoller.build(room);
-            infoPerf.log(scriptName, "Ajouter des routes entre les controllers");
-        }
-
         // Creer un nouveau Spawner
         if (!newSite) {
             newSite = infrastructure_spawner.build(room, sources);
@@ -67,6 +61,12 @@ let infrastructure = {
         if (!newSite) {
             newSite = infrastructure_extension.build(room, sources)
             infoPerf.log(scriptName, "Creer les extensions");
+        }
+
+        // Relier les controllers par des routes
+        if (!newSite) {
+            newSite = bind_contoller.build(room);
+            infoPerf.log(scriptName, "Ajouter des routes entre les controllers");
         }
 
         // Creer des perifieriques
