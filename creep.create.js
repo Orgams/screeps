@@ -35,6 +35,8 @@ let try_create_creep = function(config) {
 
         let myRoomKeys = info_room.get_my_room_keys();
 
+        console.log(Object.keys(myRoomKeys), Object.values(myRoomKeys))
+
         for (room_key of myRoomKeys) {
             let creepsRoom = creepsGroupByHome[room_key];
             let nbCreepsRoom;

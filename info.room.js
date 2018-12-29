@@ -14,11 +14,11 @@ let get_room = function() {
 }
 
 let get_my_room_keys = function() {
-    return Object.keys(get_my_room());
+    return get_names(get_my_room());
 }
 
 let get_room_keys = function() {
-    return Object.keys(get_room());
+    return get_names(get_room());
 }
 
 let get_nb_my_room = function() {
@@ -31,6 +31,15 @@ let get_nb_room = function() {
 
 let get_pos_center = function(name) {
     return new RoomPosition(24, 24, name);
+}
+
+let get_names = function(rooms) {
+    let names = []
+    for (let i in rooms){
+        let room = rooms[i];
+        names.push(room.name);
+    }
+    return names;
 }
 
 module.exports = {
