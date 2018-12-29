@@ -30,34 +30,31 @@ let try_create_creep = function(config) {
     infoPerf.log(scriptName, "Init variables");
 
     //if (config.range === "local") {
-        let creeps = info_creep.get_creeps(config.role);
-        let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
+    let creeps = info_creep.get_creeps(config.role);
+    let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
 
-        let myRoomKeys = info_room.get_my_room_keys();
+    let myRoomKeys = info_room.get_my_room_keys();
 
-        console.log(Object.keys(myRoomKeys), Object.values(myRoomKeys))
-
-        for (room_key of myRoomKeys) {
-            let creepsRoom = creepsGroupByHome[room_key];
-            let nbCreepsRoom;
-            if (creepsRoom !== undefined) {
-                nbCreepsRoom = creepsRoom.length;
-            } else {
-                nbCreepsRoom = 0;
-            }
-            let nb_max_creep_by_room = config.max / info_room.get_nb_my_room();
-            if (nbCreepsRoom < nb_max_creep_by_room) {
-                homes.push(room_key);
-            }
+    for (room_key of myRoomKeys) {
+        let creepsRoom = creepsGroupByHome[room_key];
+        let nbCreepsRoom;
+        if (creepsRoom !== undefined) {
+            nbCreepsRoom = creepsRoom.length;
+        } else {
+            nbCreepsRoom = 0;
         }
+        let nb_max_creep_by_room = config.max / info_room.get_nb_my_room();
+        if (nbCreepsRoom < nb_max_creep_by_room) {
+            homes.push(room_key);
+        }
+    }
     //}
     infoPerf.log(scriptName, "Init liste home");
 
-    console.log(homes)
-    for (let home of homes){
-        console.log(home)
-    }
-    infoPerf.log(scriptName, "");
+    console.log(homes, homes[0])
+    config.home = homes[0]
+    console.log(config.home)
+    infoPerf.log(scriptName, "Init home in config");
 
 
     for (let name in Game.spawns) {
