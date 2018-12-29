@@ -40,7 +40,7 @@ let fonc_manage_creep = function(room) {
     // prise en compte des local
     for (config of configs) {
         if (config.range === "local") {
-            let nb_room = info_room.get_nb_room();
+            let nb_room = info_room.get_nb_my_room();
             config.popOpti = config.popOpti * nb_room;
             config.max = config.max * nb_room;
         }
@@ -64,7 +64,7 @@ let fonc_manage_creep = function(room) {
 
     // Initialiser la configuration du claimer
     let configClaimer = configs.find((config) => config.role == 'claimer');
-    if (Game.gcl.level > info_room.get_nb_room()) {
+    if (Game.gcl.level > info_room.get_nb_my_room()) {
         configClaimer.max = 1;
     }
     infoPerf.log(scriptName, "Initialiser la configuration du claimer");

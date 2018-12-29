@@ -44,7 +44,9 @@ let role = {
                 })
                 target = targets[0];
             }
-            actionMove.do(creep, target)
+            if (target !== undefined) {
+                actionMove.do(creep, target)
+            }
         }
     }
 }
