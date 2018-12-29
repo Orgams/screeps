@@ -21,14 +21,17 @@ let add_part = function(part) {
 let try_create_creep = function(config) {
 
     let scriptName = "creep.create";
-    infoPerf.init(scriptName, true);
+    infoPerf.init(scriptName, false);
 
     let homes = [];
+    let home_spawns = [];
     infoPerf.log(scriptName, "Init variables");
 
     if (config.range === "local") {
         let creeps = info_creep.get_creeps(config.role);
         let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
+
+        console.log("repartition", config.role, Object.keys(creepsGroupByHome), Object.values(creepsGroupByHome))
 
         let myRoomKeys = info_room.get_my_room_keys();
 
@@ -50,26 +53,26 @@ let try_create_creep = function(config) {
         config.home = homes[0]
         infoPerf.log(scriptName, "Init home in config");
 
-        let spawns_home = Game.rooms[config.home].find(FIND_STRUCTURES, {
+        home_spawns = Game.rooms[config.home].find(FIND_STRUCTURES, {
             filter: (structure) => structure.structureType == STRUCTURE_SPAWN
         });
-        for (let spawn_home of spawns_home) {
-            let ret = create_creep(config, spawn_home);
-            if (ret === OK) {
-                return true;
-            }
-        }
-        infoPerf.log(scriptName, "Create creep in one of home spawn");
+        infoPerf.log(scriptName, "Get home spawn");
     }
 
-    for (let name in Game.spawns) {
-        spawn = Game.spawns[name];
+
+    let others_spawns = _.difference(Object.values(Game.spawns), home_spawns)
+    let spawns = home_spawns.concat(others_spawns);
+    infoPerf.log(scriptName, "Get list spawn");
+
+    for (let spawn of spawns) {
         let ret = create_creep(config, spawn);
+        console.log(ret);
         if (ret === OK) {
             return true;
         }
     }
-    infoPerf.log(scriptName, "Create creep in one spawn");
+
+
 
     infoPerf.finish(scriptName);
     return false;
@@ -91,6 +94,8 @@ let create_creep = function(config, spawn) {
 
     let okLaunchSpawn = false;
 
+    let message = "role : "+config.role+", home : "+config.home;
+
     infoPerf.log(scriptName, "Initialisation de variable");
 
     if (config.strict) {
@@ -103,16 +108,16 @@ let create_creep = function(config, spawn) {
     }
     infoPerf.log(scriptName, "construction du body");
 
-    infoPerf.simpleLog(scriptName, config.role + " (" + body.length + " parts : " + body + ") (" + costBody + "/" + energyAvailable + " energy)");
+    message += " (" + body.length + " parts) (" + costBody + "/" + energyAvailable + " energy)";
 
     if (!config.strict) {
         okLaunchSpawn = body.length >= 3
         infoPerf.log(scriptName, "vérification de la taille mini du body");
     }
 
-    infoPerf.simpleLog(scriptName, "config.strict", config.strict, "okLaunchSpawn", okLaunchSpawn)
+    message += "config.strict " + config.strict + " okLaunchSpawn " + okLaunchSpawn;
     if (okLaunchSpawn) {
-        let ret = spawn.spawnCreep(body, config.role + Game.time, {
+        ret = spawn.spawnCreep(body, config.role + Game.time, {
             memory: {
                 role: config.role,
                 color: config.color,
@@ -120,17 +125,19 @@ let create_creep = function(config, spawn) {
                 home: config.home
             }
         });
+        message += " spaw du creep (ret="+ret+")"
         infoPerf.log(scriptName, "spaw du creep");
     } else {
         if (config.strict) {
-            infoPerf.simpleLog(scriptName, config.role + " : config.model non respecté (move," + config.model + ")");
+            message += " config.model non respecté (move," + config.model + ")";
         } else {
-            infoPerf.simpleLog(scriptName, config.role + " : ressource insuffisante");
+            message +=  " ressource insuffisante";
         }
         infoPerf.log(scriptName, "message erreur");
     }
-    infoPerf.finish(scriptName);
 
+    infoPerf.simpleLog(scriptName, message);
+    infoPerf.finish(scriptName);
     return ret;
 }
 

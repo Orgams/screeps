@@ -9,7 +9,7 @@ let get_creeps = function(role) {
         for (let creep of creeps) {
             id_creeps.push(creep.id);
         }
-        memoire.set("ids." + role, id_creeps, undefined, 60);
+        memoire.set("ids." + role, id_creeps, undefined, 1);
         return creeps;
     }else{
         let creeps = [];
