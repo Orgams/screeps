@@ -21,50 +21,58 @@ let add_part = function(part) {
 let try_create_creep = function(config) {
 
     let scriptName = "creep.create";
-    infoPerf.init(scriptName, false);
-
-    let ret = false;
+    infoPerf.init(scriptName, true);
 
     let homes = [];
-
     infoPerf.log(scriptName, "Init variables");
 
-    //if (config.range === "local") {
-    let creeps = info_creep.get_creeps(config.role);
-    let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
+    if (config.range === "local") {
+        let creeps = info_creep.get_creeps(config.role);
+        let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
 
-    let myRoomKeys = info_room.get_my_room_keys();
+        let myRoomKeys = info_room.get_my_room_keys();
 
-    for (room_key of myRoomKeys) {
-        let creepsRoom = creepsGroupByHome[room_key];
-        let nbCreepsRoom;
-        if (creepsRoom !== undefined) {
-            nbCreepsRoom = creepsRoom.length;
-        } else {
-            nbCreepsRoom = 0;
+        for (room_key of myRoomKeys) {
+            let creepsRoom = creepsGroupByHome[room_key];
+            let nbCreepsRoom;
+            if (creepsRoom !== undefined) {
+                nbCreepsRoom = creepsRoom.length;
+            } else {
+                nbCreepsRoom = 0;
+            }
+            let nb_max_creep_by_room = config.max / info_room.get_nb_my_room();
+            if (nbCreepsRoom < nb_max_creep_by_room) {
+                homes.push(room_key);
+            }
         }
-        let nb_max_creep_by_room = config.max / info_room.get_nb_my_room();
-        if (nbCreepsRoom < nb_max_creep_by_room) {
-            homes.push(room_key);
+        infoPerf.log(scriptName, "Init liste home");
+
+        config.home = homes[0]
+        infoPerf.log(scriptName, "Init home in config");
+
+        let spawns_home = Game.rooms[config.home].find(FIND_STRUCTURES, {
+            filter: (structure) => structure.structureType == STRUCTURE_SPAWN
+        });
+        for (let spawn_home of spawns_home) {
+            let ret = create_creep(config, spawn_home);
+            if (ret === OK) {
+                return true;
+            }
         }
+        infoPerf.log(scriptName, "Create creep in one of home spawn");
     }
-    //}
-    infoPerf.log(scriptName, "Init liste home");
-
-    console.log(homes, homes[0])
-    config.home = homes[0]
-    console.log(config.home)
-    infoPerf.log(scriptName, "Init home in config");
-
 
     for (let name in Game.spawns) {
-        let spawn = Game.spawns[name];
-        ret = create_creep(config, spawn);
+        spawn = Game.spawns[name];
+        let ret = create_creep(config, spawn);
+        if (ret === OK) {
+            return true;
+        }
     }
-    infoPerf.log(scriptName, "Création du creep");
+    infoPerf.log(scriptName, "Create creep in one spawn");
 
     infoPerf.finish(scriptName);
-    return ret;
+    return false;
 }
 
 let create_creep = function(config, spawn) {
@@ -104,14 +112,14 @@ let create_creep = function(config, spawn) {
 
     infoPerf.simpleLog(scriptName, "config.strict", config.strict, "okLaunchSpawn", okLaunchSpawn)
     if (okLaunchSpawn) {
-        // let ret = spawn.spawnCreep(body, config.role + Game.time, {
-        //     memory: {
-        //         role: config.role,
-        //         color: config.color,
-        //         range: config.range,
-        //         home: config.home
-        //     }
-        // });
+        let ret = spawn.spawnCreep(body, config.role + Game.time, {
+            memory: {
+                role: config.role,
+                color: config.color,
+                range: config.range,
+                home: config.home
+            }
+        });
         infoPerf.log(scriptName, "spaw du creep");
     } else {
         if (config.strict) {

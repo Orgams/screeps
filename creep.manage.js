@@ -17,13 +17,13 @@ let fonc_manage_creep = function(room) {
     let creeps = Object.values(Game.creeps);
 
     let configs = [];
-    configs.push(new Config('transferer', 1, 1, 1, 1, oneWorkTreeCarry,      "#00ff00", "local", false));
-    configs.push(new Config('janitor',    2, 1, 1, 1, oneWorkTreeCarry,      "#00ffff", "local", false));
-    configs.push(new Config('miner',      3, 0, 0, 0, fullWork,              "#ff00ff", "autre", true));
-    configs.push(new Config('builder',    4, 0, 1, 1, carryWork,             "#ff0000", "local", false));
-    configs.push(new Config('upgrader',   5, 1, 1, 1, oneWorkTreeCarry,      "#0000ff", "local", false));
-    configs.push(new Config('repairer',   6, 1, 1, 1, oneWorkTreeCarry,      "#ff9900", "local", false));
-    configs.push(new Config('claimer',    7, 0, 0, 0, claim,                 "#ffff00", "autre", false));
+    configs.push(new Config('transferer', 1, 1, 1, 1, oneWorkTreeCarry, "#00ff00", "local", false));
+    configs.push(new Config('janitor', 2, 1, 1, 1, oneWorkTreeCarry, "#00ffff", "local", false));
+    configs.push(new Config('miner', 3, 0, 0, 0, fullWork, "#ff00ff", "autre", true));
+    configs.push(new Config('builder', 4, 0, 1, 1, carryWork, "#ff0000", "local", false));
+    configs.push(new Config('upgrader', 5, 1, 1, 1, oneWorkTreeCarry, "#0000ff", "local", false));
+    configs.push(new Config('repairer', 6, 1, 1, 1, oneWorkTreeCarry, "#ff9900", "local", false));
+    configs.push(new Config('claimer', 7, 0, 0, 0, claim, "#ffff00", "autre", false));
     infoPerf.log(scriptName, "Init configs");
 
     // Supprimer les configuration dont le role a déjà un creep en création
@@ -55,9 +55,11 @@ let fonc_manage_creep = function(room) {
     // Initialiser le minimum du minier au nombre de conteneur de la salle
     let nbMiners = Memory["nb.containers"];
     let configMineur = configs.find((config) => config.role == 'miner');
-    configMineur.min = nbMiners;
-    configMineur.max = nbMiners;
-    configMineur.popOpti = nbMiners;
+    if (configMineur !== undefined) {
+        configMineur.min = nbMiners;
+        configMineur.max = nbMiners;
+        configMineur.popOpti = nbMiners;
+    }
     infoPerf.log(scriptName, "Init miner");
 
     // Initialiser la configuration du claimer
@@ -141,14 +143,14 @@ let fonc_manage_creep = function(room) {
     // for (let name in Game.spawns) {
     //     let spawn = Game.spawns[name];
     //     if (spawn.spawning == null) {
-             for (let indexConfig in configs) {
-                 let config = configs[indexConfig];
-                 infoPerf.logWithoutTimer(scriptName, config.role + " maxOk " + config.maxOk() + " ratioOk " + config.ratioOk() + " config.ratio " + config.ratio + " config.actualRatio " + config.actualRatio)
-                 if (config.maxOk() && config.ratioOk()) {
-                     infoPerf.logWithoutTimer(scriptName, config.role + " : le maximum et le ratio ne sont pas atteint (" + config.nb + "/" + config.max + " et " + config.printableActualRatio() + "/" + config.printableRatio() + ")");
-                     return creepCreate.try_create_creep(config);
-                 }
-             }
+    for (let indexConfig in configs) {
+        let config = configs[indexConfig];
+        infoPerf.logWithoutTimer(scriptName, config.role + " maxOk " + config.maxOk() + " ratioOk " + config.ratioOk() + " config.ratio " + config.ratio + " config.actualRatio " + config.actualRatio)
+        if (config.maxOk() && config.ratioOk()) {
+            infoPerf.logWithoutTimer(scriptName, config.role + " : le maximum et le ratio ne sont pas atteint (" + config.nb + "/" + config.max + " et " + config.printableActualRatio() + "/" + config.printableRatio() + ")");
+            return creepCreate.try_create_creep(config);
+        }
+    }
     //     }
     // }
     infoPerf.log(scriptName, "Create creep by opti");
