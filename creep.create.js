@@ -50,6 +50,8 @@ let try_create_creep = function(config) {
         }
     //}
     infoPerf.log(scriptName, "Init liste home");
+
+    console.log(homes)
     for (let home of homes){
         console.log(home)
     }
@@ -103,14 +105,14 @@ let create_creep = function(config, spawn) {
 
     infoPerf.simpleLog(scriptName, "config.strict", config.strict, "okLaunchSpawn", okLaunchSpawn)
     if (okLaunchSpawn) {
-        let ret = spawn.spawnCreep(body, config.role + Game.time, {
-            memory: {
-                role: config.role,
-                color: config.color,
-                range: config.range,
-                home: config.home
-            }
-        });
+        // let ret = spawn.spawnCreep(body, config.role + Game.time, {
+        //     memory: {
+        //         role: config.role,
+        //         color: config.color,
+        //         range: config.range,
+        //         home: config.home
+        //     }
+        // });
         infoPerf.log(scriptName, "spaw du creep");
     } else {
         if (config.strict) {
