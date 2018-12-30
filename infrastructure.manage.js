@@ -78,26 +78,10 @@ let infrastructure = {
 
         // Creer des perifieriques
         if (!newSite) {
-            // Creer des perifieriques autour des sources
-            //newSite = infrastructure_perif.build(room, sources,1);
-            //infoPerf.log(scriptName, "Creer les perifieriques sources 1");
-            if (!newSite) {
-                newSite = infrastructure_perif.build(room, sources, 2);
-                infoPerf.log(scriptName, "Creer les perifieriquessources 2");
-            }
-            if (!newSite) {
-                newSite = infrastructure_perif.build(room, [room.controller], 4);
-                infoPerf.log(scriptName, "Creer les perifieriquescontroleur 4");
-            }
-            // Creer des perifieriques autour des storages
-            if (!newSite) {
-                let containers = room.find(FIND_STRUCTURES, {
-                    filter: (struct) => struct.structureType == STRUCTURE_STORAGE
-                });
-                newSite = infrastructure_perif.build(room, containers, 3);
-                infoPerf.log(scriptName, "Creer les perifieriques containers 3");
-            }
+            newSite = infrastructure_perif.build(room, sources);
+            infoPerf.log(scriptName, "Creer des perifieriques");
         }
+
         infoPerf.finish(scriptName);
     }
 };
