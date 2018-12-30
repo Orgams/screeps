@@ -1,16 +1,5 @@
-let infrastructure_container = require('infrastructure_container');
-
-let infrastructure_bind_structure_to_source = require('infrastructure_bind_structure_to_source');
-let infrastructure_bind_contoller = require('infrastructure_bind_contoller')
-let infrastructure_perif = require('infrastructure_perif');
-let infrastructure_spawner = require('infrastructure_spawner');
-let infrastructure_road_contournement = require('infrastructure_road_contournement');
-let infrastructure_extension = require('infrastructure_extension');
-let infrastructure_tower = require('infrastructure_tower');
-
-
-
 let infoPerf = require('info.perf');
+let memoire = require('memoire');
 
 let infrastructure = {
     manage: function(room) {
@@ -20,11 +9,13 @@ let infrastructure = {
 
         let sites = room.find(FIND_CONSTRUCTION_SITES);
         let newSite = sites.length != 0;
+        if(newSite){
+            return true;
+        }
         let sources = room.find(FIND_SOURCES);
 
         // Détruire tout les site de constructions
         if (false) {
-            let sites = room.find(FIND_CONSTRUCTION_SITES)
             for (let i = sites.length - 1; i >= 0; i--) {
                 let site = sites[i];
                 site.remove();
@@ -33,53 +24,19 @@ let infrastructure = {
 
         infoPerf.log(scriptName, "init variable");
 
-        /// ajouter des conteneurs autour des sources qui n'en ont pas
-        // Parcourir les sources
-        if (!newSite) {
-            newSite = infrastructure_container.build(room, sources);
-            infoPerf.log(scriptName, "Ajouter des conteneurs autour des sources qui n'en ont pas");
-        }
+        let infrastructure_tasks = [
+            "infrastructure_container", "infrastructure_spawner", "infrastructure_bind_structure_to_source", "infrastructure_tower",
+            "infrastructure_road_contournement", "infrastructure_extension", "infrastructure_bind_contoller", "infrastructure_perif"
+        ];
 
-        // Creer un nouveau Spawner
-        if (!newSite) {
-            newSite = infrastructure_spawner.build(room, sources);
-            infoPerf.log(scriptName, "Creer un nouveau Spawner");
-        }
-
-        // relier Les structures et les sources par des routes
-        if (!newSite) {
-            newSite = infrastructure_bind_structure_to_source.build(room, sources)
-            infoPerf.log(scriptName, "Ajouter des routes entre les sources et les batiments");
-        }
-
-        // Creer des tourelles
-        if (!newSite) {
-            newSite = infrastructure_tower.build(room, sources)
-            infoPerf.log(scriptName, "Creer des tourelles");
-        }
-
-        // Creer des voies de contournement
-        if (!newSite) {
-            newSite = infrastructure_road_contournement.build(room, sources)
-            infoPerf.log(scriptName, "Creer des voies de contournement");
-        }
-
-        // Creer les extensions
-        if (!newSite) {
-            newSite = infrastructure_extension.build(room, sources)
-            infoPerf.log(scriptName, "Creer les extensions");
-        }
-
-        // Relier les controllers par des routes
-        if (!newSite) {
-            newSite = infrastructure_bind_contoller.build(room);
-            infoPerf.log(scriptName, "Ajouter des routes entre les controllers");
-        }
-
-        // Creer des perifieriques
-        if (!newSite) {
-            newSite = infrastructure_perif.build(room, sources);
-            infoPerf.log(scriptName, "Creer des perifieriques");
+        for(let infrastructure_task of infrastructure_tasks){
+            newSite = require(infrastructure_task).build(room, sources);
+            let finsh = memoire.get(infrastructure_task+".finish", room);
+            console.log(finsh)
+            infoPerf.log(scriptName, infrastructure_task);
+            if (newSite) {
+                return newSite;
+            }
         }
 
         infoPerf.finish(scriptName);
