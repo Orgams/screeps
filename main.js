@@ -23,7 +23,9 @@ module.exports.loop = function() {
 
         let perif = infrastructure_get.perif(room_center, 1, room);
 
-        console.log(perif)
+        let perif_paire = infrastructure_get.pos_paire(perif);
+
+        console.log(perif_paire)
     }
 
     try {
