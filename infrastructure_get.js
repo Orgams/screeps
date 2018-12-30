@@ -70,5 +70,6 @@ module.exports = {
     perif: perif,
     diago: diago,
     ortho: ortho,
+    pos_paire: pos_paire,
     pos_on_path: pos_on_path
 }
