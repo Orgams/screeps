@@ -19,7 +19,7 @@ let build = function(room, sources) {
         }
     }
     let i = 0;
-    let rets;
+    let rets = [];
     while (!rets.includes(ERR_RCL_NOT_ENOUGH)) {
         i++;
         let room_center = info_room.get_pos_center(room.name);
