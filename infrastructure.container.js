@@ -5,7 +5,7 @@ let infrastructure = {
         for (let i = sources.length - 1; i >= 0; i--) {
             let source = sources[i];
             
-            // recuperer les sites de construction autour de la source
+            // recuperer les sites de construction de containers autour de la source
             let constrs = source.pos.findInRange(FIND_MY_CONSTRUCTION_SITES, 1, {
                 filter: (constr) => {
                     if (constr.structureType == STRUCTURE_CONTAINER) {
@@ -15,7 +15,7 @@ let infrastructure = {
                 }
             });
             
-            // recuperer les structures autour de la source
+            // recuperer les containers autour de la source
             let structs = source.pos.findInRange(FIND_STRUCTURES, 1, {
                 filter: (constr) => {
                     if (constr.structureType == STRUCTURE_CONTAINER) {

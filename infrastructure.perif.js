@@ -1,6 +1,6 @@
 let infrastructure_create = require('infrastructure_create');
 
-let infrastructureGet= require('infrastructure.get');
+let infrastructure_get= require('infrastructure_get');
 
 let infrastructure = {
 
@@ -16,7 +16,7 @@ let infrastructure = {
             if(room.memory[target.id]['perif'][dist] === undefined)room.memory[target.id]['perif'][dist]=false;
             
             if (!room.memory[target.id]['perif'][dist]){
-                let poss = infrastructureGet.perif(target, dist, room);
+                let poss = infrastructure_get.perif(target, dist, room);
                 for (let j = poss.length - 1; j >= 0; j--) {
                     let pos = poss[j];
                     let ret = infrastructure_create.create(pos, STRUCTURE_ROAD);

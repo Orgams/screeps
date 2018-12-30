@@ -1,6 +1,6 @@
 let infrastructure_create = require('infrastructure_create');
 
-let infrastructureGet = require('infrastructure.get');
+let infrastructure_get = require('infrastructure_get');
 
 
 let build = function(room, sources) {
@@ -9,8 +9,8 @@ let build = function(room, sources) {
         filter: (structure) => structure.structureType == STRUCTURE_CONTAINER
     });
     for (let container of containers) {
-        let poss = infrastructureGet.diago(container, 2, room);
-        poss.concat(infrastructureGet.ortho(container, 2, room));
+        let poss = infrastructure_get.diago(container, 2, room);
+        poss.concat(infrastructure_get.ortho(container, 2, room));
         for (let pos of poss) {
             let ret = infrastructure_create.create(pos, STRUCTURE_EXTENSION);
             if (ret === OK) {
