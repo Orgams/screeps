@@ -1,3 +1,5 @@
+let info_pos = require('info_pos');
+
 let action = {
     do: function(creep, target){
         if(target === null)return
@@ -5,10 +7,7 @@ let action = {
         if(energyDroped.length > 0 && creep.carry.energy != creep.carryCapacity){
             creep.pickup(energyDroped[0]);
         }else{
-            if (target.roomName === undefined) {
-                target = target.pos;
-            }
-            const pos = new RoomPosition(target.x, target.y, target.roomName);
+            let pos = info_pos.get_pos(target);
             //infoPerf.simpleLog(scriptName, creep + target + pos)
         	let ret = creep.moveTo(pos, {visualizePathStyle: {
         	    stroke: creep.memory.color,
