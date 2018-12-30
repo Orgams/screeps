@@ -1,8 +1,8 @@
-let Container = require('infrastructure.container');
-let bind_structure_to_source = require('infrastructure.bind_structure_to_source');
-let bind_contoller = require('infrastructure.bind_contoller')
-let Perif = require('infrastructure.perif');
+let infrastructure_container = require('infrastructure_container');
 
+let infrastructure_bind_structure_to_source = require('infrastructure_bind_structure_to_source');
+let infrastructure_bind_contoller = require('infrastructure_bind_contoller')
+let infrastructure_perif = require('infrastructure_perif');
 let infrastructure_spawner = require('infrastructure_spawner');
 let infrastructure_road_contournement = require('infrastructure_road_contournement');
 let infrastructure_extension = require('infrastructure_extension');
@@ -36,7 +36,7 @@ let infrastructure = {
         /// ajouter des conteneurs autour des sources qui n'en ont pas
         // Parcourir les sources
         if (!newSite) {
-            newSite = Container.build(room, sources);
+            newSite = infrastructure_container.build(room, sources);
             infoPerf.log(scriptName, "Ajouter des conteneurs autour des sources qui n'en ont pas");
         }
 
@@ -48,7 +48,7 @@ let infrastructure = {
 
         // relier Les structures et les sources par des routes
         if (!newSite) {
-            newSite = bind_structure_to_source.build(room, sources)
+            newSite = infrastructure_bind_structure_to_source.build(room, sources)
             infoPerf.log(scriptName, "Ajouter des routes entre les sources et les batiments");
         }
 
@@ -72,21 +72,21 @@ let infrastructure = {
 
         // Relier les controllers par des routes
         if (!newSite) {
-            newSite = bind_contoller.build(room);
+            newSite = infrastructure_bind_contoller.build(room);
             infoPerf.log(scriptName, "Ajouter des routes entre les controllers");
         }
 
         // Creer des perifieriques
         if (!newSite) {
             // Creer des perifieriques autour des sources
-            //newSite = Perif.build(room, sources,1);
+            //newSite = infrastructure_perif.build(room, sources,1);
             //infoPerf.log(scriptName, "Creer les perifieriques sources 1");
             if (!newSite) {
-                newSite = Perif.build(room, sources, 2);
+                newSite = infrastructure_perif.build(room, sources, 2);
                 infoPerf.log(scriptName, "Creer les perifieriquessources 2");
             }
             if (!newSite) {
-                newSite = Perif.build(room, [room.controller], 4);
+                newSite = infrastructure_perif.build(room, [room.controller], 4);
                 infoPerf.log(scriptName, "Creer les perifieriquescontroleur 4");
             }
             // Creer des perifieriques autour des storages
@@ -94,7 +94,7 @@ let infrastructure = {
                 let containers = room.find(FIND_STRUCTURES, {
                     filter: (struct) => struct.structureType == STRUCTURE_STORAGE
                 });
-                newSite = Perif.build(room, containers, 3);
+                newSite = infrastructure_perif.build(room, containers, 3);
                 infoPerf.log(scriptName, "Creer les perifieriques containers 3");
             }
         }
