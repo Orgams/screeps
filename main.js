@@ -12,7 +12,7 @@ module.exports.loop = function() {
 
     let scriptName = "main";
     infoPerf.init(scriptName, false);
-    let test = false;
+    let test = true;
     if (test) {
         let infrastructure_get = require('infrastructure_get');
         let inforoom = require('info.room');
