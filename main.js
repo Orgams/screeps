@@ -123,5 +123,5 @@ module.exports.loop = function() {
     //infoPerf.log(scriptName, "");
     //infoPerf.finish(scriptName);
 
-    //infoPerf.simpleLog(scriptName, Game.time + "--------------------------------------------------");
+    infoPerf.simpleLog(scriptName, Game.time + "--------------------------------------------------");
 }

@@ -66,7 +66,6 @@ let try_create_creep = function(config) {
 
     for (let spawn of spawns) {
         let ret = create_creep(config, spawn);
-        console.log(ret);
         if (ret === OK) {
             return true;
         }
