@@ -19,13 +19,14 @@ let build = function(room, sources) {
         }
     }
     let i = 0;
+    let rets;
     while (!rets.include(ERR_RCL_NOT_ENOUGH)) {
         i++;
         let room_center = info_room.get_pos_center(room.name);
         let perif = infrastructure_get.perif(room_center, i, room);
         let perif_paire = infrastructure_get.pos_paire(perif);
 
-        let rets = [];
+        rets = [];
         for (let pos of perif_paire) {
             let ret = infrastructure_create.create(pos, STRUCTURE_EXTENSION);
             if (ret === OK) {
