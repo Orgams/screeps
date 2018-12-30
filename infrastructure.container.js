@@ -1,5 +1,7 @@
 let infrastructure_create = require('infrastructure_create');
 
+let infrastructure_get = require('infrastructure_get');
+
 let infrastructure = {
     build: function(room, sources){
         for (let i = sources.length - 1; i >= 0; i--) {
@@ -27,12 +29,8 @@ let infrastructure = {
             
             //si il n'y a ni site de construction ni structure conteneur, l'ajouter
             if( constrs.length === 0 && structs.length === 0 ){
-                 
-                let x = source.pos.x + Math.floor((Math.random() * 3) - 1);
-                let y = source.pos.y + Math.floor((Math.random() * 3) - 1);
-
-                let pos = new RoomPosition(x, y, room.name);
-                let ret = infrastructure_create.create(pos, STRUCTURE_CONTAINER);
+                let pos = infrastructure_get.pos_on_path(source, room.controller, 1, room.name);
+                infrastructure_create.create(pos, STRUCTURE_CONTAINER);
                 return true;
             }
         }

@@ -31,8 +31,6 @@ let try_create_creep = function(config) {
         let creeps = info_creep.get_creeps(config.role);
         let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
 
-        console.log("repartition", config.role, Object.keys(creepsGroupByHome), Object.values(creepsGroupByHome))
-
         let myRoomKeys = info_room.get_my_room_keys();
 
         for (room_key of myRoomKeys) {

@@ -12,24 +12,12 @@ let infrastructure = {
 
             // Construire le Spawner si il n'y en a pas déjà un
             if (spawnInRange.length === 0) {
-                let path = source.pos.findPathTo(room.controller, {
-                    ignoreCreeps: true,
-                    swampCost: 1
-                });
 
-                path.slice(1)
-                path.pop()
+                let pos = infrastructure_get.pos_on_path(source, room.controller, distConstrSpawn, room.name);
 
-                let target;
+                console.log("infrastructure_spawner infrastructure_get.pos_on_path", pos)
 
-                while (target === undefined && distConstrSpawn > 0) {
-                    target = path[distConstrSpawn]
-                    distConstrSpawn--;
-                }
-
-                let pos = new RoomPosition(target.x, target.y, room.name);
-
-                let ret = infrastructure_create.create(pos, STRUCTURE_SPAWN);
+                infrastructure_create.create(pos, STRUCTURE_SPAWN);
                 return true;
             }
         }

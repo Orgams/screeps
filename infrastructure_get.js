@@ -30,8 +30,33 @@ let ortho = function(target, dist, room) {
     return res;
 }
 
+let pos_on_path = function(source, target, dist, roomName) {
+
+    let path = source.pos.findPathTo(target, {
+        ignoreCreeps: true,
+        swampCost: 1
+    });
+
+    path.slice(1);
+    path.pop();
+
+    dist--;
+
+    let pos_path;
+
+    while (pos_path === undefined && dist >= 0) {
+        pos_path = path[dist]
+        dist--;
+    }
+
+    let pos = new RoomPosition(pos_path.x, pos_path.y, roomName);
+
+    return pos;
+}
+
 module.exports = {
     perif: perif,
     diago: diago,
-    ortho: ortho
+    ortho: ortho,
+    pos_on_path: pos_on_path
 }
