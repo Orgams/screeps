@@ -6,7 +6,7 @@ let actionHarvest = {
         let sources = srcs;
 
         if (sources === undefined) {
-            sources = [STRUCTURE_CONTAINER, FIND_DROPPED_RESOURCES, STRUCTURE_STORAGE, FIND_SOURCES_ACTIVE];
+            sources = [FIND_DROPPED_RESOURCES, STRUCTURE_CONTAINER, STRUCTURE_STORAGE, FIND_SOURCES_ACTIVE];
         }
 
         let target = false;
