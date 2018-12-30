@@ -47,6 +47,9 @@ let memoire = {
 };
 
 let getRecur = function(obj, keyCur, keyParts) {
+	if (obj === undefined){
+		return undefined;
+	}
 	if (keyParts.length > 0) {
 		obj = obj[keyCur];
 		keyCur = keyParts[0];
@@ -62,8 +65,8 @@ let getRecur = function(obj, keyCur, keyParts) {
 }
 
 let setRecur = function(obj, keyCur, keyParts, valeur) {
-	//infoPerf.simpleLog(scriptName, "----");
-	//infoPerf.simpleLog(scriptName, obj, keyCur, keyParts, valeur);
+	// infoPerf.simpleLog(scriptName, "----");
+	// infoPerf.simpleLog(scriptName, obj, keyCur, keyParts, valeur);
 	if (keyParts.length > 0) {
 		if (obj[keyCur] === undefined) {
 			obj[keyCur] = {};
