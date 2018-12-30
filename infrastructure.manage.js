@@ -6,6 +6,7 @@ let Perif = require('infrastructure.perif');
 let infrastructure_spawner = require('infrastructure_spawner');
 let infrastructure_road_contournement = require('infrastructure_road_contournement');
 let infrastructure_extension = require('infrastructure_extension');
+let infrastructure_tower = require('infrastructure_tower');
 
 
 
@@ -49,6 +50,12 @@ let infrastructure = {
         if (!newSite) {
             newSite = bind_structure_to_source.build(room, sources)
             infoPerf.log(scriptName, "Ajouter des routes entre les sources et les batiments");
+        }
+
+        // Creer des tourelles
+        if (!newSite) {
+            newSite = infrastructure_tower.build(room, sources)
+            infoPerf.log(scriptName, "Creer des tourelles");
         }
 
         // Creer des voies de contournement
