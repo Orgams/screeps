@@ -9,9 +9,9 @@ let build = function(room, sources) {
         filter: (structure) => structure.structureType == STRUCTURE_CONTAINER
     });
     for (let container of containers) {
-        let poss = infrastructure_get.diago(container, 2, room);
-        poss = poss.concat(infrastructure_get.ortho(container, 2, room));
-        for (let pos of poss) {
+        let perif = infrastructure_get.perif(container, 2, room);
+        let perif_paire = infrastructure_get.pos_paire(perif);
+        for (let pos of perif_paire) {
             let ret = infrastructure_create.create(pos, STRUCTURE_EXTENSION);
             if (ret === OK) {
                 return true;
