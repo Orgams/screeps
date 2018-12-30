@@ -15,11 +15,11 @@ module.exports.loop = function() {
     let test = false;
     if (test) {
         let infrastructure_get = require('infrastructure_get');
-        let inforoom = require('info.room');
+        let info_room = require('info.room');
 
         let room = Game.rooms["W2N23"];
 
-        let room_center = inforoom.get_pos_center(room.name);
+        let room_center = info_room.get_pos_center(room.name);
 
         let perif = infrastructure_get.perif(room_center, 1, room);
 
