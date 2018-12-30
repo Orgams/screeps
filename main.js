@@ -12,6 +12,19 @@ module.exports.loop = function() {
 
     let scriptName = "main";
     infoPerf.init(scriptName, false);
+    let test = true;
+    if (test) {
+        let infrastructure_get = require('infrastructure_get');
+        let inforoom = require('info.room');
+
+        let room = Game.rooms["W2N23"];
+
+        let room_center = inforoom.get_pos_center(room.name);
+
+        let perif = infrastructure_get.perif(room_center, 1, room);
+
+        console.log(perif)
+    }
 
     try {
         let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
@@ -90,7 +103,7 @@ module.exports.loop = function() {
             infoPerf.log(scriptName, "creeps creation");
         }
     } catch (error) {
-        infoPerf.simpleLog(scriptName,"[main] creeps creation : " + error);
+        infoPerf.simpleLog(scriptName, "[main] creeps creation : " + error);
     }
 
     try {

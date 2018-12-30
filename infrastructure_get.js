@@ -30,6 +30,10 @@ let ortho = function(target, dist, room) {
     return res;
 }
 
+let pos_paire = function(poss) {
+    return _.filter(poss, (pos) => (pos.x+pos.y)%2 === 0);
+}
+
 let pos_on_path = function(source, target, dist, roomName) {
 
     let path = source.pos.findPathTo(target, {
