@@ -41,6 +41,9 @@ let bot = {
                 return true;
             }
         }
+        if(memoire.get("range", creep) === undefined){
+            memoire.set("range", "local", creep);
+        }
 
         // Aller dans ma salle si je suis local et que je ne suis pas dans ma salle
         if (creep.memory.range === "local"){
