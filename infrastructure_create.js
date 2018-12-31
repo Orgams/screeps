@@ -17,10 +17,10 @@ let create = function(pos, struct_type) {
 	}
 
 	// Détruire la route sous la structure si il y en a une
-	let roads = _.filter(structs, (struct) => struct.structureType === STRUCTURE_ROAD)
-	if(structs.length > 0){
-		roads[0].destroy();
-	}
+	// let roads = _.filter(structs, (struct) => struct.structureType === STRUCTURE_ROAD)
+	// if(structs.length > 0){
+	// 	roads[0].destroy();
+	// }
 	
 	// Construire la structure
 	let ret = pos.createConstructionSite(struct_type);
