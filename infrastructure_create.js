@@ -11,13 +11,13 @@ let create = function(pos, struct_type) {
 
 	// Vérifier si il n'y a pas déjà une structure
 	let structs = pos.lookFor(LOOK_STRUCTURES);
-	let structs_without_road = _.filter(structs, (struct) => structure.structureType !== STRUCTURE_ROAD)
+	let structs_without_road = _.filter(structs, (struct) => struct.structureType !== STRUCTURE_ROAD)
 	if(structs_without_road.length > 0){
 		return false;
 	}
 
 	// Détruire la route sous la structure si il y en a une
-	let roads = _.filter(structs, (struct) => structure.structureType === STRUCTURE_ROAD)
+	let roads = _.filter(structs, (struct) => struct.structureType === STRUCTURE_ROAD)
 	if(structs.length > 0){
 		roads[0].destroy();
 	}
