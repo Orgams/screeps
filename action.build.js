@@ -15,7 +15,6 @@ let action = {
 			// Passer le creep en mode global si la cible est dans une autre piece
 			if(target !== null){
 				memoire.set("range", "global", creep, 10);
-				memoire.get("range", creep);
 			}
 		}
 
