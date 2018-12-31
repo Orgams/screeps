@@ -109,7 +109,7 @@ module.exports.loop = function() {
     }
 
     try {
-        if (Game.time % 20 == 0) {
+        if (Game.time % 5 == 0) {
             for (let roomName in Game.rooms) {
                 let room = Game.rooms[roomName];
                 structManage.manage(room);
