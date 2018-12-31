@@ -42,7 +42,7 @@ let bot = {
             }
         }
         if(memoire.get("range", creep) === undefined){
-            memoire.set("range", "local", creep);
+            memoire.set("range", "local", creep, 60*60);
         }
 
         // Aller dans ma salle si je suis local et que je ne suis pas dans ma salle
