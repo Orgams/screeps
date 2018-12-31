@@ -1,4 +1,5 @@
 let actionMove = require('action.move');
+let memoire = require('memoire');
 
 let action = {
 	do: function(creep){
