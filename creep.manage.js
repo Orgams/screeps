@@ -73,11 +73,11 @@ let fonc_manage_creep = function(room) {
     infoPerf.log(scriptName, "Initialiser config.nb : le nombre actuel de creep de ce type");
 
     // Initialiser la configuration du claimer
-    if (Game.gcl.level > info_room.get_nb_my_room()) {
-        let configClaimer = configs.find((config) => config.role == 'claimer');
-        configClaimer.max = 1;
-        infoPerf.log(scriptName, "Initialiser la configuration du claimer", configClaimer);
-    }
+    // if (Game.gcl.level > info_room.get_nb_my_room()) {
+    //     let configClaimer = configs.find((config) => config.role == 'claimer');
+    //     configClaimer.max = 1;
+    //     infoPerf.log(scriptName, "Initialiser la configuration du claimer", configClaimer);
+    // }
 
     // Eliminer les configuration qui sont arriver à leur max de population
     configs = configs.filter((config) => config.maxOk());
