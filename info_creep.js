@@ -23,7 +23,7 @@ let get = function(role) {
 let set_global = function(creep) {
     let home = memoire.get("home", creep);
     if (home === creep.room.name){
-        memoire.set("range", "global", creep, 60);
+        memoire.set("range", "global", creep, 60*3);
     }
 }
 
