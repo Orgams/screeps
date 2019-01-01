@@ -79,14 +79,6 @@ let fonc_manage_creep = function(room) {
     }
     infoPerf.log(scriptName, "Initialiser config.nb : le nombre actuel de creep de ce type");
 
-    // Stopper la production de claimer si on ne peut pas avoir de nouvelle salle
-    if (Game.gcl.level <= Object.keys(Game.rooms).length) {
-        configClaimer.min = 0;
-        configClaimer.max = 0;
-        configClaimer.popOpti = 0;
-    }
-    infoPerf.log(scriptName, "Stopper la production de claimer si on ne peut pas avoir de nouvelle salle");
-
     // Eliminer les configuration qui sont arriver à leur max de population
     configs = configs.filter((config) => config.maxOk());
     infoPerf.log(scriptName, "Delete conf in max");
