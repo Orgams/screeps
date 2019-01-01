@@ -44,6 +44,8 @@ let pos_paire = function(poss) {
 
 let pos_on_path = function(source, target, dist, roomName) {
 
+    console.log(source, target)
+
     let path = source.pos.findPathTo(target, {
         ignoreCreeps: true,
         swampCost: 1
