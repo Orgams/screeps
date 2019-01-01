@@ -20,7 +20,7 @@ let fonc_manage_creep = function(room) {
     configs.push(new Config('transferer', 1, 1, 1, 1, oneWorkTreeCarry, "#00ff00", "local", false));
     configs.push(new Config('janitor', 2, 1, 1, 1, oneWorkTreeCarry, "#00ffff", "local", false));
     configs.push(new Config('miner', 3, 0, 0, 0, fullWork, "#ff00ff", "autre", true));
-    configs.push(new Config('builder', 4, 1, 0, 0, carryWork, "#ff0000", "local", false));
+    configs.push(new Config('builder', 4, 1, 1, 1, carryWork, "#ff0000", "local", false));
     configs.push(new Config('upgrader', 5, 1, 1, 1, oneWorkTreeCarry, "#0000ff", "local", false));
     configs.push(new Config('repairer', 6, 1, 1, 1, oneWorkTreeCarry, "#ff9900", "local", false));
     configs.push(new Config('claimer', 7, 0, 0, 0, claim, "#ffff00", "autre", false));
