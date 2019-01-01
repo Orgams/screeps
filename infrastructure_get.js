@@ -58,6 +58,7 @@ let pos_on_path = function(source, target, dist, roomName) {
 
     while (pos_path === undefined && dist >= 0) {
         pos_path = path[dist]
+        console.log(JSON.stringify(path))
         console.log("dist : ", dist, pos_path)
         dist--;
     }
