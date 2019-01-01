@@ -62,13 +62,6 @@ let fonc_manage_creep = function(room) {
     }
     infoPerf.log(scriptName, "Init miner");
 
-    // Initialiser la configuration du claimer
-    if (Game.gcl.level > info_room.get_nb_my_room()) {
-        let configClaimer = configs.find((config) => config.role == 'claimer');
-        configClaimer.max = 1;
-        infoPerf.log(scriptName, "Initialiser la configuration du claimer", configClaimer);
-    }
-
     /// Inisialiser les données de configs spécifique à cette salle
     // Initialiser config.nb : le nombre actuel de creep de ce type
     for (let indexConfig in configs) {
@@ -78,6 +71,13 @@ let fonc_manage_creep = function(room) {
         Memory["nb." + config.role] = config.nb;
     }
     infoPerf.log(scriptName, "Initialiser config.nb : le nombre actuel de creep de ce type");
+
+    // Initialiser la configuration du claimer
+    if (Game.gcl.level > info_room.get_nb_my_room()) {
+        let configClaimer = configs.find((config) => config.role == 'claimer');
+        configClaimer.max = 1;
+        infoPerf.log(scriptName, "Initialiser la configuration du claimer", configClaimer);
+    }
 
     console.log("avant", configs)
     // Eliminer les configuration qui sont arriver à leur max de population
