@@ -63,11 +63,11 @@ let fonc_manage_creep = function(room) {
     infoPerf.log(scriptName, "Init miner");
 
     // Initialiser la configuration du claimer
-    let configClaimer = configs.find((config) => config.role == 'claimer');
     if (Game.gcl.level > info_room.get_nb_my_room()) {
+        let configClaimer = configs.find((config) => config.role == 'claimer');
         configClaimer.max = 1;
+        infoPerf.log(scriptName, "Initialiser la configuration du claimer", configClaimer);
     }
-    infoPerf.log(scriptName, "Initialiser la configuration du claimer");
 
     /// Inisialiser les données de configs spécifique à cette salle
     // Initialiser config.nb : le nombre actuel de creep de ce type
