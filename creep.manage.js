@@ -79,6 +79,7 @@ let fonc_manage_creep = function(room) {
     }
     infoPerf.log(scriptName, "Initialiser config.nb : le nombre actuel de creep de ce type");
 
+    console.log(configs)
     // Eliminer les configuration qui sont arriver à leur max de population
     configs = configs.filter((config) => config.maxOk());
     infoPerf.log(scriptName, "Delete conf in max");
@@ -106,7 +107,6 @@ let fonc_manage_creep = function(room) {
     }
     infoPerf.log(scriptName, "Init ratio");
 
-    console.log(configs)
 
     // Create the necessary stuff that does not have its minimum for this room
     if (!allMinOk) {
