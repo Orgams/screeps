@@ -24,7 +24,6 @@ let do_out = function(creep) {
         );
 
         target = targets[0];
-        console.log (target)
         // Passer le creep en mode global si la cible est dans une autre piece
         if (target !== undefined) {
              info_creep.set_global(creep);
