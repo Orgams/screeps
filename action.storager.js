@@ -21,7 +21,7 @@ let do_out = function(creep) {
             _.sum(structure.store) < structure.storeCapacity
         );
 
-        target = targets[0];
+        target = targets[1];
         console.log (target)
         // // Passer le creep en mode global si la cible est dans une autre piece
         // if (target !== null) {
