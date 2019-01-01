@@ -112,7 +112,7 @@ let create_creep = function(config, spawn) {
         infoPerf.log(scriptName, "vérification de la taille mini du body");
     }
 
-    message += "config.strict " + config.strict + " okLaunchSpawn " + okLaunchSpawn;
+    //message += "config.strict " + config.strict + " okLaunchSpawn " + okLaunchSpawn;
     if (okLaunchSpawn) {
         ret = spawn.spawnCreep(body, config.role + Game.time, {
             memory: {
