@@ -81,7 +81,7 @@ let fonc_manage_creep = function(room) {
 
     console.log(configs)
     // Eliminer les configuration qui sont arriver à leur max de population
-    configs = configs.filter((config) => config.maxOk());
+    configs = configs.filter((config) => console.log(config) && config.maxOk());
     infoPerf.log(scriptName, "Delete conf in max");
 
     // Initialiser totalRestePopOpti : l'adition de toutes les population optimal qui ne sont pas à leur max
