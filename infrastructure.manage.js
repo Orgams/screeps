@@ -25,8 +25,15 @@ let infrastructure = {
         infoPerf.log(scriptName, "init variable");
 
         let infrastructure_tasks = [
-            "infrastructure_container", "infrastructure_spawner", "infrastructure_bind_structure_to_source", "infrastructure_tower",
-            "infrastructure_road_contournement", "infrastructure_extension", "infrastructure_bind_contoller", "infrastructure_perif"
+            "infrastructure_container", 
+            "infrastructure_spawner", 
+            "infrastructure_bind_structure_to_source", 
+            "infrastructure_tower",
+            "infrastructure_road_contournement", 
+            "infrastructure_extension", 
+            "infrastructure_bind_contoller", 
+            "infrastructure_perif",
+            "infrastructure_storage"
         ];
 
         for (let infrastructure_task of infrastructure_tasks) {
