@@ -8,6 +8,8 @@ let infoPerf = require('info.perf');
 
 let bot = require('bot');
 
+let info_room = require('info.room');
+
 module.exports.loop = function() {
 
     let scriptName = "main";
@@ -110,8 +112,8 @@ module.exports.loop = function() {
 
     try {
         if (Game.time % 5 == 0) {
-            for (let roomName in Game.rooms) {
-                let room = Game.rooms[roomName];
+            
+            for (let room of info_room.get_my_room()) {
                 structManage.manage(room);
             }
             infoPerf.log(scriptName, "structures");
