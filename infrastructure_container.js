@@ -6,7 +6,7 @@ let infoPerf = require('info.perf');
 let infrastructure = {
     build: function(room, sources) {
         let scriptName = "infrastructure_container";
-        infoPerf.init(scriptName, true, room, Object.values(sources));
+        infoPerf.init(scriptName, true, room, Object.keys(sources));
 
 
         for (let i = sources.length - 1; i >= 0; i--) {
