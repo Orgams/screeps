@@ -1,5 +1,8 @@
 let actionMove = require('action.move');
+
 let memoire = require('memoire');
+
+let info_creep = require('info_creep');
 
 let action = {
 	do: function(creep){
@@ -15,7 +18,7 @@ let action = {
 
 			// Passer le creep en mode global si la cible est dans une autre piece
 			if(target !== null){
-				memoire.set("range", "global", creep, 60);
+				info_creep.set_global(creep);
 			}
 		}
 

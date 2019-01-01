@@ -1,6 +1,6 @@
 let memoire = require('memoire');
 
-let get_creeps = function(role) {
+let get = function(role) {
 
     let id_creeps = memoire.get("ids." + role);
     if (id_creeps === undefined) {
@@ -11,7 +11,7 @@ let get_creeps = function(role) {
         }
         memoire.set("ids." + role, id_creeps, undefined, 1);
         return creeps;
-    }else{
+    } else {
         let creeps = [];
         for (let id_creep of id_creeps) {
             creeps.push(Game.getObjectById(id_creep));
@@ -20,6 +20,11 @@ let get_creeps = function(role) {
     }
 }
 
+let set_global = function(role) {
+    memoire.set("range", "global", creep, 60);
+}
+
 module.exports = {
-    get_creeps: get_creeps
+    get: get,
+    set_global: set_global
 }

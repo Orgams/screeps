@@ -1,6 +1,8 @@
 let actionMove = require('action.move');
 
 let do_out = function(creep) {
+
+    //Récuperer le stockage le plus proche qui n'est pas plein dans la salle
     targets = creep.room.find(FIND_MY_STRUCTURES, {
         filter: (structure) => {
             if (structure.structureType == STRUCTURE_STORAGE) {
@@ -10,6 +12,25 @@ let do_out = function(creep) {
         }
     });
     let target = creep.pos.findClosestByRange(targets);
+
+
+    // Chercher un stockage dans les autres salles si besoin
+    if (target === null) {
+        targets = _.filter(Game.structures, (structure) =>
+            structure.structureType == STRUCTURE_STORAGE &&
+            _.sum(structure.store) < structure.storeCapacity
+        );
+
+        console.log (targets)
+        // target = targets[Object.keys(targets)[0]];
+
+        // // Passer le creep en mode global si la cible est dans une autre piece
+        // if (target !== null) {
+        //     info_creep.set_global(creep);
+        // }
+    }
+
+    // Stocker les differantes resources dans le stockage
     if (target) {
         for (let typeCarry in creep.carry) {
             let nbCarry = creep.carry[typeCarry];

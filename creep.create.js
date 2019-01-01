@@ -1,6 +1,6 @@
 let infoPerf = require('info.perf');
 
-let info_creep = require('info.creep');
+let info_creep = require('info_creep');
 let info_room = require('info.room');
 
 let costBody = 0;
@@ -28,7 +28,7 @@ let try_create_creep = function(config) {
     infoPerf.log(scriptName, "Init variables");
 
     if (config.range === "local") {
-        let creeps = info_creep.get_creeps(config.role);
+        let creeps = info_creep.get(config.role);
         let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
 
         let myRoomKeys = info_room.get_my_room_keys();
