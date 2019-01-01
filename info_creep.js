@@ -21,7 +21,7 @@ let get = function(role) {
 }
 
 let set_global = function(creep) {
-    memoire.set("range", "global", creep, 60);
+    memoire.set("range", "global", creep, 20);
 }
 
 module.exports = {
