@@ -1,5 +1,7 @@
 let actionMove = require('action.move');
 
+let info_creep = require('info_creep');
+
 let do_out = function(creep) {
 
     //Récuperer le stockage le plus proche qui n'est pas plein dans la salle
