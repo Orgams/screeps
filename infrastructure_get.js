@@ -49,6 +49,8 @@ let pos_on_path = function(source, target, dist, roomName) {
         swampCost: 1
     });
 
+    console.log(path)
+
     path.slice(1);
     path.pop();
 
