@@ -38,6 +38,7 @@ let infrastructure = {
             // Ajouter le site de construction s'il n'existe pas et s'il n'y a pas de conteneur
             if (constrs.length === 0 && structs.length === 0) {
                 let pos = infrastructure_get.pos_on_path(source, room.controller, 1, room.name);
+                console.log(pos)
                 infrastructure_create.create(pos, STRUCTURE_CONTAINER);
                 return true;
             }
