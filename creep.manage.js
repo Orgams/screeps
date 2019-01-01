@@ -106,6 +106,8 @@ let fonc_manage_creep = function(room) {
     }
     infoPerf.log(scriptName, "Init ratio");
 
+    console.log(configs)
+
     // Create the necessary stuff that does not have its minimum for this room
     if (!allMinOk) {
         for (let indexConfig in configs) {
