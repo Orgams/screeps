@@ -122,7 +122,7 @@ let create_creep = function(config, spawn) {
                 home: config.home
             }
         });
-        message += " spaw du creep dans " + spawn.room.name + " (ret=" + ret + ")"
+        message += " spaw du creep (ret=" + ret + ")"
         infoPerf.log(scriptName, "spaw du creep");
     } else {
         if (config.strict) {
