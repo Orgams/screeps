@@ -3,12 +3,12 @@ let start = {};
 let activate = {};
 
 let info = {
-	init: function(script, activation) {
+	init: function(script, activation, ...messages) {
 		activate[script] = activation;
 		if (activate[script]) {
 			times[script] = new Date().getTime();
 			start[script] = times[script];
-			console.log("[" + script + "]", "--------------------------");
+			console.log("[" + script + "]", "--------", ...messages);
 		}
 	},
 	finish: function(script) {
