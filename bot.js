@@ -4,6 +4,8 @@ let actionMove = require('action.move');
 
 let info_room = require('info.room');
 
+let memoire = require('memoire');
+
 let bot = {
 
     /** @param {Creep} creep **/
