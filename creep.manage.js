@@ -65,7 +65,6 @@ let fonc_manage_creep = function(room) {
     // Initialiser la configuration du claimer
     if (Game.gcl.level > info_room.get_nb_my_room()) {
         let configClaimer = configs.find((config) => config.role == 'claimer');
-        console.log(configClaimer);
         configClaimer.max = 1;
         infoPerf.log(scriptName, "Initialiser la configuration du claimer", configClaimer);
     }
