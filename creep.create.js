@@ -91,7 +91,7 @@ let create_creep = function(config, spawn) {
 
     let okLaunchSpawn = false;
 
-    let message = "role : "+config.role+", home : "+config.home;
+    let message = config.role + ", home:" + config.home + "(" + spawn.room.name + ")";
 
     infoPerf.log(scriptName, "Initialisation de variable");
 
@@ -105,7 +105,7 @@ let create_creep = function(config, spawn) {
     }
     infoPerf.log(scriptName, "construction du body");
 
-    message += " (" + body.length + " parts) (" + costBody + "/" + energyAvailable + " energy)";
+    message += " (" + body.length + " parts) (" + costBody + "/" + energyAvailable + ")";
 
     if (!config.strict) {
         okLaunchSpawn = body.length >= 3
@@ -122,13 +122,13 @@ let create_creep = function(config, spawn) {
                 home: config.home
             }
         });
-        message += " spaw du creep dans " + spawn.room.name + " (ret="+ret+")"
+        message += " spaw du creep dans " + spawn.room.name + " (ret=" + ret + ")"
         infoPerf.log(scriptName, "spaw du creep");
     } else {
         if (config.strict) {
             message += " config.model non respecté (move," + config.model + ")";
         } else {
-            message +=  " ressource insuffisante";
+            message += " ressource insuffisante";
         }
         infoPerf.log(scriptName, "message erreur");
     }
