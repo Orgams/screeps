@@ -26,7 +26,6 @@ let bot = {
 
         visual.text(message, pos.x+1,pos.y, {
             color: color,
-            backgroundColor: "#fff",
             align: "left",
             opacity: 0.5
         });
