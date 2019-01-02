@@ -15,7 +15,6 @@ let bot = {
 
         let pos = creep.pos;
         let visual = creep.room.visual;
-        let message = memoire.get("range", creep) + ", " + memoire.get("home", creep);
         let color = memoire.get("color", creep);
 
         let style = {
@@ -53,7 +52,7 @@ let bot = {
             visual.line(orthos[3], orthos[0], style);
         }
 
-        visual.text(message, pos.x + 1, pos.y, style);
+        //visual.text("", pos.x + 1, pos.y, style);
 
         // Aller vers le flag qui porte le nom du role du creep s'il y en a un
         if (Game.flags[creep.memory.role] != undefined) {
