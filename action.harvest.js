@@ -1,5 +1,6 @@
 let actionMove = require('action.move');
 let actionPickup = require('action.pickup');
+let info_perf = require('info_perf');
 
 let actionHarvest = {
     do: function(creep, srcs) {
