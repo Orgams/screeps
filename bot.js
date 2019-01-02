@@ -42,7 +42,8 @@ let bot = {
         // Indiquer si je suis en mode global
         if (memoire.get("range", creep) === "global"){
             let orthos = infrastructure_get.ortho(pos, 1, creep.room);
-            visual.line(orthos[0], orthos[1], style);
+            visual.line(orthos[0], orthos[2], style);
+            visual.line(orthos[2], orthos[1], style);
         }
 
         visual.text(message, pos.x + 1, pos.y, {
