@@ -13,18 +13,27 @@ let bot = {
 
         let pos = creep.pos;
         let visual = creep.room.visual;
-        let message = memoire.get("range", creep)+", "+memoire.get("home", creep);
+        let message = memoire.get("range", creep) + ", " + memoire.get("home", creep);
         let color = memoire.get("color", creep);
 
-        visual.circle(pos, {
+        let style = {
             fill: 'transparent',
             radius: 0.55,
             stroke: color
-        });
+        };
 
-        
+        // Indiquer mon role
+        visual.circle(pos, style);
 
-        visual.text(message, pos.x+1,pos.y, {
+        // Indiquer si je cherche des chercher de l'energie
+        if (creep.memory.harvest) {
+            style.radius = 0.1;
+            visual.circle(pos, style);
+        }
+
+
+
+        visual.text(message, pos.x + 1, pos.y, {
             color: color,
             align: "left",
             opacity: 0.5
@@ -56,13 +65,13 @@ let bot = {
                 return true;
             }
         }
-        if(memoire.get("range", creep) === undefined){
-            memoire.set("range", "local", creep, 60*60);
+        if (memoire.get("range", creep) === undefined) {
+            memoire.set("range", "local", creep, 60 * 60);
         }
 
         // Aller dans ma salle si je suis local et que je ne suis pas dans ma salle
-        if (creep.memory.range === "local"){
-            if(creep.memory.home !== undefined && creep.room.name !== creep.memory.home){
+        if (creep.memory.range === "local") {
+            if (creep.memory.home !== undefined && creep.room.name !== creep.memory.home) {
                 actionMove.do(creep, info_room.get_pos_center(creep.memory.home));
                 return true;
             }
@@ -74,7 +83,7 @@ let bot = {
                     return true;
                 }
             }
-        } 
+        }
 
         actionMove.do(creep, Game.flags['Wait']);
         return false;
