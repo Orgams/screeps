@@ -19,7 +19,8 @@ let bot = {
         });
         visual.text("message", creep.pos, {
             color: creep.memory.color,
-            align: "right"
+            align: "right",
+            opacity: 0.5
         });
 
         // Aller vers le flag qui porte le nom du role du creep s'il y en a un
