@@ -8,7 +8,7 @@ let build = function(room, sources) {
 	if (ret === OK) {
 		return true;
 	}
-	return ret
+	return false;
 }
 
 module.exports = {
