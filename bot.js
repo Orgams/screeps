@@ -39,6 +39,11 @@ let bot = {
             visual.circle(pos, style);
         }
 
+        style = {
+            color: color,
+            align: "left",
+            opacity: 0.5
+        };
         // Indiquer si je suis en mode global
         if (memoire.get("range", creep) === "global"){
             let orthos = infrastructure_get.ortho(pos, 1, creep.room);
@@ -48,11 +53,7 @@ let bot = {
             visual.line(orthos[3], orthos[0], style);
         }
 
-        visual.text(message, pos.x + 1, pos.y, {
-            color: color,
-            align: "left",
-            opacity: 0.5
-        });
+        visual.text(message, pos.x + 1, pos.y, style);
 
         // Aller vers le flag qui porte le nom du role du creep s'il y en a un
         if (Game.flags[creep.memory.role] != undefined) {
