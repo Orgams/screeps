@@ -20,7 +20,7 @@ let bot = {
             stroke: creep.memory.color
         });
 
-        let message = creep.home;
+        let message = memoire.get("home", creep);
 
         visual.text(message, pos.x+1,pos.y, {
             color: creep.memory.color,
