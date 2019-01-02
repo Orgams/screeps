@@ -3,7 +3,6 @@ let infrastructure_get = require('infrastructure_get');
 
 let infrastructure = {
     build: function(room, sources) {
-        console.log("sources : ", sources);
         for (source of sources) {
             let distConstrSpawn = 4
             let typeStruct = STRUCTURE_SPAWN;
@@ -12,11 +11,9 @@ let infrastructure = {
             let spawnInRange = source.pos.findInRange(FIND_MY_STRUCTURES, distConstrSpawn, {
                 filter: (struct) => struct.structureType === typeStruct
             });
-            console.log("spawnInRange : ", spawnInRange);
             // Construire le Spawner si il n'y en a pas déjà un
             if (spawnInRange.length === 0) {
                 let pos = infrastructure_get.pos_on_path(source, room.controller, distConstrSpawn, room.name);
-                console.log("pos for spawn : ", pos);
                 let ret = infrastructure_create.create(pos, typeStruct)
                 if (ret === OK) {
                     return true;
