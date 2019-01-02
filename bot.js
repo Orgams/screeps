@@ -34,10 +34,10 @@ let bot = {
         }
 
         // Indiquer si je suis chez moi
-        if (memoire.get("home", creep) === creep.room.name){
-            style.radius = 0.7;
-            visual.circle(pos, style);
-        }
+        // if (memoire.get("home", creep) === creep.room.name){
+        //     style.radius = 0.7;
+        //     visual.circle(pos, style);
+        // }
 
         // Indiquer si je suis en mode global
         if (memoire.get("range", creep) === "global"){
