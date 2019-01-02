@@ -11,15 +11,17 @@ let bot = {
     /** @param {Creep} creep **/
     run: function(creep, actions, sources) {
 
+        let pos = creep.pos;
+
         let visual = creep.room.visual;
-        visual.circle(creep.pos, {
+        visual.circle(pos, {
             fill: 'transparent',
             radius: 0.55,
             stroke: creep.memory.color
         });
-        visual.text("message", creep.pos.x-1,creep.pos.y, {
+        visual.text("message", pos.x+1,pos.y, {
             color: creep.memory.color,
-            align: "right",
+            align: "left",
             opacity: 0.5
         });
 
