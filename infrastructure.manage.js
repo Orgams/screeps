@@ -42,7 +42,7 @@ let infrastructure = {
             let key_memory = "finish." + infrastructure_task;
 
             // Définir le début du message
-            let message = room + "Gest infra : " + infrastructure_task + " : ";
+            let message = room + infrastructure_task + " : ";
 
             // Récuperer la clef mémoire 
             let is_finish = memoire.get(key_memory, room);

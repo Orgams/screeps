@@ -3,7 +3,8 @@ let infrastructure_get = require('infrastructure_get');
 
 let infrastructure = {
     build: function(room, sources) {
-        for (source of room.find(sources)) {
+        console.log("sources : ", sources);
+        for (source of sources) {
             let distConstrSpawn = 4
             let typeStruct = STRUCTURE_SPAWN;
 
