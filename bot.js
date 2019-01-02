@@ -12,18 +12,21 @@ let bot = {
     run: function(creep, actions, sources) {
 
         let pos = creep.pos;
-
         let visual = creep.room.visual;
+        let message = memoire.get("range", creep);
+        let color = memoire.get("color", creep);
+
         visual.circle(pos, {
             fill: 'transparent',
             radius: 0.55,
-            stroke: creep.memory.color
+            stroke: color
         });
 
-        let message = memoire.get("range", creep);
+        
 
         visual.text(message, pos.x+1,pos.y, {
-            color: creep.memory.color,
+            color: color,
+            backgroundColor: #fff,
             align: "left",
             opacity: 0.5
         });
