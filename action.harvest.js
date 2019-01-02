@@ -86,9 +86,7 @@ let findTarget = function(creep, source) {
         return false;
     }
     let ret = creep.pos.findClosestByPath(targets);
-
-
-
+    console.log("ret : ", ret, "targets : ", targets)
     return ret;
 }
 
