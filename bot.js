@@ -25,9 +25,15 @@ let bot = {
         // Indiquer mon role
         visual.circle(pos, style);
 
-        // Indiquer si je cherche des chercher de l'energie
+        // Indiquer si je cherche de l'energie
         if (creep.memory.harvest) {
             style.radius = 0.1;
+            visual.circle(pos, style);
+        }
+
+        // Indiquer si je suis chez moi
+        if (memoire.get("home", creep) === creep.room.name){
+            style.radius = 0.6;
             visual.circle(pos, style);
         }
 
