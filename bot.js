@@ -18,6 +18,7 @@ let bot = {
         };
         let visual = creep.room.visual;
         visual.circle(creep.pos, style);
+        visual.text("message", creep.pos, style);
 
         // Aller vers le flag qui porte le nom du role du creep s'il y en a un
         if (Game.flags[creep.memory.role] != undefined) {
