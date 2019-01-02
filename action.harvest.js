@@ -12,7 +12,7 @@ let actionHarvest = {
         let sources = srcs;
 
         if (sources === undefined) {
-            sources = [FIND_DROPPED_RESOURCES, STRUCTURE_CONTAINER, STRUCTURE_STORAGE, FIND_SOURCES_ACTIVE];
+            sources = [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, FIND_DROPPED_RESOURCES, FIND_SOURCES_ACTIVE];
         }
         info_perf.log(scriptName, "Initialisation des variables");
 
