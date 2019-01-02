@@ -5,7 +5,7 @@ let infrastructure = {
     manage: function(room) {
 
         let scriptName = "infrastructure.manage";
-        info_perf.init(scriptName, true, room);
+        info_perf.init(scriptName, false, room);
 
         let sites = room.find(FIND_CONSTRUCTION_SITES);
         let newSite = sites.length != 0;
