@@ -52,8 +52,6 @@ let bot = {
             visual.line(orthos[3], orthos[0], style);
         }
 
-        //visual.text("", pos.x + 1, pos.y, style);
-
         // Aller vers le flag qui porte le nom du role du creep s'il y en a un
         if (Game.flags[creep.memory.role] != undefined) {
             actionMove.do(creep, Game.flags[creep.memory.role]);
