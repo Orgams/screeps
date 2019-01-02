@@ -4,8 +4,8 @@ let info_perf = require('info_perf');
 
 let actionHarvest = {
     do: function(creep, srcs) {
-        let scriptName = "action_harvest";
-        info_perf.init(scriptName, true);
+        let scriptName = "action_harvest " + creep;
+        info_perf.init(scriptName, true, creep.room);
 
 
         let sources = srcs;
