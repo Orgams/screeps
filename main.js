@@ -135,10 +135,5 @@ module.exports.loop = function() {
     }
     infoPerf.finish(scriptName);
 
-    //let scriptName = "";
-    //infoPerf.init(scriptName,true);
-    //infoPerf.log(scriptName, "");
-    //infoPerf.finish(scriptName);
-
     infoPerf.simpleLog(scriptName, Game.time + "--------------------------------------------------");
 }
