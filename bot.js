@@ -13,7 +13,7 @@ let bot = {
 
         let pos = creep.pos;
         let visual = creep.room.visual;
-        let message = memoire.get("range", creep);
+        let message = memoire.get("range", creep)+", "+memoire.get("home", creep);
         let color = memoire.get("color", creep);
 
         visual.circle(pos, {
