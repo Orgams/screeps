@@ -1,7 +1,7 @@
 let creepCreate = require('creep.create');
 
 let info_room = require('info.room');
-let infoPerf = require('info.perf');
+let info_perf = require('info_perf');
 
 const fullWork = [WORK, WORK, WORK, MOVE, WORK, WORK, WORK, MOVE];
 const carryWork = [CARRY, WORK, MOVE, CARRY, MOVE, WORK, MOVE, MOVE];
@@ -13,7 +13,7 @@ const freqAffichage = 1;
 
 let fonc_manage_creep = function(room) {
     let scriptName = "creep.manage";
-    infoPerf.init(scriptName, false);
+    info_perf.init(scriptName, false);
     let creeps = Object.values(Game.creeps);
 
     let configs = [];
@@ -24,7 +24,7 @@ let fonc_manage_creep = function(room) {
     configs.push(new Config('upgrader', 5, 1, 1, 1, oneWorkTreeCarry, "#0000ff", "local", false));
     configs.push(new Config('repairer', 6, 1, 1, 1, oneWorkTreeCarry, "#ff9900", "local", false));
     configs.push(new Config('claimer', 7, 0, 0, 0, claim, "#ffff00", "autre", false));
-    infoPerf.log(scriptName, "Init configs");
+    info_perf.log(scriptName, "Init configs");
 
     // Supprimer les configuration dont le role a déjà un creep en création
     let creepCreating = new Set();
@@ -50,7 +50,7 @@ let fonc_manage_creep = function(room) {
     let totalCreeps = 0;
     let totalRestePopOpti = 0;
     let allMinOk = true;
-    infoPerf.log(scriptName, "Init vars");
+    info_perf.log(scriptName, "Init vars");
 
     // Initialiser le minimum du minier au nombre de conteneur de la salle
     let nbMiners = Memory["nb.containers"];
@@ -60,7 +60,7 @@ let fonc_manage_creep = function(room) {
         configMineur.max = nbMiners;
         configMineur.popOpti = nbMiners;
     }
-    infoPerf.log(scriptName, "Init miner");
+    info_perf.log(scriptName, "Init miner");
 
     /// Inisialiser les données de configs spécifique à cette salle
     // Initialiser config.nb : le nombre actuel de creep de ce type
@@ -70,25 +70,25 @@ let fonc_manage_creep = function(room) {
         if (config.nb === undefined) config.nb = 0;
         Memory["nb." + config.role] = config.nb;
     }
-    infoPerf.log(scriptName, "Initialiser config.nb : le nombre actuel de creep de ce type");
+    info_perf.log(scriptName, "Initialiser config.nb : le nombre actuel de creep de ce type");
 
     // Initialiser la configuration du claimer
     if (Game.gcl.level > info_room.get_nb_my_room()) {
         let configClaimer = configs.find((config) => config.role == 'claimer');
         configClaimer.max = 1;
-        infoPerf.log(scriptName, "Initialiser la configuration du claimer", configClaimer);
+        info_perf.log(scriptName, "Initialiser la configuration du claimer", configClaimer);
     }
 
     // Eliminer les configuration qui sont arriver à leur max de population
     configs = configs.filter((config) => config.maxOk());
-    infoPerf.log(scriptName, "Delete conf in max");
+    info_perf.log(scriptName, "Delete conf in max");
 
     // Initialiser totalRestePopOpti : l'adition de toutes les population optimal qui ne sont pas à leur max
     for (let indexConfig in configs) {
         let config = configs[indexConfig];
         totalRestePopOpti += config.popOpti;
     }
-    infoPerf.log(scriptName, "Init totalRestePopOpti");
+    info_perf.log(scriptName, "Init totalRestePopOpti");
 
     // Initialiser 
     //    config.ratio : le ratio optimal des creep de ce type par rapport au total des population optimal qui ne sont pas à leur max
@@ -104,7 +104,7 @@ let fonc_manage_creep = function(room) {
         totalCreeps += config.nb;
         allMinOk = allMinOk && config.minOk();
     }
-    infoPerf.log(scriptName, "Init ratio");
+    info_perf.log(scriptName, "Init ratio");
 
 
     // Create the necessary stuff that does not have its minimum for this room
@@ -112,12 +112,12 @@ let fonc_manage_creep = function(room) {
         for (let indexConfig in configs) {
             let config = configs[indexConfig];
             if (!config.minOk()) {
-                infoPerf.logWithoutTimer(scriptName, config.role + " : le minimum n'est pas respecter : " + config.nb + " / " + config.min)
+                info_perf.logWithoutTimer(scriptName, config.role + " : le minimum n'est pas respecter : " + config.nb + " / " + config.min)
                 return creepCreate.try_create_creep(config);
             }
         }
     }
-    infoPerf.log(scriptName, "Create creep by min");
+    info_perf.log(scriptName, "Create creep by min");
 
     // Initialiser config.actualRatio : le ratio actuel des creeps de ce type par rapport au total de population actuel qui ne sont pas à leur max
     for (let indexConfig in configs) {
@@ -127,9 +127,9 @@ let fonc_manage_creep = function(room) {
         } else {
             config.actualRatio = config.nb / totalCreeps;
         }
-        //infoPerf.simpleLog(scriptName, config.nb + " " + config.role " (de " + config.min + " à " + config.max + " au mieux " + config.popOpti + ") " + " (" + config.printableActualRatio() + "/" + config.printableRatio() + ")");
+        //info_perf.simpleLog(scriptName, config.nb + " " + config.role " (de " + config.min + " à " + config.max + " au mieux " + config.popOpti + ") " + " (" + config.printableActualRatio() + "/" + config.printableRatio() + ")");
     }
-    infoPerf.log(scriptName, "Init actual ratio");
+    info_perf.log(scriptName, "Init actual ratio");
 
 
     // Create the necessary stuff that does not have their popOpti without removing the maximum for this room
@@ -138,17 +138,17 @@ let fonc_manage_creep = function(room) {
     //     if (spawn.spawning == null) {
     for (let indexConfig in configs) {
         let config = configs[indexConfig];
-        infoPerf.logWithoutTimer(scriptName, config.role + " maxOk " + config.maxOk() + " ratioOk " + config.ratioOk() + " config.ratio " + config.ratio + " config.actualRatio " + config.actualRatio)
+        info_perf.logWithoutTimer(scriptName, config.role + " maxOk " + config.maxOk() + " ratioOk " + config.ratioOk() + " config.ratio " + config.ratio + " config.actualRatio " + config.actualRatio)
         if (config.maxOk() && config.ratioOk()) {
-            infoPerf.logWithoutTimer(scriptName, config.role + " : le maximum et le ratio ne sont pas atteint (" + config.nb + "/" + config.max + " et " + config.printableActualRatio() + "/" + config.printableRatio() + ")");
+            info_perf.logWithoutTimer(scriptName, config.role + " : le maximum et le ratio ne sont pas atteint (" + config.nb + "/" + config.max + " et " + config.printableActualRatio() + "/" + config.printableRatio() + ")");
             return creepCreate.try_create_creep(config);
         }
     }
     //     }
     // }
-    infoPerf.log(scriptName, "Create creep by opti");
+    info_perf.log(scriptName, "Create creep by opti");
 
-    infoPerf.finish(scriptName);
+    info_perf.finish(scriptName);
 
 }
 

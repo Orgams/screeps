@@ -8,7 +8,7 @@ let action = {
             creep.pickup(energyDroped[0]);
         }else{
             let pos = info_pos.get_pos(target);
-            //infoPerf.simpleLog(scriptName, creep + target + pos)
+            //info_perf.simpleLog(scriptName, creep + target + pos)
         	let ret = creep.moveTo(pos, {visualizePathStyle: {
         	    stroke: creep.memory.color,
                 fill: 'transparent',

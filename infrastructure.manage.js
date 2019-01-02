@@ -1,11 +1,11 @@
-let infoPerf = require('info.perf');
+let info_perf = require('info_perf');
 let memoire = require('memoire');
 
 let infrastructure = {
     manage: function(room) {
 
         let scriptName = "infrastructure.manage";
-        infoPerf.init(scriptName, true, room);
+        info_perf.init(scriptName, true, room);
 
         let sites = room.find(FIND_CONSTRUCTION_SITES);
         let newSite = sites.length != 0;
@@ -22,7 +22,7 @@ let infrastructure = {
             }
         }
 
-        infoPerf.log(scriptName, "init variable");
+        info_perf.log(scriptName, "init variable");
 
         let infrastructure_tasks = [
             "infrastructure_container", 
@@ -50,18 +50,18 @@ let infrastructure = {
             if (is_finish === undefined || is_finish < room.controller.level) {
                 newSite = require(infrastructure_task).build(room, sources);
                 if (newSite) {
-                    infoPerf.log(scriptName, message + "Creation")
+                    info_perf.log(scriptName, message + "Creation")
                     return newSite;
                 } else {
                     memoire.set(key_memory, room.controller.level, room);
-                    infoPerf.log(scriptName, message + "Note comme fini")
+                    info_perf.log(scriptName, message + "Note comme fini")
                 }
             } else {
-                infoPerf.log(scriptName, message + "Deja fini")
+                info_perf.log(scriptName, message + "Deja fini")
             }
         }
 
-        infoPerf.finish(scriptName);
+        info_perf.finish(scriptName);
     }
 };
 

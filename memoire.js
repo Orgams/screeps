@@ -1,4 +1,4 @@
-let infoPerf = require('info.perf');
+let info_perf = require('info_perf');
 
 let scriptName = "memoire"
 
@@ -57,7 +57,7 @@ let getRecur = function(obj, keyCur, keyParts) {
 		return getRecur(obj, keyCur, keyParts);
 	} else {
 		if(obj[keyCur+"ttl"] !== undefined && obj[keyCur+"ttl"] < Game.time){
-			//infoPerf.simpleLog(scriptName, "data out to date");
+			//info_perf.simpleLog(scriptName, "data out to date");
 			return undefined
 		}
 		return obj[keyCur];
@@ -65,8 +65,8 @@ let getRecur = function(obj, keyCur, keyParts) {
 }
 
 let setRecur = function(obj, keyCur, keyParts, valeur) {
-	// infoPerf.simpleLog(scriptName, "----");
-	// infoPerf.simpleLog(scriptName, obj, keyCur, keyParts, valeur);
+	// info_perf.simpleLog(scriptName, "----");
+	// info_perf.simpleLog(scriptName, obj, keyCur, keyParts, valeur);
 	if (keyParts.length > 0) {
 		if (obj[keyCur] === undefined) {
 			obj[keyCur] = {};

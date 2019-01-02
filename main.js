@@ -4,7 +4,7 @@ let structManage = require('infrastructure.manage');
 
 let memoire = require('memoire');
 
-let infoPerf = require('info.perf');
+let info_perf = require('info_perf');
 
 let bot = require('bot');
 
@@ -13,7 +13,7 @@ let info_room = require('info.room');
 module.exports.loop = function() {
 
     let scriptName = "main";
-    infoPerf.init(scriptName, false);
+    info_perf.init(scriptName, false);
     let test = false;
     if (test) {
         let infrastructure_get = require('infrastructure_get');
@@ -54,9 +54,9 @@ module.exports.loop = function() {
                 }
             }
         })
-        infoPerf.log(scriptName, "towers");
+        info_perf.log(scriptName, "towers");
     } catch (error) {
-        infoPerf.simpleLog(scriptName, "[main] towers : " + error);
+        info_perf.simpleLog(scriptName, "[main] towers : " + error);
     }
 
     try {
@@ -65,9 +65,9 @@ module.exports.loop = function() {
             let creep = Game.creeps[name];
             require('role.' + creep.memory.role).run(creep);
         }
-        infoPerf.log(scriptName, "creeps work");
+        info_perf.log(scriptName, "creeps work");
     } catch (error) {
-        infoPerf.simpleLog(scriptName, "[main] creeps work : " + error);
+        info_perf.simpleLog(scriptName, "[main] creeps work : " + error);
     }
 
     // Initialiser la mémoire
@@ -89,7 +89,7 @@ module.exports.loop = function() {
         //Memory["structures"] = structs;
         Memory["containers"] = containers;
         Memory["sources"] = sources;
-        infoPerf.log(scriptName, "Initialiser la mémoire");
+        info_perf.log(scriptName, "Initialiser la mémoire");
     }
 
     try {
@@ -104,10 +104,10 @@ module.exports.loop = function() {
             room.memory.nb.containers = _.filter(room.find(FIND_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER).length;
             creepManage.manage_creep(room);
 
-            infoPerf.log(scriptName, "creeps creation");
+            info_perf.log(scriptName, "creeps creation");
         }
     } catch (error) {
-        infoPerf.simpleLog(scriptName, "[main] creeps creation : " + error);
+        info_perf.simpleLog(scriptName, "[main] creeps creation : " + error);
     }
 
     try {
@@ -116,10 +116,10 @@ module.exports.loop = function() {
             for (let room of info_room.get_my_room()) {
                 structManage.manage(room);
             }
-            infoPerf.log(scriptName, "structures");
+            info_perf.log(scriptName, "structures");
         }
     } catch (error) {
-        infoPerf.simpleLog(scriptName, "[main] structures : " + error);
+        info_perf.simpleLog(scriptName, "[main] structures : " + error);
     }
 
     try {
@@ -129,11 +129,11 @@ module.exports.loop = function() {
                 delete Memory.creeps[i];
             }
         }
-        infoPerf.log(scriptName, "clean memory");
+        info_perf.log(scriptName, "clean memory");
     } catch (error) {
-        infoPerf.simpleLog(scriptName, "[main] clean memory : " + error);
+        info_perf.simpleLog(scriptName, "[main] clean memory : " + error);
     }
-    infoPerf.finish(scriptName);
+    info_perf.finish(scriptName);
 
-    infoPerf.simpleLog(scriptName, Game.time + "--------------------------------------------------");
+    info_perf.simpleLog(scriptName, Game.time + "--------------------------------------------------");
 }

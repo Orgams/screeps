@@ -1,4 +1,4 @@
-let infoPerf = require('info.perf');
+let info_perf = require('info_perf');
 
 let info_creep = require('info_creep');
 let info_room = require('info.room');
@@ -21,11 +21,11 @@ let add_part = function(part) {
 let try_create_creep = function(config) {
 
     let scriptName = "creep.create";
-    infoPerf.init(scriptName, false);
+    info_perf.init(scriptName, false);
 
     let homes = [];
     let home_spawns = [];
-    infoPerf.log(scriptName, "Init variables");
+    info_perf.log(scriptName, "Init variables");
 
     if (config.range === "local") {
         let creeps = info_creep.get(config.role);
@@ -46,21 +46,21 @@ let try_create_creep = function(config) {
                 homes.push(room_key);
             }
         }
-        infoPerf.log(scriptName, "Init liste home");
+        info_perf.log(scriptName, "Init liste home");
 
         config.home = homes[0]
-        infoPerf.log(scriptName, "Init home in config");
+        info_perf.log(scriptName, "Init home in config");
 
         home_spawns = Game.rooms[config.home].find(FIND_STRUCTURES, {
             filter: (structure) => structure.structureType == STRUCTURE_SPAWN
         });
-        infoPerf.log(scriptName, "Get home spawn");
+        info_perf.log(scriptName, "Get home spawn");
     }
 
 
     let others_spawns = _.difference(Object.values(Game.spawns), home_spawns)
     let spawns = home_spawns.concat(others_spawns);
-    infoPerf.log(scriptName, "Get list spawn");
+    info_perf.log(scriptName, "Get list spawn");
 
     for (let spawn of spawns) {
         let ret = create_creep(config, spawn);
@@ -71,14 +71,14 @@ let try_create_creep = function(config) {
 
 
 
-    infoPerf.finish(scriptName);
+    info_perf.finish(scriptName);
     return false;
 }
 
 let create_creep = function(config, spawn) {
 
     let scriptName = "creep.create";
-    infoPerf.init(scriptName, false);
+    info_perf.init(scriptName, false);
 
     if (spawn == undefined) return;
     if (config.strict == undefined) config.strict = false;
@@ -93,7 +93,7 @@ let create_creep = function(config, spawn) {
 
     let message = config.role + ", home:" + config.home + "(" + spawn.room.name + ")";
 
-    infoPerf.log(scriptName, "Initialisation de variable");
+    info_perf.log(scriptName, "Initialisation de variable");
 
     if (config.strict) {
         config.model.forEach((module) => okLaunchSpawn = add_part(module))
@@ -103,13 +103,13 @@ let create_creep = function(config, spawn) {
             indexSpe = (indexSpe + 1) % config.model.length;
         }
     }
-    infoPerf.log(scriptName, "construction du body");
+    info_perf.log(scriptName, "construction du body");
 
     message += " (" + body.length + " parts) (" + costBody + "/" + energyAvailable + ")";
 
     if (!config.strict) {
         okLaunchSpawn = body.length >= 3
-        infoPerf.log(scriptName, "vérification de la taille mini du body");
+        info_perf.log(scriptName, "vérification de la taille mini du body");
     }
 
     //message += "config.strict " + config.strict + " okLaunchSpawn " + okLaunchSpawn;
@@ -123,18 +123,18 @@ let create_creep = function(config, spawn) {
             }
         });
         message += " spaw du creep (ret=" + ret + ")"
-        infoPerf.log(scriptName, "spaw du creep");
+        info_perf.log(scriptName, "spaw du creep");
     } else {
         if (config.strict) {
             message += " config.model non respecté (move," + config.model + ")";
         } else {
             message += " ressource insuffisante";
         }
-        infoPerf.log(scriptName, "message erreur");
+        info_perf.log(scriptName, "message erreur");
     }
 
-    infoPerf.simpleLog(scriptName, message);
-    infoPerf.finish(scriptName);
+    info_perf.simpleLog(scriptName, message);
+    info_perf.finish(scriptName);
     return ret;
 }
 

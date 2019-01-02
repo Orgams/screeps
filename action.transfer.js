@@ -1,7 +1,7 @@
 let actionMove = require('action.move');
 
 let findStruct = function(creep, strunctureType, taux_remplissage){
-    //infoPerf.simpleLog(scriptName, strunctureType + taux_remplissage)
+    //info_perf.simpleLog(scriptName, strunctureType + taux_remplissage)
 
     return creep.room.find(FIND_MY_STRUCTURES, {
         filter: (structure) =>  strunctureType.includes(structure.structureType) && structure.energy < structure.energyCapacity*(taux_remplissage|1)

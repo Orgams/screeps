@@ -18,7 +18,7 @@ let create = function(pos, struct_type) {
 
 	// Construire la structure
 	let ret = pos.createConstructionSite(struct_type);
-	//infoPerf.simpleLog(scriptName, "create road : " + pos.x +" "+ pos.y +" "+ terrain+" "+ terrain != "plain" +" "+terrain != "swamp"+" "+ ret)
+	//info_perf.simpleLog(scriptName, "create road : " + pos.x +" "+ pos.y +" "+ terrain+" "+ terrain != "plain" +" "+terrain != "swamp"+" "+ ret)
 
 	// Détruire la route sous la structure si il y en a une et si le site de construction est placé
 	if (ret === OK) {

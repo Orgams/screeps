@@ -1,17 +1,17 @@
 let infrastructure_create = require('infrastructure_create');
 let infrastructure_get = require('infrastructure_get');
 
-let infoPerf = require('info.perf');
+let info_perf = require('info_perf');
 
 let infrastructure = {
     build: function(room, sources) {
         let scriptName = "infrastructure_container";
-        infoPerf.init(scriptName, true, room, sources);
+        info_perf.init(scriptName, true, room, sources);
 
 
         for (let i = sources.length - 1; i >= 0; i--) {
             let source = sources[i];
-            infoPerf.log(scriptName, "debut source ", source);
+            info_perf.log(scriptName, "debut source ", source);
 
             // recuperer les sites de construction de containers autour de la source
             let constrs = source.pos.findInRange(FIND_MY_CONSTRUCTION_SITES, 1, {
@@ -22,7 +22,7 @@ let infrastructure = {
                     return false;
                 }
             });
-            infoPerf.log(scriptName, "recuperer les sites de construction de containers autour de la source");
+            info_perf.log(scriptName, "recuperer les sites de construction de containers autour de la source");
 
             // recuperer les containers autour de la source
             let structs = source.pos.findInRange(FIND_STRUCTURES, 1, {
@@ -33,7 +33,7 @@ let infrastructure = {
                     return false;
                 }
             });
-            infoPerf.log(scriptName, "recuperer les containers autour de la source");
+            info_perf.log(scriptName, "recuperer les containers autour de la source");
 
             // Ajouter le site de construction s'il n'existe pas et s'il n'y a pas de conteneur
             if (constrs.length === 0 && structs.length === 0) {
@@ -41,11 +41,11 @@ let infrastructure = {
                 infrastructure_create.create(pos, STRUCTURE_CONTAINER);
                 return true;
             }
-            infoPerf.log(scriptName, "Ajouter le site de construction s'il n'existe pas et s'il n'y a pas de conteneur");
+            info_perf.log(scriptName, "Ajouter le site de construction s'il n'existe pas et s'il n'y a pas de conteneur");
 
             
         }
-        infoPerf.finish(scriptName);
+        info_perf.finish(scriptName);
         return false;
     }
 }

@@ -4,7 +4,7 @@ let actionPickup = require('action.pickup');
 let actionHarvest = {
     do: function(creep, srcs) {
         let scriptName = "action_harvest";
-        infoPerf.init(scriptName, true);
+        info_perf.init(scriptName, true);
 
 
         let sources = srcs;
@@ -12,7 +12,7 @@ let actionHarvest = {
         if (sources === undefined) {
             sources = [FIND_DROPPED_RESOURCES, STRUCTURE_CONTAINER, STRUCTURE_STORAGE, FIND_SOURCES_ACTIVE];
         }
-        infoPerf.log(scriptName, "Initialisation des variables");
+        info_perf.log(scriptName, "Initialisation des variables");
 
         let target = false;
 
@@ -22,13 +22,13 @@ let actionHarvest = {
                 if (take(creep, source, target) == ERR_NOT_IN_RANGE) {
                     actionMove.do(creep, target);
                 }
-                infoPerf.log(scriptName, "Récolte pour " + source);
-                infoPerf.finish(scriptName);
+                info_perf.log(scriptName, "Récolte pour " + source);
+                info_perf.finish(scriptName);
                 return true;
             }
-            infoPerf.log(scriptName, "Impossible de récolter pour " + source);
+            info_perf.log(scriptName, "Impossible de récolter pour " + source);
         }
-        infoPerf.finish(scriptName);
+        info_perf.finish(scriptName);
         return false;
 
     }
