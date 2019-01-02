@@ -37,6 +37,12 @@ let bot = {
             visual.circle(pos, style);
         }
 
+        // Indiquer si je suis en mode global
+        if (memoire.get("range", creep) === "global"){
+            style.radius = 0.7;
+            visual.rect(pos, 1, 1, style);
+        }
+
 
 
         visual.text(message, pos.x + 1, pos.y, {
