@@ -30,11 +30,11 @@ let infrastructure = {
             "infrastructure_spawner", 
             "infrastructure_bind_structure_to_source", 
             "infrastructure_tower",
-            "infrastructure_road_contournement", 
             "infrastructure_extension", 
+            "infrastructure_storage",
+            "infrastructure_road_contournement", 
             "infrastructure_bind_contoller", 
-            "infrastructure_perif",
-            "infrastructure_storage"
+            "infrastructure_perif"
         ];
 
         for (let infrastructure_task of infrastructure_tasks) {
