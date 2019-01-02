@@ -17,7 +17,9 @@ let bot = {
             radius: 0.55,
             stroke: creep.memory.color
         });
-        visual.text("message", creep.pos);
+        visual.text("message", creep.pos, {
+            color: creep.memory.color
+        });
 
         // Aller vers le flag qui porte le nom du role du creep s'il y en a un
         if (Game.flags[creep.memory.role] != undefined) {
