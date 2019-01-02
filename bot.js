@@ -6,6 +6,8 @@ let info_room = require('info.room');
 
 let memoire = require('memoire');
 
+let infrastructure_get = require('infrastructure_get');
+
 let bot = {
 
     /** @param {Creep} creep **/
@@ -39,11 +41,9 @@ let bot = {
 
         // Indiquer si je suis en mode global
         if (memoire.get("range", creep) === "global"){
-            style.radius = 0.7;
-            visual.rect(pos, 1, 1, style);
+            let orthos = infrastructure_get.ortho(pos);
+            visual.line(orthos[0], orthos[1], style);
         }
-
-
 
         visual.text(message, pos.x + 1, pos.y, {
             color: color,
