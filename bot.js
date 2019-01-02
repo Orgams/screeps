@@ -19,7 +19,10 @@ let bot = {
             radius: 0.55,
             stroke: creep.memory.color
         });
-        visual.text("message", pos.x+1,pos.y, {
+
+        let message = creep.home;
+
+        visual.text(message, pos.x+1,pos.y, {
             color: creep.memory.color,
             align: "left",
             opacity: 0.5
