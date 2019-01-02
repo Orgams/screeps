@@ -5,7 +5,7 @@ let infrastructure = {
     manage: function(room) {
 
         let scriptName = "infrastructure.manage";
-        let debug = creep.room.name === "W3N24";
+        let debug = room.name === "W3N24";
         info_perf.init(scriptName, debug, room);
 
         let sites = room.find(FIND_CONSTRUCTION_SITES);
