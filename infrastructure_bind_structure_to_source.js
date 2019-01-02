@@ -7,6 +7,7 @@ let infrastructure = {
                 return structure.structureType != STRUCTURE_ROAD;
             }
         });
+        console.log("sources.length : ", sources.length)
         for (let i = sources.length - 1; i >= 0; i--) {
             let source = sources[i];
             for (let j = structs.length -1 ; j >= 0; j--) {
