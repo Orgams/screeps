@@ -18,7 +18,7 @@ let infrastructure = {
                     let pos = new RoomPosition(point.x, point.y, room.name);
                     let ret = infrastructure_create.create(pos, STRUCTURE_ROAD);
                     console.log("ret : ", ret, "source : ", source, "struct : ", struct, "point : ", point)
-                    if (ret == OK){
+                    if (ret === OK){
                         return true;
                     }
                 }
