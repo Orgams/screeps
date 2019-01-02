@@ -59,16 +59,16 @@ module.exports.loop = function() {
         info_perf.simpleLog(scriptName, "[main] towers : " + error);
     }
 
-    try {
+    //try {
         // Assign all role
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
             require('role.' + creep.memory.role).run(creep);
         }
         info_perf.log(scriptName, "creeps work");
-    } catch (error) {
-        info_perf.simpleLog(scriptName, "[main] creeps work : " + error);
-    }
+    // } catch (error) {
+    //     info_perf.simpleLog(scriptName, "[main] creeps work : " + error);
+    // }
 
     // Initialiser la mémoire
     if (Game.time % 60 == 0) {
