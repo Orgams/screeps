@@ -18,7 +18,8 @@ let bot = {
             stroke: creep.memory.color
         });
         visual.text("message", creep.pos, {
-            color: creep.memory.color
+            color: creep.memory.color,
+            align: "right"
         });
 
         // Aller vers le flag qui porte le nom du role du creep s'il y en a un
