@@ -16,7 +16,7 @@ let infrastructure = {
                     let point = path[k];
                     let pos = new RoomPosition(point.x, point.y, room.name);
                     let ret = infrastructure_create.create(pos, STRUCTURE_ROAD);
-                    console.log("ret : ", ret)
+                    console.log("ret : ", ret, "source : ", source, "struct : ", struct, "point : ", point)
                     if (ret == OK){
                         return true;
                     }
