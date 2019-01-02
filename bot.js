@@ -10,15 +10,14 @@ let bot = {
 
     /** @param {Creep} creep **/
     run: function(creep, actions, sources) {
-        
-        let style = {
+
+        let visual = creep.room.visual;
+        visual.circle(creep.pos, {
             fill: 'transparent',
             radius: 0.55,
             stroke: creep.memory.color
-        };
-        let visual = creep.room.visual;
-        visual.circle(creep.pos, style);
-        visual.text("message", creep.pos, style);
+        });
+        visual.text("message", creep.pos);
 
         // Aller vers le flag qui porte le nom du role du creep s'il y en a un
         if (Game.flags[creep.memory.role] != undefined) {
