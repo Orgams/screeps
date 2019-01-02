@@ -44,6 +44,8 @@ let bot = {
             let orthos = infrastructure_get.ortho(pos, 1, creep.room);
             visual.line(orthos[0], orthos[2], style);
             visual.line(orthos[2], orthos[1], style);
+            visual.line(orthos[1], orthos[3], style);
+            visual.line(orthos[3], orthos[0], style);
         }
 
         visual.text(message, pos.x + 1, pos.y, {
