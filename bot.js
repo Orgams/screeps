@@ -33,7 +33,7 @@ let bot = {
 
         // Indiquer si je suis chez moi
         if (memoire.get("home", creep) === creep.room.name){
-            style.radius = 0.6;
+            style.radius = 0.7;
             visual.circle(pos, style);
         }
 
