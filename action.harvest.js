@@ -4,9 +4,10 @@ let info_perf = require('info_perf');
 
 let actionHarvest = {
     do: function(creep, srcs) {
+        
         let scriptName = "action_harvest " + creep;
-        let debug = creep.room.name === "W3N24";
-        info_perf.init(scriptName, debug, creep.room);
+        //let debug = creep.room.name === "W3N24";
+        info_perf.init(scriptName, false, creep.room);
 
 
         let sources = srcs;
@@ -86,7 +87,6 @@ let findTarget = function(creep, source) {
         return false;
     }
     let ret = creep.pos.findClosestByPath(targets);
-    console.log("ret : ", ret, "targets : ", targets)
     return ret;
 }
 
