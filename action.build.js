@@ -11,8 +11,6 @@ let action = {
 		let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
 		let target = creep.pos.findClosestByRange(targets);
 
-		console.log (target)
-
 		// Chercher un site dans les autres salles si besoin
 		if(target === null){
 			targets = Game.constructionSites;
@@ -24,10 +22,8 @@ let action = {
 			}
 		}
 
-		console.log (target)
-		
 		// Tenter de construire le site s'il existe
-		if(target !== null){
+		if(target !== null && target !== undefined){
 			if(creep.build(target) == ERR_NOT_IN_RANGE) {
 				actionMove.do(creep, target);
 			}
