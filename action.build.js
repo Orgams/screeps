@@ -24,6 +24,8 @@ let action = {
 			}
 		}
 
+		console.log (target)
+		
 		// Tenter de construire le site s'il existe
 		if(target !== null){
 			if(creep.build(target) == ERR_NOT_IN_RANGE) {
