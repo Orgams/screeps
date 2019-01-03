@@ -6,7 +6,7 @@ let infrastructure = {
 
         let scriptName = "infrastructure.manage";
         let debug = room.name === "W3N24";
-        info_perf.init(scriptName, debug, room);
+        info_perf.init(scriptName, false, room);
 
         let sites = room.find(FIND_CONSTRUCTION_SITES);
         let newSite = sites.length != 0;
