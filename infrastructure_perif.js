@@ -3,22 +3,20 @@ let infrastructure_get = require('infrastructure_get');
 
 let build = function(room, sources) {
     let newSite = false;
-    // if (!newSite) {
-    //     Creer des perifieriques autour des sources
-    //     newSite = build_perif(room, sources,1);
-    // }
+
     if (!newSite) {
         newSite = build_perif(room, sources, 2);
     }
     if (!newSite) {
         newSite = build_perif(room, [room.controller], 4);
     }
-    if (!newSite) {
-        let containers = room.find(FIND_STRUCTURES, {
-            filter: (struct) => struct.structureType == STRUCTURE_STORAGE
-        });
-        newSite = build_perif(room, containers, 3);
-    }
+    // if (!newSite) {
+    //     let containers = room.find(FIND_STRUCTURES, {
+    //         filter: (struct) => struct.structureType == STRUCTURE_STORAGE
+    //     });
+    //     newSite = build_perif(room, containers, 3);
+    // }
+    return newSite;
 }
 
 let build_perif = function(room, targets, distance) {
