@@ -9,6 +9,7 @@ let info_perf = require('info_perf');
 let bot = require('bot');
 
 let info_room = require('info.room');
+let info_struct = require('info_struct');
 
 module.exports.loop = function() {
 
@@ -31,8 +32,8 @@ module.exports.loop = function() {
     }
 
     try {
-        let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
-        towers.forEach(function(tower) {
+        let towers = info_struct.get_towers();
+        for (let tower of towers) {
             let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             if (closestHostile) {
                 tower.attack(closestHostile);
@@ -53,22 +54,22 @@ module.exports.loop = function() {
                     }
                 }
             }
-        })
+        }
         info_perf.log(scriptName, "towers");
     } catch (error) {
         info_perf.simpleLog(scriptName, "[main] towers : " + error);
     }
 
-    //try {
+    try {
         // Assign all role
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
             require('role.' + creep.memory.role).run(creep);
         }
         info_perf.log(scriptName, "creeps work");
-    // } catch (error) {
-    //     info_perf.simpleLog(scriptName, "[main] creeps work : " + error);
-    // }
+    } catch (error) {
+        info_perf.simpleLog(scriptName, "[main] creeps work : " + error);
+    }
 
     // Initialiser la mémoire
     if (Game.time % 60 == 0) {
@@ -86,7 +87,6 @@ module.exports.loop = function() {
         Memory["nb.containers"] = containers.length;
 
         //Game.getObjectById
-        //Memory["structures"] = structs;
         Memory["containers"] = containers;
         Memory["sources"] = sources;
         info_perf.log(scriptName, "Initialiser la mémoire");
