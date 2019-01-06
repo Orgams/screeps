@@ -28,9 +28,9 @@ module.exports.loop = function() {
 
     try {
         let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
-        towers.forEach(function(tower) {
+        for (let tower of towers) {
             tower_action.run(tower)
-        })
+        }
         info_perf.log(scriptName, "towers");
     } catch (error) {
         info_perf.simpleLog(scriptName, "[main] towers : " + error);
