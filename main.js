@@ -1,14 +1,10 @@
 let creepManage = require('creep.manage');
-
 let structManage = require('infrastructure.manage');
-
 let memoire = require('memoire');
-
 let info_perf = require('info_perf');
-
 let bot = require('bot');
-
 let info_room = require('info.room');
+let tower_action = require('tower_action');
 
 module.exports.loop = function() {
 
@@ -33,26 +29,7 @@ module.exports.loop = function() {
     try {
         let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
         towers.forEach(function(tower) {
-            let closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-            if (closestHostile) {
-                tower.attack(closestHostile);
-            } else if (tower.energy > tower.energyCapacity / 2) {
-
-                let closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => structure.hits < structure.hitsMax / 2 && structure.structureType != STRUCTURE_WALL
-                });
-                if (closestDamagedStructure) {
-                    tower.repair(closestDamagedStructure);
-                } else {
-
-                    let closestAlly = tower.pos.findClosestByRange(FIND_CREEPS, {
-                        filter: (target) => target.hits < target.hitsMax
-                    });
-                    if (closestAlly) {
-                        tower.heal(closestAlly);
-                    }
-                }
-            }
+            tower_action.run(tower)
         })
         info_perf.log(scriptName, "towers");
     } catch (error) {
