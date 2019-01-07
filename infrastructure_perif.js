@@ -1,5 +1,6 @@
 let infrastructure_create = require('infrastructure_create');
 let infrastructure_get = require('infrastructure_get');
+let info_perf = require('info_perf');
 
 let build = function(room, sources) {
     let scriptName = "infrastructure_perif";
