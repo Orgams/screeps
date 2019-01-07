@@ -51,7 +51,6 @@ let infrastructure = {
             if (is_finish === undefined || is_finish < room.controller.level) {
                 newSite = require(infrastructure_task).build(room, sources);
 
-                console.log(newSite);
                 if (newSite) {
                     info_perf.log(scriptName, message + "Creation")
                     return newSite;

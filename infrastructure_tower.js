@@ -4,7 +4,6 @@ let infrastructure_get = require('infrastructure_get');
 let infrastructure = {
     build: function(room, sources) {
         for (source of sources) {
-            console.log("infrastructure_tower", source);
             let distConstrSpawn = 3
             let typeStruct = STRUCTURE_TOWER;
 
@@ -17,7 +16,6 @@ let infrastructure = {
             if (spawnInRange.length === 0) {
                 let pos = infrastructure_get.pos_on_path(source, room.controller, distConstrSpawn, room.name);
                 let ret = infrastructure_create.create(pos, typeStruct)
-                console.log("creation de tourelles", ret);
                 if (ret === OK) {
                     return true;
                 }

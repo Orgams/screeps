@@ -7,7 +7,6 @@ let infrastructure = {
 
         for (let struct of structs) {
             let poss = infrastructure_get.ortho(struct, 1, room)
-            console.log (struct, poss)
             for (let pos of poss) {
                 let ret = infrastructure_create.create(pos, STRUCTURE_ROAD);
                 if (ret === OK) {

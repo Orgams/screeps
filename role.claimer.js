@@ -29,7 +29,6 @@ let role = {
 
 		} else {
 			if (creep.room.controller) {
-				console.log("room autre")
 
 				let ret = creep.attackController(creep.room.controller)
 

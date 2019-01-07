@@ -1,5 +1,4 @@
 let infrastructure_create = require('infrastructure_create');
-
 let infrastructure = {
     build: function(room, sources){
         let structs = room.find(FIND_STRUCTURES, {
@@ -7,7 +6,6 @@ let infrastructure = {
                 return structure.structureType != STRUCTURE_ROAD;
             }
         });
-        console.log("sources.length : ", sources.length)
         for (let i = sources.length - 1; i >= 0; i--) {
             let source = sources[i];
             for (let j = structs.length -1 ; j >= 0; j--) {
@@ -17,7 +15,6 @@ let infrastructure = {
                     let point = path[k];
                     let pos = new RoomPosition(point.x, point.y, room.name);
                     let ret = infrastructure_create.create(pos, STRUCTURE_ROAD);
-                    console.log("ret : ", ret, "source : ", source, "struct : ", struct, "point : ", point)
                     if (ret === OK){
                         return true;
                     }
