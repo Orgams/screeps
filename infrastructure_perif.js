@@ -2,13 +2,18 @@ let infrastructure_create = require('infrastructure_create');
 let infrastructure_get = require('infrastructure_get');
 
 let build = function(room, sources) {
+    let scriptName = "infrastructure_perif";
+    info_perf.init(scriptName, true);
+
     let newSite = false;
 
     if (!newSite) {
         newSite = build_perif(room, sources, 2);
+        info_perf.log(scriptName, "fin sources", newSite);
     }
     if (!newSite) {
         newSite = build_perif(room, [room.controller], 4);
+        info_perf.log(scriptName, "fin controller", newSite);
     }
     // if (!newSite) {
     //     let containers = room.find(FIND_STRUCTURES, {
@@ -16,6 +21,8 @@ let build = function(room, sources) {
     //     });
     //     newSite = build_perif(room, containers, 3);
     // }
+
+    info_perf.finish(scriptName);
     return newSite;
 }
 
