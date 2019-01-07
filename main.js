@@ -10,21 +10,6 @@ module.exports.loop = function() {
 
     let scriptName = "main";
     info_perf.init(scriptName, false);
-    let test = false;
-    if (test) {
-        let infrastructure_get = require('infrastructure_get');
-        let info_room = require('info.room');
-
-        let room = Game.rooms["W2N23"];
-
-        let room_center = info_room.get_pos_center(room.name);
-
-        let perif = infrastructure_get.perif(room_center, 1, room);
-
-        let perif_paire = infrastructure_get.pos_paire(perif);
-
-        console.log(perif_paire)
-    }
 
     try {
         let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
@@ -36,16 +21,16 @@ module.exports.loop = function() {
         info_perf.simpleLog(scriptName, "[main] towers : " + error);
     }
 
-    //try {
+    try {
         // Assign all role
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
             require('role.' + creep.memory.role).run(creep);
         }
         info_perf.log(scriptName, "creeps work");
-    // } catch (error) {
-    //     info_perf.simpleLog(scriptName, "[main] creeps work : " + error);
-    // }
+    } catch (error) {
+        info_perf.simpleLog(scriptName, "[main] creeps work : " + error);
+    }
 
     // Initialiser la mémoire
     if (Game.time % 60 == 0) {
