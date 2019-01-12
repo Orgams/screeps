@@ -20,6 +20,8 @@ let add_part = function(part) {
 
 let try_create_creep = function(config) {
 
+    console.log("test")
+
     let scriptName = "creep.create";
     info_perf.init(scriptName, false);
 
