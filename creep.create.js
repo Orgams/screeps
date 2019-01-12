@@ -54,9 +54,12 @@ let try_create_creep = function(config) {
             info_perf.log(scriptName, "Init home in config");
         }
 
-        home_spawns = Game.rooms[config.home].find(FIND_STRUCTURES, {
-            filter: (structure) => structure.structureType == STRUCTURE_SPAWN
-        });
+        let room = Game.rooms[config.home];
+        if (room !== undefined) {
+            home_spawns = room.find(FIND_STRUCTURES, {
+                filter: (structure) => structure.structureType == STRUCTURE_SPAWN
+            });
+        }
         info_perf.log(scriptName, "Get home spawn");
     }
 
@@ -124,7 +127,7 @@ let create_creep = function(config, spawn) {
             home: config.home
         };
         config.memory = Object.assign(json_memory, config.memory)
-        
+
         ret = spawn.spawnCreep(body, config.role + Game.time, {
             memory: config.memory
         });
