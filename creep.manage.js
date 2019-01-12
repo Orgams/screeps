@@ -73,8 +73,6 @@ let fonc_manage_creep = function(room) {
     info_perf.log(scriptName, "Initialiser config.nb : le nombre actuel de creep de ce type");
 
     // Initialiser la configuration du claimer
-    console.log("Game.gcl.level : ", Game.gcl.level, "info_room.get_nb_my_room() : ", info_room.get_nb_my_room());
-    console.log("Game.gcl.level > info_room.get_nb_my_room() : ", Game.gcl.level > info_room.get_nb_my_room());
     if (Game.gcl.level > info_room.get_nb_my_room()) {
         let configClaimer = configs.find((config) => config.role == 'claimer');
         configClaimer.max = 1;
@@ -84,6 +82,8 @@ let fonc_manage_creep = function(room) {
     // Eliminer les configuration qui sont arriver à leur max de population
     configs = configs.filter((config) => config.maxOk());
     info_perf.log(scriptName, "Delete conf in max");
+
+    console.log("configs", configs);
 
     // Initialiser totalRestePopOpti : l'adition de toutes les population optimal qui ne sont pas à leur max
     for (let indexConfig in configs) {
