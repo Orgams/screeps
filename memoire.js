@@ -6,6 +6,10 @@ let lock = function(key, target) {
 	set(key+"lock", true, target)
 }
 
+let unlock = function(key, target) {
+	set(key+"lock", false, target)
+}
+
 let getTarget = function(target){
 	if (target === undefined) {
 		return Memory;
@@ -86,5 +90,7 @@ let setRecur = function(obj, keyCur, keyParts, valeur) {
 
 module.exports = {
 	set: set,
-	get: get
+	get: get,
+	lock: lock,
+	unlock: unlock
 };
