@@ -28,7 +28,7 @@ let try_create_creep = function(config) {
     info_perf.log(scriptName, "Init variables");
 
     // Define 
-    if (config.range === "local" && ) {
+    if (config.range === "local") {
         let creeps = info_creep.get(config.role);
         let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
 
@@ -48,11 +48,11 @@ let try_create_creep = function(config) {
             }
         }
         info_perf.log(scriptName, "Init liste home");
-        /*
+
         if (config.memory.home === undefined) {
             config.memory.home = homes[0]
             info_perf.log(scriptName, "Init home in config");
-        }*/
+        }
 
         home_spawns = Game.rooms[config.home].find(FIND_STRUCTURES, {
             filter: (structure) => structure.structureType == STRUCTURE_SPAWN
