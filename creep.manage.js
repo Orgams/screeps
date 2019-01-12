@@ -146,7 +146,7 @@ let fonc_manage_creep = function(room) {
     // Create creep helper for ally
     let flag = Game.flags["Help"];
     if (flag){
-        console.log(flag.pos);
+        console.log(flag.pos.roomName);
     }
     // let confAlly = new Config('ally' , 1, 1, 1, 1, carryWork , "#000000", "local", false);
     // confAlly.memory.homelock = true;
