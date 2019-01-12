@@ -10,6 +10,9 @@ module.exports.loop = function() {
 
     let scriptName = "main";
     info_perf.init(scriptName, false);
+    {
+        memoire.set("test.var","toto");
+    }
 
     try {
         let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
