@@ -12,7 +12,7 @@ module.exports.loop = function() {
     info_perf.init(scriptName, false);
     {
         memoire.set("test.var","titi")
-        //memoire.lock("test.var");
+        memoire.unlock("test.var");
     }
 
     try {
