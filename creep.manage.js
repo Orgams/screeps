@@ -150,7 +150,7 @@ let fonc_manage_creep = function(room) {
         let confAlly = new Config('ally' , 1, 1, 1, 1, carryWork , "#000000", "local", false);
         confAlly.memory.home = home;
         confAlly.memory.homelock = true;
-        // return creepCreate.try_create_creep(config);
+        return creepCreate.try_create_creep(config);
     }
     info_perf.log(scriptName, "Create creep helper for ally");
 
