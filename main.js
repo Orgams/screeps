@@ -11,7 +11,8 @@ module.exports.loop = function() {
     let scriptName = "main";
     info_perf.init(scriptName, false);
     {
-        memoire.lock("test.var");
+        memoire.set("test.var","titi")
+        //memoire.lock("test.var");
     }
 
     try {
