@@ -2,7 +2,18 @@ let info_perf = require('info_perf');
 
 let scriptName = "memoire"
 
+let lock = function(key, target) {
+	// Initialiser l'objet où il faut ajouter une donnée en mémoire
+	let obj = getTarget(target);
+}
 
+let getTarget = function(target){
+	if (target === undefined) {
+		return Memory;
+	} else {
+		return target.memory;
+	}
+}
 
 let set = function(key, valeur, target, ttl) {
 	let keyParts = key.split(".");
@@ -10,12 +21,7 @@ let set = function(key, valeur, target, ttl) {
 	keyParts.shift(1);
 
 	// Initialiser l'objet où il faut ajouter une donnée en mémoire
-	let obj = null;
-	if (target === undefined) {
-		obj = Memory;
-	} else {
-		obj = target.memory;
-	}
+	let obj = getTarget(target);
 
 	// Appel récursif pour creer les objet et mettre la valeur à la fin
 	setRecur(obj, keyCur, keyParts, valeur);
@@ -36,12 +42,7 @@ let get = function(key, target) {
 	keyParts.shift(1);
 
 	// Initialiser l'objet où il faut ajouter une donnée en mémoire
-	let obj = null;
-	if (target === undefined) {
-		obj = Memory;
-	} else {
-		obj = target.memory;
-	}
+	let obj = getTarget(target);
 
 	// Appel récursif pour creer les objet et mettre la valeur à la fin
 	return getRecur(obj, keyCur, keyParts);
