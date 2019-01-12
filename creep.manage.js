@@ -17,13 +17,13 @@ let fonc_manage_creep = function(room) {
     let creeps = Object.values(Game.creeps);
 
     let configs = [];
-    configs.push(new Config('transferer', 1, 1, 1, 1, oneWorkTreeCarry, "#00ff00", "local", false));
-    configs.push(new Config('janitor', 2, 1, 1, 1, oneWorkTreeCarry, "#00ffff", "local", false));
-    configs.push(new Config('miner', 3, 0, 0, 0, fullWork, "#ff00ff", "autre", true));
-    configs.push(new Config('builder', 4, 1, 1, 1, carryWork, "#ff0000", "local", false));
-    configs.push(new Config('upgrader', 5, 1, 1, 1, oneWorkTreeCarry, "#0000ff", "local", false));
-    configs.push(new Config('repairer', 6, 1, 1, 1, oneWorkTreeCarry, "#ff9900", "local", false));
-    configs.push(new Config('claimer', 7, 0, 0, 0, claim, "#ffff00", "autre", false));
+    configs.push(new Config('transferer' /**/ , 1, 1, 1, 1, oneWorkTreeCarry /**/ , "#00ff00", "local", false));
+    configs.push(new Config('janitor' /*   */ , 2, 1, 1, 1, oneWorkTreeCarry /**/ , "#00ffff", "local", false));
+    configs.push(new Config('miner' /*     */ , 3, 0, 0, 0, fullWork /*        */ , "#ff00ff", "autre", true));
+    configs.push(new Config('builder' /*   */ , 4, 1, 1, 1, carryWork /*       */ , "#ff0000", "local", false));
+    configs.push(new Config('upgrader' /*  */ , 5, 1, 1, 1, oneWorkTreeCarry /**/ , "#0000ff", "local", false));
+    configs.push(new Config('repairer' /*  */ , 6, 1, 1, 1, oneWorkTreeCarry /**/ , "#ff9900", "local", false));
+    configs.push(new Config('claimer' /*   */ , 7, 0, 0, 0, claim /*           */ , "#ffff00", "autre", false));
     info_perf.log(scriptName, "Init configs");
 
     // Supprimer les configuration dont le role a déjà un creep en création
@@ -133,9 +133,6 @@ let fonc_manage_creep = function(room) {
 
 
     // Create the necessary stuff that does not have their popOpti without removing the maximum for this room
-    // for (let name in Game.spawns) {
-    //     let spawn = Game.spawns[name];
-    //     if (spawn.spawning == null) {
     for (let indexConfig in configs) {
         let config = configs[indexConfig];
         info_perf.logWithoutTimer(scriptName, config.role + " maxOk " + config.maxOk() + " ratioOk " + config.ratioOk() + " config.ratio " + config.ratio + " config.actualRatio " + config.actualRatio)
@@ -144,11 +141,13 @@ let fonc_manage_creep = function(room) {
             return creepCreate.try_create_creep(config);
         }
     }
-    //     }
-    // }
     info_perf.log(scriptName, "Create creep by opti");
 
-    info_perf.finish(scriptName);
+    // Create creep helper for ally
+    // let confAlly = new Config('ally' , 1, 1, 1, 1, carryWork , "#000000", "local", false);
+    // confAlly.memory.homelock = true;
+    // return creepCreate.try_create_creep(config);
+    // info_perf.log(scriptName, "Create creep helper for ally");
 
 }
 
@@ -161,7 +160,8 @@ function Config(role, priority, min, popOpti, max, model, color, range, strict) 
     this.model = model;
     this.color = color;
     this.strict = strict;
-    this.range = range
+    this.range = range;
+    this.memory = {};
     this.minOk = function() {
         if (this.nb == undefined) return undefined;
         return this.nb >= this.min;
