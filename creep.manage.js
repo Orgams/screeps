@@ -23,7 +23,7 @@ let fonc_manage_creep = function(room) {
     configs.push(new Config('builder' /*   */ , 4, 1, 1, 1, carryWork /*       */ , "#ff0000", "local", false));
     configs.push(new Config('upgrader' /*  */ , 5, 1, 1, 1, oneWorkTreeCarry /**/ , "#0000ff", "local", false));
     configs.push(new Config('repairer' /*  */ , 6, 1, 1, 1, oneWorkTreeCarry /**/ , "#ff9900", "local", false));
-    configs.push(new Config('claimer' /*   */ , 7, 0, 0, 0, claim /*           */ , "#ffff00", "autre", false));
+    //configs.push(new Config('claimer' /*   */ , 7, 0, 0, 0, claim /*           */ , "#ffff00", "autre", false));
     info_perf.log(scriptName, "Init configs");
 
     // Supprimer les configuration dont le role a déjà un creep en création
