@@ -3,8 +3,7 @@ let info_perf = require('info_perf');
 let scriptName = "memoire"
 
 let lock = function(key, target) {
-	// Initialiser l'objet où il faut ajouter une donnée en mémoire
-	let obj = getTarget(target);
+	set(key+"lock", true, target)
 }
 
 let getTarget = function(target){
@@ -79,7 +78,9 @@ let setRecur = function(obj, keyCur, keyParts, valeur) {
 		keyParts.shift(1);
 		setRecur(obj, keyCur, keyParts, valeur);
 	} else {
-		obj[keyCur] = valeur;
+		if (obj[keyCur+"lock"] !== true){
+			obj[keyCur] = valeur;
+		}
 	}
 }
 
