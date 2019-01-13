@@ -7,7 +7,7 @@ let info_room = require('info.room');
 let tower_action = require('tower_action');
 
 module.exports.loop = function() {
-
+console.log("message");
     let scriptName = "main";
     info_perf.init(scriptName, false);
 
