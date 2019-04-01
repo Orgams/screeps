@@ -33,12 +33,26 @@ let ortho = function(target, dist, room) {
 
 
     res = [];
+
+    let x=pos.x + dist;
+    let y=pos.y;
+    console.log("new room pos = x : ", x, "y : ", y);
+    res.push(new RoomPosition(x, y, room.name));
+
+    x=pos.x - dist;
+    y=pos.y;
+    console.log("new room pos = x : ", x, "y : ", y);
+    res.push(new RoomPosition(x, y, room.name));
     
-    res.push(new RoomPosition(pos.x + dist, pos.y, room.name));
-    console.log("test2");
-    res.push(new RoomPosition(pos.x - dist, pos.y, room.name));
-    res.push(new RoomPosition(pos.x, pos.y + dist, room.name));
-    res.push(new RoomPosition(pos.x, pos.y - dist, room.name));
+    x=pos.x;
+    y=pos.y + dist;
+    console.log("new room pos = x : ", x, "y : ", y);
+    res.push(new RoomPosition(x, y, room.name));
+
+    x=pos.x;
+    y=pos.y - dist;
+    console.log("new room pos = x : ", x, "y : ", y);
+    res.push(new RoomPosition(x, y, room.name));
     return res;
 }
 
