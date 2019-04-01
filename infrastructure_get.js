@@ -36,22 +36,22 @@ let ortho = function(target, dist, room) {
 
     let x=pos.x + dist;
     let y=pos.y;
-    console.log("new room pos = x : ", x, "y : ", y);
+    console.log("new room pos = x : ", x, " ("+typeof x+")", "y : ", " ("+typeof y+")", y);
     res.push(new RoomPosition(x, y, room.name));
 
     x=pos.x - dist;
     y=pos.y;
-    console.log("new room pos = x : ", x, "y : ", y);
+    console.log("new room pos = x : ", x, " ("+typeof x+")", "y : ", " ("+typeof y+")", y);
     res.push(new RoomPosition(x, y, room.name));
     
     x=pos.x;
     y=pos.y + dist;
-    console.log("new room pos = x : ", x, "y : ", y);
+    console.log("new room pos = x : ", x, " ("+typeof x+")", "y : ", " ("+typeof y+")", y);
     res.push(new RoomPosition(x, y, room.name));
 
     x=pos.x;
     y=pos.y - dist;
-    console.log("new room pos = x : ", x, "y : ", y);
+    console.log("new room pos = x : ", x, " ("+typeof x+")", "y : ", " ("+typeof y+")", y);
     res.push(new RoomPosition(x, y, room.name));
     return res;
 }
