@@ -31,9 +31,11 @@ let ortho = function(target, dist, room) {
     console.log("target : ", target, "dist : ", dist, "room : ", room);
     let pos = info_pos.get_pos(target);
 
-    console.log("test");
+
     res = [];
+    
     res.push(new RoomPosition(pos.x + dist, pos.y, room.name));
+    console.log("test2");
     res.push(new RoomPosition(pos.x - dist, pos.y, room.name));
     res.push(new RoomPosition(pos.x, pos.y + dist, room.name));
     res.push(new RoomPosition(pos.x, pos.y - dist, room.name));
