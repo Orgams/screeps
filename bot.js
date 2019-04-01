@@ -54,7 +54,6 @@ let bot = {
         // Indiquer si je suis en mode global
         if (memoire.get("range", creep) === "global"){
             let orthos = infrastructure_get.ortho(pos, 1, creep.room);
-            console.log("test");
             visual.line(orthos[0], orthos[2], style);
             visual.line(orthos[2], orthos[1], style);
             visual.line(orthos[1], orthos[3], style);
