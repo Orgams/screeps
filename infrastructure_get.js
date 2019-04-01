@@ -28,7 +28,7 @@ let diago = function(target, dist, room) {
 }
 
 let ortho = function(target, dist, room) {
-    console.log("target : ", target, "dist : ", dist, "room : ", room);
+    console.log("target : ", target, "dist : ", dist, "room : ", room, "room.name : ", room.name);
     let pos = info_pos.get_pos(target);
 
 
