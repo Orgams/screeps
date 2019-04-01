@@ -4,6 +4,8 @@ let actionMove = require('action.move');
 
 let info_room = require('info.room');
 
+let info_perf = require('info_perf');
+
 let memoire = require('memoire');
 
 let infrastructure_get = require('infrastructure_get');
@@ -12,6 +14,9 @@ let bot = {
 
     /** @param {Creep} creep **/
     run: function(creep, actions, sources) {
+
+        let scriptName = "bot";
+        info_perf.init(scriptName, true);
 
         let pos = creep.pos;
         let visual = creep.room.visual;
@@ -25,18 +30,21 @@ let bot = {
 
         // Indiquer mon role
         visual.circle(pos, style);
+        info_perf.log(scriptName, "Indiquer mon role" + " (" + creep.memory.role + ")");
 
         // Indiquer si je cherche de l'energie
         if (creep.memory.harvest) {
             style.radius = 0.1;
             visual.circle(pos, style);
         }
+        info_perf.log(scriptName, "Indiquer si je cherche de l'energie");
 
         // Indiquer si je suis chez moi
         if (memoire.get("home", creep) === creep.room.name){
             style.radius = 0.7;
             visual.circle(pos, style);
         }
+        info_perf.log(scriptName, "Indiquer si je suis chez moi");
 
         style = {
             color: color,
@@ -51,10 +59,12 @@ let bot = {
             visual.line(orthos[1], orthos[3], style);
             visual.line(orthos[3], orthos[0], style);
         }
+        info_perf.log(scriptName, "Indiquer si je suis en mode global");
 
         // Aller vers le flag qui porte le nom du role du creep s'il y en a un
         if (Game.flags[creep.memory.role] != undefined) {
             actionMove.do(creep, Game.flags[creep.memory.role]);
+            info_perf.log(scriptName, "Aller vers le flag qui porte le nom du role du creep");
             return;
         }
 
@@ -72,9 +82,12 @@ let bot = {
             creep.memory.harvest = false;
             //creep.say(creep.memory.role);
         }
+        info_perf.log(scriptName, "Initialiser le mode");
 
+        // Récolter
         if (creep.memory.harvest) {
             if (actionHarvest.do(creep, sources)) {
+                info_perf.log(scriptName, "Récolter");
                 return true;
             }
         }
@@ -86,19 +99,24 @@ let bot = {
         if (creep.memory.range === "local") {
             if (creep.memory.home !== undefined && creep.room.name !== creep.memory.home) {
                 actionMove.do(creep, info_room.get_pos_center(creep.memory.home));
+                info_perf.log(scriptName, "Aller dans ma salle si je suis local et que je ne suis pas dans ma salle");
                 return true;
             }
         }
 
+        // Effrectuer mes actions
         if (!creep.memory.harvest) {
             for (let action of actions) {
                 if (require('action.' + action).do(creep)) {
+                    info_perf.log(scriptName, "Effrectuer mes actions");
                     return true;
                 }
             }
         }
 
+        // Aller attendre
         actionMove.do(creep, Game.flags['Wait']);
+        info_perf.log(scriptName, "Aller attendre");
         return false;
     }
 }
