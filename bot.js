@@ -84,6 +84,7 @@ let bot = {
         }
         info_perf.log(scriptName, "Initialiser le mode");
 
+console.log("creep.memory.harvest : ", creep.memory.harvest + " (" + typeof creep.memory.harvest + ") ");
         // Récolter
         if (creep.memory.harvest) {
             if (actionHarvest.do(creep, sources)) {
@@ -104,7 +105,6 @@ let bot = {
             }
         }
 
-        console.log("creep.memory.harvest : ", creep.memory.harvest + " (" + typeof creep.memory.harvest + ") ");
         // Effrectuer mes actions
         if (!creep.memory.harvest) {
             for (let action of actions) {
