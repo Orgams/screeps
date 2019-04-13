@@ -7,7 +7,7 @@ let actionHarvest = {
         
         let scriptName = "action_harvest " + creep;
         //let debug = creep.room.name === "W3N24";
-        info_perf.init(scriptName, false, creep.room);
+        info_perf.init(scriptName, true, creep.room);
 
 
         let sources = srcs;
