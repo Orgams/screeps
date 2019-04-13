@@ -30,7 +30,7 @@ module.exports.loop = function() {
             if(role_name === undefined){
                 memoire.set("role", creep.name.match("[a-z]*"), creep);
             }else{
-                require('role.' + creep.memory.role).run(creep);
+                require('role.' + role_name).run(creep);
             }
         }
         info_perf.log(scriptName, "creeps work");
