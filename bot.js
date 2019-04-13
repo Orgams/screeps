@@ -16,7 +16,7 @@ let bot = {
     run: function(creep, actions, sources) {
 
         let scriptName = "bot";
-        info_perf.init(scriptName, true);
+        info_perf.init(scriptName, false);
 
         let pos = creep.pos;
         let visual = creep.room.visual;
@@ -84,7 +84,6 @@ let bot = {
         }
         info_perf.log(scriptName, "Initialiser le mode");
 
-console.log("creep.memory.harvest : ", creep.memory.harvest + " (" + typeof creep.memory.harvest + ") ");
         // Récolter
         if (creep.memory.harvest) {
             if (actionHarvest.do(creep, sources)) {
