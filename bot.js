@@ -25,7 +25,7 @@ let bot = {
         let color = memoire.get("color", creep);
         if(color === undefined){
             let role_name = memoire.get("role", creep);
-            console.log("role_name : " + JSON.stringify(role_name[0]) + " (" + typeof role_name + ") ");
+            console.log("role_name : " + role_name + " (" + typeof role_name + ") ");
             console.log(colorLib.get());
             //memoire.set("color", colorLib.get(memoire.get("role", creep)), creep);
         }
