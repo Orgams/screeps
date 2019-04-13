@@ -26,13 +26,11 @@ module.exports.loop = function() {
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
             let role_name = memoire.get("role", creep);
-            console.log("role_name : " + role_name + " (" + typeof role_name + ") ");
             if(role_name === undefined || typeof role_name !== "string"){
-                console.log("test")
-                memoire.set("role", creep.name.match("[a-z]*")[0], creep);
-            }else{
-                require('role.' + role_name).run(creep);
+                role_name = creep.name.match("[a-z]*")[0]
+                memoire.set("role", role_name, creep);
             }
+            require('role.' + role_name).run(creep);
         }
         info_perf.log(scriptName, "creeps work");
     } catch (error) {
