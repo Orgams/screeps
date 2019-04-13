@@ -1,6 +1,8 @@
 let info_pos = require('info_pos');
 
 let addRoomPosition = function(arr, x, y, room_name){
+    // Controler si les parametres sont valides
+    if(x < 0 || x > 49 || y < 0 || y > 49) return;
     arr.push(new RoomPosition(x, y, room_name));
 }
 
@@ -29,7 +31,6 @@ let json = {
         addRoomPosition(res, pos.x - dist, pos.y - dist, room.name);
         return res;
     }, ortho: function(target, dist, room) {
-        console.log("target : ", target, "dist : ", dist, "room : ", room, "room.name : ", room.name + " ("+typeof room.name+")");
         let pos = info_pos.get_pos(target);
 
         res = [];
