@@ -11,7 +11,7 @@ let action = {
 
 		let scriptName = "action.build";
 
-		info_perf.init(scriptName, true);
+		info_perf.init(scriptName, false);
 
 		// Recuperer le site de construction de la salle le plus proche
 		let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
