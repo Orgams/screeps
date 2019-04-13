@@ -9,7 +9,7 @@ let tower_action = require('tower_action');
 module.exports.loop = function() {
 
     let scriptName = "main";
-    info_perf.init(scriptName, false);
+    info_perf.init(scriptName, true);
 
     try {
         let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
