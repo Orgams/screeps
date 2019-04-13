@@ -24,7 +24,9 @@ let bot = {
         let visual = creep.room.visual;
         let color = memoire.get("color", creep);
         if(color === undefined){
-            console.log(colorLib.get(memoire.get("role", creep)));
+            let role_name = memoire.get("role", creep);
+            console.log("role_name : " + role_name + " (" + typeof role_name + ") ");
+            console.log(colorLib.get());
             //memoire.set("color", colorLib.get(memoire.get("role", creep)), creep);
         }
 
