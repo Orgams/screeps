@@ -26,7 +26,7 @@ module.exports.loop = function() {
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
             roleName = memoire.get("role", creep);
-            console.log("roleName : " + roleName + " (" + typeof roleName + ") "
+            console.log("roleName : " + roleName + " (" + typeof roleName + ") ");
             require('role.' + creep.memory.role).run(creep);
         }
         info_perf.log(scriptName, "creeps work");
