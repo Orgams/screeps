@@ -9,7 +9,7 @@ let tower_action = require('tower_action');
 module.exports.loop = function() {
 
     let scriptName = "main";
-    info_perf.init(scriptName, true);
+    info_perf.init(scriptName, false);
 
     try {
         let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
@@ -26,7 +26,7 @@ module.exports.loop = function() {
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
             let role_name = memoire.get("role", creep);
-            console.log("role_name : " + role_name + " (" + typeof role_name + ") ");
+            //console.log("role_name : " + role_name + " (" + typeof role_name + ") ");
             if(role_name === undefined){
                 console.log("test")
                 memoire.set("role", creep.name.match("[a-z]*"), creep);

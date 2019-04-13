@@ -24,9 +24,6 @@ let bot = {
         let visual = creep.room.visual;
         let color = memoire.get("color", creep);
         if(color === undefined){
-            let role_name = memoire.get("role", creep);
-            console.log("role_name : " + role_name + " (" + typeof role_name + ") ");
-            console.log(colorLib.get());
             //memoire.set("color", colorLib.get(memoire.get("role", creep)), creep);
         }
 
@@ -69,6 +66,8 @@ let bot = {
         }
         info_perf.log(scriptName, "Indiquer si je suis en mode global");
 
+            let role_name = memoire.get("role", creep);
+            console.log("role_name : " + role_name + " (" + typeof role_name + ") ");
         // Aller vers le flag qui porte le nom du role du creep s'il y en a un
         if (Game.flags[creep.memory.role] != undefined) {
             actionMove.do(creep, Game.flags[creep.memory.role]);
