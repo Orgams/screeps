@@ -24,7 +24,8 @@ let bot = {
         let visual = creep.room.visual;
         let color = memoire.get("color", creep);
         if(color === undefined){
-            memoire.set("color", colorLib.get(memoire.get("role", creep)), creep);
+            console.log("test");
+            //memoire.set("color", colorLib.get(memoire.get("role", creep)), creep);
         }
 
         let style = {
