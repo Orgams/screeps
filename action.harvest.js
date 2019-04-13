@@ -80,9 +80,9 @@ let findTarget = function(creep, source) {
     if ([FIND_SOURCES_ACTIVE].includes(source)) {
         console.log("source : " + source + " (" + typeof source + ") ");
         // Recolter sur les sources si il n'y a pas le bon nombre de mineur
-        let hasMinerByContainer = Memory["nb.containers"] > 0 && Memory["nb.containers"] > Memory["nb.miner"]
-        console.log("hasMinerByContainer : " + hasMinerByContainer + " (" + typeof hasMinerByContainer + ") ");
-        if (hasMinerByContainer) {
+        let workerCanMine = Memory["nb.containers"] == 0 || Memory["nb.containers"] > Memory["nb.miner"]
+        console.log("workerCanMine : " + workerCanMine + " (" + typeof workerCanMine + ") ");
+        if (workerCanMine) {
             targets = creep.room.find(FIND_SOURCES_ACTIVE);
         }
     }
