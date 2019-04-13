@@ -1,5 +1,6 @@
 let color = {
     get: function(roleCreep){
+        console.log("roleCreep : " + roleCreep + " (" + typeof roleCreep + ") ");
         switch (roleCreep) {
             case 'transferer' : console.log("#00ff00");
             case 'janitor' : console.log("#00ffff");
