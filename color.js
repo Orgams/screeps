@@ -1,7 +1,5 @@
-let memoire = require('memoire');
-
 let color = {
-    getColor : function(roleCreep){
+    get: function(roleCreep){
         switch (roleCreep) {
             case 'transferer' : return "#00ff00";
             case 'janitor' : return "#00ffff";
