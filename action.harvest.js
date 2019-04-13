@@ -15,7 +15,7 @@ let actionHarvest = {
         if (sources === undefined) {
             sources = [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, FIND_DROPPED_RESOURCES, FIND_SOURCES_ACTIVE];
         }
-        info_perf.log(scriptName, "Initialisation des variables");
+        info_perf.log(scriptName, "Initialisation des variables : ", "sources : ", sources + " (" + typeof sources + ") ");
 
         let target = false;
 
