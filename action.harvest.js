@@ -15,7 +15,7 @@ let actionHarvest = {
         if (sources === undefined) {
             sources = [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, FIND_DROPPED_RESOURCES, FIND_SOURCES_ACTIVE];
         }
-        info_perf.log(scriptName, "Initialisation des variables : ", "sources : ", sources + " (" + typeof sources + ") ");
+        info_perf.log(scriptName, "Initialisation des variables : sources : " + sources + " (" + typeof sources + ") ");
 
         let target = false;
 
@@ -78,6 +78,7 @@ let findTarget = function(creep, source) {
         targets = creep.room.find(FIND_DROPPED_RESOURCES);
     }
     if ([FIND_SOURCES_ACTIVE].includes(source)) {
+        console.log("source : " + source + " (" + typeof source + ") ");
         // Recolter sur les sources si il n'y a pas le bon nombre de mineur
         if (Memory["nb.containers"] > Memory["nb.miner"]) {
             targets = creep.room.find(FIND_SOURCES_ACTIVE);
