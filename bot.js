@@ -8,6 +8,8 @@ let info_perf = require('info_perf');
 
 let memoire = require('memoire');
 
+let colorLib = require('color');
+
 let infrastructure_get = require('infrastructure_get');
 
 let bot = {
@@ -21,6 +23,9 @@ let bot = {
         let pos = creep.pos;
         let visual = creep.room.visual;
         let color = memoire.get("color", creep);
+        if(color === undefined){
+            memoire.set("color", colorLib.get(memoire.get("role", creep)), creep);
+        }
 
         let style = {
             fill: 'transparent',
