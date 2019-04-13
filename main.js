@@ -26,7 +26,7 @@ module.exports.loop = function() {
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
             let role_name = memoire.get("role", creep);
-            //console.log("role_name : " + role_name + " (" + typeof role_name + ") ");
+            console.log("role_name : " + role_name + " (" + typeof role_name + ") ");
             if(role_name === undefined){
                 console.log("test")
                 memoire.set("role", creep.name.match("[a-z]*"), creep);
