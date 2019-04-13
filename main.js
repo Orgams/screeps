@@ -27,7 +27,7 @@ module.exports.loop = function() {
             let creep = Game.creeps[name];
             roleName = memoire.get("role", creep);
             if(roleName === undefined){
-                console.log(creep.id);
+                console.log(creep.name);
             }
             require('role.' + creep.memory.role).run(creep);
         }
