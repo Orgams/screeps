@@ -104,6 +104,7 @@ let bot = {
             }
         }
 
+        console.log("creep.memory.harvest : ", creep.memory.harvest + " (" + typeof creep.memory.harvest + ") ");
         // Effrectuer mes actions
         if (!creep.memory.harvest) {
             for (let action of actions) {
