@@ -1,19 +1,19 @@
 let color = {
     get: function(roleCreep){
         switch (roleCreep) {
-            case 'transferer' :
+            case "transferer" :
                 return "#00ff00";
-            case 'janitor' :
+            case "janitor" :
                 return "#00ffff";
-            case 'miner' :
+            case "miner" :
                 return "#ff00ff";
-            case 'builder' :
+            case "builder" :
                 return "#ff0000";
-            case 'upgrader' :
+            case "upgrader" :
                 return "#0000ff";
-            case 'repairer' :
+            case "repairer" :
                 return "#ff9900";
-            case 'claimer' :
+            case "claimer" :
                 return "#ffff00";
         }
     }
