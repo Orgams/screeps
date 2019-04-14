@@ -23,6 +23,7 @@ module.exports.loop = function() {
 
     try {
         // Assign all role
+        info_perf.init(scriptName + "-work", true);
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
             let role_name = memoire.get("role", creep);
@@ -31,6 +32,7 @@ module.exports.loop = function() {
                 memoire.set("role", role_name, creep);
             }
             require('role.' + role_name).run(creep);
+            info_perf.log(scriptName + "-work", "role_name");
         }
         info_perf.log(scriptName, "creeps work");
     } catch (error) {
