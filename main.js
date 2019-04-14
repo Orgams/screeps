@@ -32,7 +32,7 @@ module.exports.loop = function() {
                 memoire.set("role", role_name, creep);
             }
             require('role.' + role_name).run(creep);
-            info_perf.log(scriptName + "-work", "role_name");
+            info_perf.log(scriptName + "-work", role_name);
         }
         info_perf.log(scriptName, "creeps work");
     } catch (error) {
