@@ -19,7 +19,7 @@ let do_out = function(creep){
     //Remplir d'énergie les structure
     if(targets.length === 0) targets = findStruct(creep, [STRUCTURE_SPAWN, STRUCTURE_EXTENSION]);
     
-    //Remplir d'énergie les tours s'il n'y a rien d'autre à faire
+    //Remplir d'énergie les tours s'il n'y a rien d'autre àfaire
     if(targets.length === 0) targets = findStruct(creep, [STRUCTURE_TOWER]);
     
     let target = creep.pos.findClosestByRange(targets);
@@ -30,7 +30,7 @@ let do_out = function(creep){
         }
         return true;
     }
-	return false;
+    return false;
 }
 
 module.exports = {

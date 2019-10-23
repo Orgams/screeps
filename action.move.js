@@ -9,13 +9,13 @@ let action = {
         }else{
             let pos = info_pos.get_pos(target);
             //info_perf.simpleLog(scriptName, creep + target + pos)
-        	let ret = creep.moveTo(pos, {visualizePathStyle: {
-        	    stroke: creep.memory.color,
+            let ret = creep.moveTo(pos, {visualizePathStyle: {
+                stroke: creep.memory.color,
                 fill: 'transparent',
                 lineStyle: 'dashed',
                 strokeWidth: .15,
                 opacity: .3
-        	}});
+            }});
         }
     }
 };

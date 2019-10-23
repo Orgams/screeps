@@ -47,7 +47,7 @@ let infrastructure = {
             // Récuperer la clef mémoire 
             let is_finish = memoire.get(key_memory, room);
 
-            // Creer l'infrastructure si cette tache n'a pas déjà été fini
+            // Creer l'infrastructure si cette tache n'a pas déjàété fini
             if (is_finish === undefined || is_finish < room.controller.level) {
                 newSite = require(infrastructure_task).build(room, sources);
 

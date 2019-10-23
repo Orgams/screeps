@@ -113,8 +113,8 @@ let bot = {
         // Effrectuer mes actions
         if (!creep.memory.harvest) {
             for (let action of actions) {
+                info_perf.log(scriptName, "Creep "+ creep.name +" effrectue action " + action);
                 if (require('action.' + action).do(creep)) {
-                    info_perf.log(scriptName, "Effrectuer mes actions");
                     return true;
                 }
             }

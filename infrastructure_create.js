@@ -9,7 +9,7 @@ let create = function(pos, struct_type) {
 		return false;
 	}
 
-	// Vérifier si il n'y a pas déjà une structure
+	// Vérifier si il n'y a pas déjàune structure
 	let structs = pos.lookFor(LOOK_STRUCTURES);
 	let structs_without_road = _.filter(structs, (struct) => struct.structureType !== STRUCTURE_ROAD)
 	if (structs_without_road.length > 0) {

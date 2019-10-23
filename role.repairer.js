@@ -2,7 +2,7 @@ let bot = require('bot');
 
 let role = {
     run: function(creep) {
-        return bot.run(creep, ['repair','transfer', 'storager', 'build']);
+        return bot.run(creep, ['repair', 'build', 'transfer', 'storager']);
     }
 }
 

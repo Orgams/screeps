@@ -26,7 +26,7 @@ let set = function(key, valeur, target, ttl) {
 	// Initialiser l'objet où il faut ajouter une donnée en mémoire
 	let obj = getTarget(target);
 
-	// Appel récursif pour creer les objet et mettre la valeur à la fin
+	// Appel récursif pour creer les objet et mettre la valeur àla fin
 	setRecur(obj, keyCur, keyParts, valeur);
 
 	// Ajouter une valeur ttl si demandé
@@ -47,7 +47,7 @@ let get = function(key, target) {
 	// Initialiser l'objet où il faut ajouter une donnée en mémoire
 	let obj = getTarget(target);
 
-	// Appel récursif pour creer les objet et mettre la valeur à la fin
+	// Appel récursif pour creer les objet et mettre la valeur àla fin
 	return getRecur(obj, keyCur, keyParts);
 }
 

@@ -12,7 +12,7 @@ let infrastructure = {
                 filter: (struct) => struct.structureType === typeStruct
             });
 
-            // Construire le tourelle si il n'y en a pas déjà une
+            // Construire le tourelle si il n'y en a pas déjàune
             if (spawnInRange.length === 0) {
                 let pos = infrastructure_get.pos_on_path(source, room.controller, distConstrSpawn, room.name);
                 let ret = infrastructure_create.create(pos, typeStruct)

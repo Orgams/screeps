@@ -35,7 +35,7 @@ let info = {
 	},
 	logWithoutTimer: function(script, ...messages) {
 		if (activate[script]) {
-			console.log("[" + script + "]", message);
+			console.log("[" + script + "]", messages);
 		}
 
 	},
