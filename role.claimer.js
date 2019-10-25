@@ -5,6 +5,8 @@ let actionMove = require('action.move');
 let role = {
 	run: function(creep) {
 
+		let scriptName = "role.claimer";
+ 		info_perf.init(scriptName, true);
 		// Aller vers le flag qui porte le nom du role du creep s'il y en a un
 		if (Game.flags[creep.memory.role] != undefined) {
 			actionMove.do(creep, Game.flags[creep.memory.role]);
@@ -24,8 +26,11 @@ let role = {
 				creep.memory.target = undefined;
 			}
 
-			let res = actionMove.do(creep, creep.memory.target);
-
+			if(actionMove.do(creep, creep.memory.target)){
+			if(!ret){
+				creep.memory.target = undefined;
+				info_perf.log(scriptName, "impossible de d'aller dans l'autre salle, je n'ai plus de cible");
+			}
 
 		} else {
 			if (creep.room.controller) {
