@@ -13,7 +13,7 @@ const freqAffichage = 1;
 
 let fonc_manage_creep = function(room) {
     let scriptName = "creep.manage";
-    info_perf.init(scriptName, false);
+    info_perf.init(scriptName, true);
     let creeps = Object.values(Game.creeps);
 
     let configs = [];

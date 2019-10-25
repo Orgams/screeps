@@ -9,7 +9,7 @@ let tower_action = require('tower_action');
 module.exports.loop = function() {
 
     let scriptName = "main";
-    info_perf.init(scriptName, false);
+    info_perf.init(scriptName, true);
 
     try {
         let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
@@ -65,17 +65,15 @@ module.exports.loop = function() {
         // Create necessary creeps for all rooms
         if (Game.time % 10 == 0) {
 
-            let room = Game.rooms["W37N2"];
+            let room = Game.rooms["W36N9"];
 
-            if (room.memory === undefined) room.memory = {};
-            if (room.memory.nb === undefined) room.memory.nb = {};
-            room.memory.nb.containers = _.filter(room.find(FIND_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER).length;
+            memoire.set("nb.containers", _.filter(room.find(FIND_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER).length, room);
             creepManage.manage_creep(room);
 
             info_perf.log(scriptName, "creeps creation");
         }
     } catch (error) {
-        info_perf.simpleLog(scriptName, "[main] creeps creation : " + error);
+        info_perf.simpleLog(scriptName, "creeps creation : " + error);
     }
 
     try {
