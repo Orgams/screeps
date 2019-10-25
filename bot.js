@@ -24,7 +24,6 @@ let bot = {
         let visual = creep.room.visual;
         let color = memoire.get("color", creep);
         if(color === undefined){
-            console.log(colorLib.get(memoire.get("role", creep)));
             memoire.set("color", colorLib.get(memoire.get("role", creep)), creep);
         }
 
@@ -89,13 +88,12 @@ let bot = {
             creep.memory.harvest = true;
             //creep.say('harvest');
         }
-
         // Se mettre en mode travail si on est en mode recherche d'énergie et que l'on ne peut rien porter de plus
         if (creep.memory.harvest && totalCarry == creep.carryCapacity) {
             creep.memory.harvest = false;
             //creep.say(creep.memory.role);
         }
-        info_perf.log(scriptName, "Initialiser le mode");
+        info_perf.log(scriptName, "Initialiser le mode récolte ou travail");
 
         // Récolter
         if (creep.memory.harvest) {
