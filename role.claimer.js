@@ -26,7 +26,8 @@ let role = {
 				creep.memory.target = undefined;
 			}
 
-			if(actionMove.do(creep, creep.memory.target)){
+			console.log(creep.memory.target.x,"-",creep.memory.target.y)
+			let ret = actionMove.do(creep, creep.memory.target);
 			if(!ret){
 				creep.memory.target = undefined;
 				info_perf.log(scriptName, "impossible de d'aller dans l'autre salle, je n'ai plus de cible");

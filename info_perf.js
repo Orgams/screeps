@@ -2,10 +2,13 @@ let times = {};
 let start = {};
 let activate = {};
 
-/*let scriptName = "";
+/*
+let info_perf = require('info_perf');
+let scriptName = "";
 info_perf.init(scriptName, true);
 info_perf.log(scriptName, "");
-info_perf.finish(scriptName);*/
+info_perf.finish(scriptName);
+*/
 let info = {
 	init: function(script, activation, ...messages) {
 		activate[script] = activation;
