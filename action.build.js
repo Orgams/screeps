@@ -34,10 +34,13 @@ let action = {
 		if(target !== null && target !== undefined){
 			info_perf.log(scriptName, "construire le site", target);
 			if(creep.build(target) == ERR_NOT_IN_RANGE) {
+				info_perf.log(scriptName, "trop loin, avancer", target);
 				actionMove.do(creep, target);
 			}
+			info_perf.finish(scriptName)
 			return true;
 		}
+		info_perf.finish(scriptName)
 		return false;
 	}
 };
