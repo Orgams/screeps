@@ -74,6 +74,13 @@ let bot = {
             return;
         }
 
+        // Aller vers le flag qui porte le nom du creep s'il y en a un
+        if (Game.flags[creep.name] != undefined) {
+            actionMove.do(creep, Game.flags[creep.name]);
+            info_perf.log(scriptName, "Aller vers le flag qui porte le nom du role du creep");
+            return;
+        }
+
         // Calculer combien porte le creep
         let totalCarry = _.sum(creep.carry);
 
