@@ -9,7 +9,7 @@ let action = {
         if(target === null)return false;
         scriptName="action.move";
 
-        info_perf_state=false;//require('memoire').get("role", creep)==="builder";
+        info_perf_state=require('memoire').get("role", creep)==="builder";
         info_perf.init(scriptName, info_perf_state);
 
         if(target === null){
@@ -23,7 +23,7 @@ let action = {
         }else{
             let pos = info_pos.get_pos(target);
 
-            console.log(pos)
+            console.log(pos, target)
             let target_id=pos.roomName+"-"+pos.x+"-"+pos.y;
 
             let pos_tmp = memoire.get("move."+target_id, creep);
