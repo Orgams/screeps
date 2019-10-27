@@ -1,4 +1,5 @@
 let get_pos = function(target) {
+	console.log("target : " + target + " (" + typeof target + ") ")
     if (target.roomName === undefined) {
         target = target.pos;
     }
