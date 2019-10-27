@@ -23,7 +23,6 @@ let action = {
         }else{
             let pos = info_pos.get_pos(target);
 
-            console.log("pos : ",pos, "target : ",target)
             let target_id=pos.roomName+"-"+pos.x+"-"+pos.y;
 
             let pos_tmp = memoire.get("move."+target_id, creep);
@@ -39,8 +38,6 @@ let action = {
             }
 
             pos_tmp = new RoomPosition(pos_tmp.x, pos_tmp.y, pos_tmp.roomName);
-
-            console.log(pos_tmp)
 
             info_perf.log(scriptName, "aller vers la cible : " + "creep : " + creep + " (" + typeof creep + ") " + "target : " + target + " (" + typeof target + ") " + " " + "pos : " + pos + " (" + typeof pos + ") ")
             let ret = creep.moveTo(pos_tmp, {visualizePathStyle: {
