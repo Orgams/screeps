@@ -18,7 +18,7 @@ let bot = {
     run: function(creep, actions, sources) {
 
         let scriptName = "bot";
-        info_perf_state=false;//memoire.get("role", creep)==="builder";
+        info_perf_state=true;//memoire.get("role", creep)==="builder";
         info_perf.init(scriptName, info_perf_state);
 
         let pos = creep.pos;
@@ -120,7 +120,7 @@ let bot = {
         if (!creep.memory.harvest) {
             for (let action of actions) {
                 if (require('action.' + action).do(creep)) {
-                    info_perf.simpleLog(scriptName, "Creep "+ creep.name +" effrectue action " + action);
+                    info_perf.log(scriptName, "Creep "+ creep.name +" effrectue action " + action);
                     return true;
                 }
             }
