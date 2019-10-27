@@ -25,14 +25,19 @@ module.exports.loop = function() {
         // Assign all role
         info_perf.init(scriptName + "-work", false);
         for (let name in Game.creeps) {
-            let creep = Game.creeps[name];
-            let role_name = memoire.get("role", creep);
-            if(role_name === undefined || typeof role_name !== "string"){
-                role_name = creep.name.match("[a-z]*")[0]
-                memoire.set("role", role_name, creep);
+            let creep;
+            try {
+                creep = Game.creeps[name];
+                let role_name = memoire.get("role", creep);
+                if(role_name === undefined || typeof role_name !== "string"){
+                    role_name = creep.name.match("[a-z]*")[0]
+                    memoire.set("role", role_name, creep);
+                }
+                require('role.' + role_name).run(creep);
+                info_perf.log(scriptName + "-work", role_name + " " + creep.memory.range);
+            } catch (error) {
+                info_perf.simpleLog(scriptName + "-work", "[main] creep work : " + creep + ":" + error);
             }
-            require('role.' + role_name).run(creep);
-            info_perf.log(scriptName + "-work", role_name + " " + creep.memory.range);
         }
         info_perf.log(scriptName, "creeps work");
     } catch (error) {
