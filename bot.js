@@ -120,7 +120,7 @@ let bot = {
         if (!creep.memory.harvest) {
             for (let action of actions) {
                 if (require('action.' + action).do(creep)) {
-                    info_perf.log(scriptName, "Creep "+ creep.name +" effrectue action " + action);
+                    info_perf.simpleLog(scriptName, "Creep "+ creep.name +" effrectue action " + action);
                     return true;
                 }
             }
