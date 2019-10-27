@@ -21,7 +21,7 @@ let add_part = function(part) {
 let try_create_creep = function(config) {
 
     let scriptName = "creep.create";
-    info_perf.init(scriptName, true);
+    info_perf.init(scriptName, false);
 
     let homes = [];
     let home_spawns = [];
