@@ -21,8 +21,9 @@ let action = {
             info_perf.log(scriptName, "Ramasser l'energy au sol")
             creep.pickup(energyDroped[0]);
         }else{
-
-            console.log(creep, "target : " + target + " (" + typeof target + ") ")
+            if(target === undefined){
+                console.log(creep, "target : " + target + " (" + typeof target + ") ")
+            }
 
             let pos = info_pos.get_pos(target);
 
