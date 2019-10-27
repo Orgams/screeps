@@ -23,7 +23,7 @@ let action = {
         }else{
             let pos = info_pos.get_pos(target);
 
-            console.log(pos, target)
+            console.log("pos : ",pos, "target : ",target)
             let target_id=pos.roomName+"-"+pos.x+"-"+pos.y;
 
             let pos_tmp = memoire.get("move."+target_id, creep);
