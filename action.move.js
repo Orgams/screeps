@@ -9,7 +9,7 @@ let action = {
         if(target === null)return false;
         scriptName="action.move";
 
-        info_perf_state=require('memoire').get("role", creep)==="builder";
+        info_perf_state=false; //require('memoire').get("role", creep)==="builder";
         info_perf.init(scriptName, info_perf_state);
 
         if(target === null){
