@@ -10,8 +10,8 @@ let action = {
 	do: function(creep){
 
 		let scriptName = "action.build";
-
-		info_perf.init(scriptName, false);
+		let info_perf_state=require('memoire').get("role", creep)==="builder";
+		info_perf.init(scriptName, info_perf_state);
 
 		// Recuperer le site de construction de la salle le plus proche
 		let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
