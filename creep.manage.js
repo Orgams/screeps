@@ -9,8 +9,6 @@ const oneWorkTreeCarry = [WORK, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE];
 const small = [WORK, CARRY, MOVE]
 const claim = [CLAIM, MOVE]
 
-const freqAffichage = 1;
-
 let fonc_manage_creep = function(room) {
     let scriptName = "creep.manage";
     info_perf.init(scriptName, false);

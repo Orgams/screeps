@@ -18,7 +18,7 @@ let bot = {
     run: function(creep, actions, sources) {
 
         let scriptName = "bot";
-        info_perf_state=true;//memoire.get("role", creep)==="builder";
+        info_perf_state=false;//memoire.get("role", creep)==="builder";
         info_perf.init(scriptName, info_perf_state);
 
         let pos = creep.pos;
@@ -126,8 +126,9 @@ let bot = {
             }
         }
 
-        // Aller attendre
-        actionMove.do(creep, Game.flags['Wait']);
+        // Dire attendre
+        creep.say('Wait');
+        //actionMove.do(creep, Game.flags['Wait']);
         info_perf.log(scriptName, "Aller attendre");
         return false;
     }

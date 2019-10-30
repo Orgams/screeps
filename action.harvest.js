@@ -12,6 +12,7 @@ let actionHarvest = {
 
         let sources = srcs;
 
+        // Initialisation des variables : sources
         if (sources === undefined) {
             sources = [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, FIND_DROPPED_RESOURCES, FIND_SOURCES_ACTIVE];
         }
@@ -21,6 +22,7 @@ let actionHarvest = {
 
         for (let source of sources) {
             target = findTarget(creep, source);
+            info_perf.log(scriptName, "Cible trouver pour " + source + " : " + target);
             if (target) {
                 if (take(creep, source, target) == ERR_NOT_IN_RANGE) {
                     actionMove.do(creep, target);

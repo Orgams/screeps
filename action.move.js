@@ -22,7 +22,7 @@ let action = {
             creep.pickup(energyDroped[0]);
         }else{
             if(target === undefined){
-                console.log(creep, "target : " + target + " (" + typeof target + ") ")
+                console.log(creep, creep.memory.range, creep.memory.harvest , "target : " + target + " (" + typeof target + ") ")
             }
 
             let pos = info_pos.get_pos(target);
