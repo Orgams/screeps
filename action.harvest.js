@@ -2,6 +2,8 @@ let actionMove = require('action.move');
 let actionPickup = require('action.pickup');
 let info_perf = require('info_perf');
 
+let mess;
+
 let actionHarvest = {
     do: function(creep, srcs) {
         
@@ -20,9 +22,12 @@ let actionHarvest = {
 
         let target = false;
 
+        mess = ""
+
         for (let source of sources) {
             target = findTarget(creep, source);
             info_perf.log(scriptName, "Cible trouver pour " + source + " : " + target);
+            mess += "Cible trouver pour " + source + " : " + target + "\n";
             if (target) {
                 if (take(creep, source, target) == ERR_NOT_IN_RANGE) {
                     actionMove.do(creep, target);
@@ -33,6 +38,8 @@ let actionHarvest = {
             }
             info_perf.log(scriptName, "Impossible de récolter pour " + source);
         }
+        mess += "Je ne peux pas récolter";
+        console.log(creep, "\n"+mess)
         info_perf.finish(scriptName);
         return false;
 
@@ -76,20 +83,33 @@ let findTarget = function(creep, source) {
             }
         });
     }
+    mess += "STRUCTURE targets : " + targets + "\n";
     if ([FIND_DROPPED_RESOURCES].includes(source)) {
         targets = creep.room.find(FIND_DROPPED_RESOURCES);
     }
+    mess += "DROPPED_RESOURCES targets : " + targets + "\n";
+    
+
     if ([FIND_SOURCES_ACTIVE].includes(source)) {
-        // Recolter sur les sources si il n'y a pas le bon nombre de mineur
-        let workerCanMine = Memory["nb.sources"] !== Memory["nb.containers"] || Memory["nb.containers"] > Memory["nb.miner"];
+
+        let has_more_sources_than_container = Memory["nb.sources"] !== Memory["nb.containers"];
+        let has_more_container_than_miner = Memory["nb.containers"] > Memory["nb.miner"];
+        let workerCanMine = has_more_sources_than_container || has_more_container_than_miner;
+
+        mess += "has_more_sources_than_container : " + has_more_sources_than_container + "\n";
+        mess += "has_more_container_than_miner : " + has_more_container_than_miner + "\n";
+        mess += "workerCanMine : " + workerCanMine + "\n";
+
         if (workerCanMine) {
             targets = creep.room.find(FIND_SOURCES_ACTIVE);
         }
     }
+    mess += "SOURCES_ACTIVE targets : " + targets + "\n";
     if (targets.length === 0) {
         return false;
     }
     let ret = creep.pos.findClosestByPath(targets);
+    mess += "return : " + ret + "\n";
     return ret;
 }
 

@@ -24,6 +24,7 @@ module.exports.loop = function() {
     try {
         // Assign all role
         info_perf.init(scriptName + "-work", false);
+        let nb_miner = 0;
         for (let name in Game.creeps) {
             let creep;
             try {
@@ -33,12 +34,16 @@ module.exports.loop = function() {
                     role_name = creep.name.match("[a-z]*")[0]
                     memoire.set("role", role_name, creep);
                 }
+                if(role_name === "miner"){
+                    nb_miner++;
+                }
                 require('role.' + role_name).run(creep);
                 info_perf.log(scriptName + "-work", role_name + " " + creep.memory.range);
             } catch (error) {
                 info_perf.simpleLog(scriptName + "-work", "[main] creep work : " + creep + ":" + error);
             }
         }
+        Memory["nb.miner"] = nb_miner;
         info_perf.log(scriptName, "creeps work");
     } catch (error) {
         info_perf.simpleLog(scriptName, "[main] creeps work : " + error);
@@ -58,6 +63,7 @@ module.exports.loop = function() {
         let containers = _.filter(structs, (structure) => structure.structureType == STRUCTURE_CONTAINER)
 
         Memory["nb.containers"] = containers.length;
+        Memory["nb.sources"] = sources.length;
 
         //Game.getObjectById
         //Memory["structures"] = structs;
