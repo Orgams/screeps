@@ -81,6 +81,19 @@ let bot = {
             return;
         }
 
+        if (memoire.get("range", creep) === undefined) {
+            memoire.set("range", "local", creep, 60 * 60);
+        }
+
+        // Aller dans ma salle si je suis local et que je ne suis pas dans ma salle
+        if (creep.memory.range === "local") {
+            if (creep.memory.home !== undefined && creep.room.name !== creep.memory.home) {
+                actionMove.do(creep, info_room.get_pos_center(creep.memory.home));
+                info_perf.log(scriptName, "Aller dans ma salle si je suis local et que je ne suis pas dans ma salle");
+                return true;
+            }
+        }
+
         // Calculer combien porte le creep
         let totalCarry = _.sum(creep.carry);
 
@@ -96,22 +109,12 @@ let bot = {
         }
         info_perf.log(scriptName, "Initialiser le mode récolte ou travail");
 
+
+
         // Récolter
         if (creep.memory.harvest) {
             if (actionHarvest.do(creep, sources)) {
                 info_perf.log(scriptName, "Récolter");
-                return true;
-            }
-        }
-        if (memoire.get("range", creep) === undefined) {
-            memoire.set("range", "local", creep, 60 * 60);
-        }
-
-        // Aller dans ma salle si je suis local et que je ne suis pas dans ma salle
-        if (creep.memory.range === "local") {
-            if (creep.memory.home !== undefined && creep.room.name !== creep.memory.home) {
-                actionMove.do(creep, info_room.get_pos_center(creep.memory.home));
-                info_perf.log(scriptName, "Aller dans ma salle si je suis local et que je ne suis pas dans ma salle");
                 return true;
             }
         }
