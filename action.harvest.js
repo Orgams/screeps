@@ -1,5 +1,6 @@
 let actionMove = require('action.move');
 let actionPickup = require('action.pickup');
+let action_pickup_close = require('action_pickup_close');
 let info_perf = require('info_perf');
 
 let mess;
@@ -11,6 +12,13 @@ let actionHarvest = {
         //let debug = creep.room.name === "W3N24";
         info_perf.init(scriptName, false, creep.room);
 
+
+        // Ramasser l'energy au sol s'il y en a
+        if(action_pickup_close.do(creep)){
+            info_perf.log(scriptName, "Ramasser l'energy au sol")
+            info_perf.finish(scriptName)
+            return true;
+        }
 
         let sources = srcs;
 
@@ -82,12 +90,14 @@ let findTarget = function(creep, source) {
                 return false;
             }
         });
+        mess += "STRUCTURE targets : " + targets + "\n";
     }
-    mess += "STRUCTURE targets : " + targets + "\n";
+    
     if ([FIND_DROPPED_RESOURCES].includes(source)) {
         targets = creep.room.find(FIND_DROPPED_RESOURCES);
+        mess += "DROPPED_RESOURCES targets : " + targets + "\n";
     }
-    mess += "DROPPED_RESOURCES targets : " + targets + "\n";
+    
     
 
     if ([FIND_SOURCES_ACTIVE].includes(source)) {
@@ -103,8 +113,8 @@ let findTarget = function(creep, source) {
         if (workerCanMine) {
             targets = creep.room.find(FIND_SOURCES_ACTIVE);
         }
+        mess += "SOURCES_ACTIVE targets : " + targets + "\n";
     }
-    mess += "SOURCES_ACTIVE targets : " + targets + "\n";
     if (targets.length === 0) {
         return false;
     }
