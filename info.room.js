@@ -14,11 +14,11 @@ let get_room = function() {
 }
 
 let get_my_room_keys = function() {
-	return get_names(get_my_room());
+	return get_rooms_names(get_my_room());
 }
 
 let get_room_keys = function() {
-	return get_names(get_room());
+	return get_rooms_names(get_room());
 }
 
 let get_nb_my_room = function() {
@@ -33,7 +33,7 @@ let get_pos_center = function(name) {
 	return new RoomPosition(24, 24, name);
 }
 
-let get_names = function(rooms) {
+let get_rooms_names = function(rooms) {
 	let names = []
 	for (let i in rooms){
 		let room = rooms[i];
