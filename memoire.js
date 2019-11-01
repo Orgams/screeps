@@ -65,6 +65,8 @@ let getRecur = function(obj, keyCur, keyParts) {
 }
 
 let setRecur = function(obj, keyCur, keyParts, valeur) {
+
+	// Appler setRecur s'il y a encore des sous object
 	if (keyParts.length > 0) {
 		if (obj[keyCur] === undefined) {
 			obj[keyCur] = {};
@@ -73,19 +75,21 @@ let setRecur = function(obj, keyCur, keyParts, valeur) {
 		keyCur = keyParts[0];
 		keyParts.shift(1);
 		setRecur(obj, keyCur, keyParts, valeur);
-	} else {
+	} 
+	// Mettre à jour la valeur si elle n'est pas lock
+	else {
 		if (obj[keyCur+"lock"] !== true){
 			obj[keyCur] = valeur;
 		}
 	}
 }
 
-let lock = function(key, target) {
-	set(key+"lock", true, target)
+let lock = function(key, target, ttl) {
+	set(key+"lock", true, target, ttl);
 }
 
 let unlock = function(key, target) {
-	set(key+"lock", false, target)
+	set(key+"lock", false, target);
 }
 
 module.exports = {
