@@ -1,9 +1,9 @@
-let actionMove = require('action.move');
+let actionMove = require('action_move');
 let info_perf = require('info_perf');
 
 let actionRepair = {
     do: function(creep){
-        let scriptName = "action.repair";
+        let scriptName = "action_repair";
         info_perf.init(scriptName, false);
         
         let targets = creep.room.find(FIND_STRUCTURES, {

@@ -1,4 +1,4 @@
-let actionMove = require('action.move');
+let actionMove = require('action_move');
 
 let findStruct = function(creep, strunctureType, taux_remplissage){
     //info_perf.simpleLog(scriptName, strunctureType + taux_remplissage)

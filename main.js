@@ -1,9 +1,9 @@
-let creepManage = require('creep.manage');
-let structManage = require('infrastructure.manage');
+let creep_manage = require('creep_manage');
+let infrastructure_manage = require('infrastructure_manage');
 let memoire = require('memoire');
 let info_perf = require('info_perf');
 let bot = require('bot');
-let info_room = require('info.room');
+let info_room = require('info_room');
 let tower_action = require('tower_action');
 
 module.exports.loop = function() {
@@ -37,7 +37,7 @@ module.exports.loop = function() {
                 if(role_name === "miner"){
                     nb_miner++;
                 }
-                require('role.' + role_name).run(creep);
+                require('role_' + role_name).run(creep);
                 info_perf.log(scriptName + "-work", role_name + " " + creep.memory.range);
             } catch (error) {
                 info_perf.simpleLog(scriptName + "-work", "[main] creep work : " + creep + ":" + error);
@@ -79,7 +79,7 @@ module.exports.loop = function() {
             let room = Game.rooms["W36N9"];
 
             memoire.set("nb.containers", _.filter(room.find(FIND_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER).length, room);
-            creepManage.manage_creep(room);
+            creep_manage.manage_creep(room);
 
             info_perf.log(scriptName, "creeps creation");
         }
@@ -91,7 +91,7 @@ module.exports.loop = function() {
         if (Game.time % 5 == 0) {
             
             for (let room of info_room.get_my_room()) {
-                structManage.manage(room);
+                infrastructure_manage.manage(room);
             }
             info_perf.log(scriptName, "structures");
         }

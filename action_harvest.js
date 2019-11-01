@@ -1,5 +1,5 @@
-let actionMove = require('action.move');
-let actionPickup = require('action.pickup');
+let actionMove = require('action_move');
+let actionPickup = require('action_pickup');
 let action_pickup_close = require('action_pickup_close');
 let info_perf = require('info_perf');
 

@@ -1,4 +1,4 @@
-let actionMove = require('action.move');
+let actionMove = require('action_move');
 
 let memoire = require('memoire');
 
@@ -9,7 +9,7 @@ let info_perf = require('info_perf');
 let action = {
 	do: function(creep){
 
-		let scriptName = "action.build";
+		let scriptName = "action_build";
 		let info_perf_state=false;//require('memoire').get("role", creep)==="builder";
 		info_perf.init(scriptName, info_perf_state);
 

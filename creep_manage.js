@@ -1,6 +1,6 @@
-let creepCreate = require('creep.create');
+let creep_create = require('creep_create');
 
-let info_room = require('info.room');
+let info_room = require('info_room');
 let info_perf = require('info_perf');
 
 const fullWork = [WORK, WORK, MOVE, WORK, WORK, WORK, MOVE, WORK];
@@ -10,7 +10,7 @@ const small = [CARRY, WORK, MOVE]
 const claim = [CLAIM, MOVE]
 
 let fonc_manage_creep = function(room) {
-    let scriptName = "creep.manage";
+    let scriptName = "creep_manage";
     info_perf.init(scriptName, false);
     let creeps = Object.values(Game.creeps);
 
@@ -112,7 +112,7 @@ let fonc_manage_creep = function(room) {
             let config = configs[indexConfig];
             if (!config.minOk()) {
                 info_perf.logWithoutTimer(scriptName, config.role + " : le minimum n'est pas respecter : " + config.nb + " / " + config.min)
-                return creepCreate.try_create_creep(config);
+                return creep_create.try_create_creep(config);
             }
         }
     }
@@ -137,7 +137,7 @@ let fonc_manage_creep = function(room) {
         info_perf.logWithoutTimer(scriptName, config.role + " maxOk " + config.maxOk() + " ratioOk " + config.ratioOk() + " config.ratio " + config.ratio + " config.actualRatio " + config.actualRatio)
         if (config.maxOk() && config.ratioOk()) {
             info_perf.logWithoutTimer(scriptName, config.role + " : le maximum et le ratio ne sont pas atteint (" + config.nb + "/" + config.max + " et " + config.printableActualRatio() + "/" + config.printableRatio() + ")");
-            return creepCreate.try_create_creep(config);
+            return creep_create.try_create_creep(config);
         }
     }
     info_perf.log(scriptName, "Create creep by opti");

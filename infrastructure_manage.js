@@ -4,7 +4,7 @@ let memoire = require('memoire');
 let infrastructure = {
     manage: function(room) {
 
-        let scriptName = "infrastructure.manage";
+        let scriptName = "infrastructure_manage";
         let debug = room.name === "W3N24";
         info_perf.init(scriptName, false, room);
 

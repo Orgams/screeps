@@ -1,13 +1,13 @@
 let bot = require('bot');
 
-let actionMove = require('action.move');
+let actionMove = require('action_move');
 
 let info_perf = require('info_perf');
 
 let role = {
 	run: function(creep) {
 
-		let scriptName = "role.claimer";
+		let scriptName = "role_claimer";
 		info_perf.init(scriptName, false);
 
 		// Aller vers le flag qui porte le nom du role du creep s'il y en a un

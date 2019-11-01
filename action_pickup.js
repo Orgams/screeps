@@ -1,4 +1,4 @@
-let actionMove = require('action.move');
+let actionMove = require('action_move');
 
 let action = {
     do: function(creep){

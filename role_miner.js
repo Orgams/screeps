@@ -1,6 +1,6 @@
-let actionHarvest = require('action.harvest');
-let actionMove = require('action.move');
-let actionMine = require('action.mine')
+let actionHarvest = require('action_harvest');
+let actionMove = require('action_move');
+let actionMine = require('action_mine')
 let memoire = require('memoire');
 
 function find_free_container (structure) {

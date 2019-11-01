@@ -1,12 +1,14 @@
 let info_perf = require('info_perf');
 
 let info_creep = require('info_creep');
-let info_room = require('info.room');
+let info_room = require('info_room');
 
 let costBody = 0;
 let body = [];
 let spawn;
 let energyAvailable
+
+let scriptName = "creep_create";
 
 let add_part = function(part) {
     let cost_part = BODYPART_COST[part];
@@ -20,7 +22,7 @@ let add_part = function(part) {
 
 let try_create_creep = function(config) {
 
-    let scriptName = "creep.create";
+
     info_perf.init(scriptName, false);
 
     let homes = [];
@@ -76,9 +78,6 @@ let try_create_creep = function(config) {
 }
 
 let create_creep = function(config, spawn) {
-
-    let scriptName = "creep.create";
-    info_perf.init(scriptName, false);
 
     if (spawn == undefined) return;
     if (config.strict == undefined) config.strict = false;
@@ -139,6 +138,5 @@ let create_creep = function(config, spawn) {
 }
 
 module.exports = {
-    create_creep: create_creep,
     try_create_creep: try_create_creep
 };

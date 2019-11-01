@@ -1,6 +1,6 @@
 let infrastructure_create = require('infrastructure_create');
 let infrastructure_get = require('infrastructure_get');
-let info_room = require('info.room');
+let info_room = require('info_room');
 
 
 let build = function(room, sources) {

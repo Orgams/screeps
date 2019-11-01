@@ -4,7 +4,7 @@ let info_perf = require('info_perf');
 
 let role = {
     run: function(creep) {
-    	let scriptName = "role.builder";
+    	let scriptName = "role_builder";
 		info_perf.init(scriptName, false);
 
 		let actions = ['build', 'repair','transfer', 'storager']

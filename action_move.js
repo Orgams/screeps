@@ -10,7 +10,7 @@ let action = {
     do: function(creep, target){
 
         // Initialiser info perf
-        scriptName="action.move";
+        scriptName="action_move";
         let info_perf_state=false; //require('memoire').get("role", creep)==="builder";
         info_perf.init(scriptName, info_perf_state);
 

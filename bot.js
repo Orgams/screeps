@@ -1,8 +1,8 @@
-let actionHarvest = require('action.harvest');
+let actionHarvest = require('action_harvest');
 
-let actionMove = require('action.move');
+let actionMove = require('action_move');
 
-let info_room = require('info.room');
+let info_room = require('info_room');
 
 let info_perf = require('info_perf');
 
@@ -122,7 +122,7 @@ let bot = {
         // Effrectuer mes actions
         if (!creep.memory.harvest) {
             for (let action of actions) {
-                if (require('action.' + action).do(creep)) {
+                if (require('action_' + action).do(creep)) {
                     info_perf.log(scriptName, "Creep "+ creep.name +" effrectue action " + action);
                     return true;
                 }
