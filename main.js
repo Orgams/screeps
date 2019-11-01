@@ -1,10 +1,18 @@
 let creep_manage = require('creep_manage');
+
 let infrastructure_manage = require('infrastructure_manage');
+
 let memoire = require('memoire');
+
 let info_perf = require('info_perf');
+
 let bot = require('bot');
+
 let info_room = require('info_room');
+
 let tower_action = require('tower_action');
+
+let info_struct = require('info_struct');
 
 module.exports.loop = function() {
 
@@ -12,7 +20,7 @@ module.exports.loop = function() {
     info_perf.init(scriptName, false);
 
     try {
-        let towers = _.filter(Game.structures, s => s.structureType == STRUCTURE_TOWER);
+        let towers = info_struct.get_towers();
         for (let tower of towers) {
             tower_action.run(tower)
         }
