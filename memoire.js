@@ -1,23 +1,3 @@
-let info_perf = require('info_perf');
-
-let scriptName = "memoire"
-
-let lock = function(key, target) {
-	set(key+"lock", true, target)
-}
-
-let unlock = function(key, target) {
-	set(key+"lock", false, target)
-}
-
-let getTarget = function(target){
-	if (target === undefined) {
-		return Memory;
-	} else {
-		return target.memory;
-	}
-}
-
 let set = function(key, valeur, target, ttl) {
 	let keyParts = key.split(".");
 	let keyCur = keyParts[0];
@@ -51,28 +31,40 @@ let get = function(key, target) {
 	return getRecur(obj, keyCur, keyParts);
 }
 
+let getTarget = function(target){
+	if (target === undefined) {
+		return Memory;
+	} else {
+		return target.memory;
+	}
+}
 
 let getRecur = function(obj, keyCur, keyParts) {
+
+	// Vérifier les parametres
 	if (obj === undefined) {
 		return undefined;
 	}
+
+	// Appler getRecur s'il y a encore des sous object
 	if (keyParts.length > 0) {
 		obj = obj[keyCur];
 		keyCur = keyParts[0];
 		keyParts.shift(1);
 		return getRecur(obj, keyCur, keyParts);
-	} else {
-		if (obj[keyCur + "ttl"] !== undefined && obj[keyCur + "ttl"] < Game.time) {
-			//info_perf.simpleLog(scriptName, "data out to date");
-			return undefined
-		}
-		return obj[keyCur];
 	}
+
+	// Retourner undefined s'il y a un ttl et qu'il est dépassé
+	if (obj[keyCur + "ttl"] !== undefined && obj[keyCur + "ttl"] < Game.time) {
+		return undefined
+	}
+
+	// Retourner la valeur
+	return obj[keyCur];
+	
 }
 
 let setRecur = function(obj, keyCur, keyParts, valeur) {
-	// info_perf.simpleLog(scriptName, "----");
-	// info_perf.simpleLog(scriptName, obj, keyCur, keyParts, valeur);
 	if (keyParts.length > 0) {
 		if (obj[keyCur] === undefined) {
 			obj[keyCur] = {};
@@ -86,6 +78,14 @@ let setRecur = function(obj, keyCur, keyParts, valeur) {
 			obj[keyCur] = valeur;
 		}
 	}
+}
+
+let lock = function(key, target) {
+	set(key+"lock", true, target)
+}
+
+let unlock = function(key, target) {
+	set(key+"lock", false, target)
 }
 
 module.exports = {

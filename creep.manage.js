@@ -6,7 +6,7 @@ let info_perf = require('info_perf');
 const fullWork = [WORK, WORK, MOVE, WORK, WORK, WORK, MOVE, WORK];
 const carryWork = [CARRY, WORK, MOVE, CARRY, MOVE, WORK, MOVE, MOVE];
 const oneWorkTreeCarry = [WORK, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE];
-const small = [WORK, CARRY, MOVE]
+const small = [CARRY, WORK, MOVE]
 const claim = [CLAIM, MOVE]
 
 let fonc_manage_creep = function(room) {
