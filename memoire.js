@@ -7,7 +7,9 @@ let set = function(key, valeur, target, ttl) {
 	let obj = getTarget(target);
 
 	// Appel récursif pour creer les objet et mettre la valeur àla fin
-	setRecur(obj, keyCur, keyParts, valeur);
+	if(!setRecur(obj, keyCur, keyParts, valeur)){
+		return false
+	}
 
 	// Ajouter une valeur ttl si demandé
 	if (ttl !== undefined) {
@@ -15,8 +17,9 @@ let set = function(key, valeur, target, ttl) {
 		let keyCur = keyParts[0];
 		keyParts.shift(1);
 
-		setRecur(obj, keyCur, keyParts, Game.time + ttl);
+		return setRecur(obj, keyCur, keyParts, Game.time + ttl);
 	}
+	return true;
 }
 
 let get = function(key, target) {
@@ -74,13 +77,15 @@ let setRecur = function(obj, keyCur, keyParts, valeur) {
 		obj = obj[keyCur];
 		keyCur = keyParts[0];
 		keyParts.shift(1);
-		setRecur(obj, keyCur, keyParts, valeur);
+		return setRecur(obj, keyCur, keyParts, valeur);
 	} 
 	// Mettre à jour la valeur si elle n'est pas lock
 	else {
 		if (obj[keyCur+"lock"] !== true){
 			obj[keyCur] = valeur;
+			return true;
 		}
+		return false;
 	}
 }
 
