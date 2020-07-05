@@ -15,14 +15,15 @@ let fonc_manage_creep = function() {
     let creeps = Object.values(Game.creeps);
 
     let configs = [];
-    //                       role,        priority, min, popOpti, max, model,             color,     range,  strict
-    configs.push(new Config('transferer', 1,        1,   1,       1,   oneWorkTreeCarry, "#00ff00", "local", false));
-    configs.push(new Config('janitor'   , 2,        0,   0,       0,   oneWorkTreeCarry, "#00ffff", "local", false));
-    configs.push(new Config('miner'     , 3,        0,   0,       0,   fullWork,         "#ff00ff", "autre", true));
-    configs.push(new Config('builder'   , 4,        1,   1,       1,   carryWork,        "#ff0000", "local", false));
-    configs.push(new Config('upgrader'  , 5,        1,   2,       2,   oneWorkTreeCarry, "#0000ff", "local", false));
-    configs.push(new Config('repairer'  , 6,        0,   0,       1,   oneWorkTreeCarry, "#ff9900", "local", false));
-    configs.push(new Config('claimer'   , 7,        0,   0,       0,   claim,            "#ffff00", "autre", true));
+
+    configs.push(get_config_transferer(level));
+    configs.push(get_config_janitor(level));
+    configs.push(get_config_miner(level));
+    configs.push(get_config_builder(level));
+    configs.push(get_config_upgrader(level));
+    configs.push(get_config_repairer(level));
+    configs.push(get_config_claimer(level));
+
     info_perf.log(scriptName, "Init configs");
 
     // Supprimer les configuration dont le role a déjàun creep en création
@@ -143,7 +144,35 @@ let fonc_manage_creep = function() {
     info_perf.log(scriptName, "Create creep by opti");
 
     info_perf.finish(scriptName);
+}
 
+function get_config_transferer(level){
+    //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
+    return new Config('transferer', 1,        1,   1,       1,   oneWorkTreeCarry, "#00ff00", "local", false);
+}
+function get_config_janitor(level){
+    //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
+    return new Config('janitor'   , 2,        0,   0,       0,   oneWorkTreeCarry, "#00ffff", "local", false);
+}
+function get_config_miner(level){
+    //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
+    return new Config('miner'     , 3,        0,   0,       0,   fullWork,         "#ff00ff", "autre", true);
+}
+function get_config_builder(level){
+    //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
+    return new Config('builder'   , 4,        1,   1,       1,   carryWork,        "#ff0000", "local", false);
+}
+function get_config_upgrader(level){
+    //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
+    return new Config('upgrader'  , 5,        1,   2,       2,   oneWorkTreeCarry, "#0000ff", "local", false);
+}
+function get_config_repairer(level){
+    //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
+    return new Config('repairer'  , 6,        0,   0,       1,   oneWorkTreeCarry, "#ff9900", "local", false);
+}
+function get_config_claimer(level){
+    //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
+    return new Config('claimer'   , 7,        0,   0,       0,   claim,            "#ffff00", "autre", true);
 }
 
 function Config(role, priority, min, popOpti, max, model, color, range, strict) {
