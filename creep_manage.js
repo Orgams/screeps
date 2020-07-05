@@ -9,13 +9,15 @@ const oneWorkTreeCarry = [WORK, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE];
 const small = [CARRY, WORK, MOVE]
 const claim = [CLAIM, MOVE]
 
-let fonc_manage_creep = function() {
+let fonc_manage_creep = function(room) {
     let scriptName = "creep_manage";
     info_perf.init(scriptName, false);
+
     let creeps = Object.values(Game.creeps);
 
-    let configs = [];
+    let level = room.controller.level;
 
+    let configs = [];
     configs.push(get_config_transferer(level));
     configs.push(get_config_janitor(level));
     configs.push(get_config_miner(level));
@@ -33,7 +35,6 @@ let fonc_manage_creep = function() {
             let roleCur = spawn.spawning.name.replace(/[0-9]/g, '');
             creepCreating.add(roleCur);
         }
-
     }
     configs = configs.filter((config) => !creepCreating.has(config.role));
 
@@ -52,17 +53,7 @@ let fonc_manage_creep = function() {
     let allMinOk = true;
     info_perf.log(scriptName, "Init vars");
 
-    // Initialiser le minimum du minier au nombre de conteneur de la salle
-    let nbMiners = Memory["nb.containers"];
-    let configMineur = configs.find((config) => config.role == 'miner');
-    if (configMineur !== undefined) {
-        configMineur.min = nbMiners;
-        configMineur.max = nbMiners;
-        configMineur.popOpti = nbMiners;
-    }
-    info_perf.log(scriptName, "Init miner");
-
-    /// Inisialiser les données de configs spécifique àcette salle
+    /// Inisialiser les données de configs spécifique à cette salle
     // Initialiser config.nb : le nombre actuel de creep de ce type
     for (let indexConfig in configs) {
         let config = configs[indexConfig];
@@ -72,14 +63,7 @@ let fonc_manage_creep = function() {
     }
     info_perf.log(scriptName, "Initialiser config.nb : le nombre actuel de creep de ce type");
 
-    // Initialiser la configuration du claimer
-    if (Game.gcl.level > info_room.get_nb_my_room()) {
-        let configClaimer = configs.find((config) => config.role == 'claimer');
-        configClaimer.max = 1;
-        info_perf.log(scriptName, "Initialiser la configuration du claimer", configClaimer);
-    }
-
-    // Eliminer les configuration qui sont arriver àleur max de population
+    // Eliminer les configuration qui sont arriver à leur max de population
     configs = configs.filter((config) => config.maxOk());
     info_perf.log(scriptName, "Delete conf in max");
 
@@ -155,8 +139,12 @@ function get_config_janitor(level){
     return new Config('janitor'   , 2,        0,   0,       0,   oneWorkTreeCarry, "#00ffff", "local", false);
 }
 function get_config_miner(level){
-    //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
-    return new Config('miner'     , 3,        0,   0,       0,   fullWork,         "#ff00ff", "autre", true);
+
+    // Initialiser le minimum du minier au nombre de conteneur global
+    let nbMiners = Memory["nb.containers"];
+
+    //                 role,    priority, min,      popOpti,  max,      model,     color,     range,  strict
+    return new Config('miner' , 3,        nbMiners, nbMiners, nbMiners, fullWork, "#ff00ff", "autre", true);
 }
 function get_config_builder(level){
     //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
@@ -171,8 +159,15 @@ function get_config_repairer(level){
     return new Config('repairer'  , 6,        0,   0,       1,   oneWorkTreeCarry, "#ff9900", "local", false);
 }
 function get_config_claimer(level){
+
+    // Initialiser la configuration du claimer
+    max = 0;
+    if (Game.gcl.level > info_room.get_nb_my_room()) {
+        max = 1;
+    }
+
     //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
-    return new Config('claimer'   , 7,        0,   0,       0,   claim,            "#ffff00", "autre", true);
+    return new Config('claimer'   , 7,        0,   0,       max, claim,            "#ffff00", "autre", true);
 }
 
 function Config(role, priority, min, popOpti, max, model, color, range, strict) {

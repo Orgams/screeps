@@ -84,7 +84,9 @@ module.exports.loop = function() {
         // Create necessary creeps for all rooms
         if (Game.time % 10 == 0) {
 
-            creep_manage.manage_creep();
+            for (room of Object.values(Game.rooms)) {
+                creep_manage.manage_creep(room);
+            }
 
             info_perf.log(scriptName, "creeps creation");
         }
