@@ -9,7 +9,7 @@ const oneWorkTreeCarry = [WORK, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE];
 const small = [CARRY, WORK, MOVE]
 const claim = [CLAIM, MOVE]
 
-let fonc_manage_creep = function(room) {
+let fonc_manage_creep = function() {
     let scriptName = "creep_manage";
     info_perf.init(scriptName, false);
     let creeps = Object.values(Game.creeps);
@@ -89,7 +89,7 @@ let fonc_manage_creep = function(room) {
     }
     info_perf.log(scriptName, "Init totalRestePopOpti");
 
-    // Initialiser 
+    // Initialiser
     //    config.ratio : le ratio optimal des creep de ce type par rapport au total des population optimal qui ne sont pas àleur max
     //    totalCreeps : le total des creeps de type qui ne sont pas àleur max
     for (let indexConfig in configs) {

@@ -84,9 +84,6 @@ module.exports.loop = function() {
         // Create necessary creeps for all rooms
         if (Game.time % 10 == 0) {
 
-            let room = Game.rooms["W36N9"];
-
-            memoire.set("nb.containers", _.filter(room.find(FIND_STRUCTURES), (structure) => structure.structureType == STRUCTURE_CONTAINER).length, room);
             creep_manage.manage_creep(room);
 
             info_perf.log(scriptName, "creeps creation");
