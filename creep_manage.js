@@ -6,8 +6,10 @@ let info_perf = require('info_perf');
 const fullWork = [WORK, WORK, MOVE, WORK, WORK, WORK, MOVE, WORK];
 const carryWork = [CARRY, WORK, MOVE, CARRY, MOVE, WORK, MOVE, MOVE];
 const oneWorkTreeCarry = [WORK, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE];
-const small = [CARRY, WORK, MOVE]
-const claim = [CLAIM, MOVE]
+const small = [CARRY, WORK, MOVE];
+const claim = [CLAIM, MOVE];
+
+let energy;
 
 let fonc_manage_creep = function(room) {
     let scriptName = "creep_manage";
@@ -17,6 +19,8 @@ let fonc_manage_creep = function(room) {
 
     let level = room.controller.level;
 
+    energy = room.energyAvailable
+
     let configs = [];
     configs.push(get_config_transferer(level));
     configs.push(get_config_janitor(level));
@@ -24,11 +28,11 @@ let fonc_manage_creep = function(room) {
     configs.push(get_config_builder(level));
     configs.push(get_config_upgrader(level));
     configs.push(get_config_repairer(level));
-    configs.push(get_config_claimer(level));
+    //configs.push(get_config_claimer(level));
 
     info_perf.log(scriptName, "Init configs");
 
-    // Supprimer les configuration dont le role a déjàun creep en création
+    // Supprimer les configuration dont le role a déjà un creep en création
     let creepCreating = new Set();
     for (spawn of Object.values(Game.spawns)) {
         if (spawn.spawning !== null) {
@@ -143,8 +147,13 @@ function get_config_miner(level){
     // Initialiser le minimum du minier au nombre de conteneur global
     let nbMiners = Memory["nb.containers"];
 
+    let strict = true;
+    if (energy < 800){
+        strict = false;
+    }
+
     //                 role,    priority, min,      popOpti,  max,      model,     color,     range,  strict
-    return new Config('miner' , 3,        nbMiners, nbMiners, nbMiners, fullWork, "#ff00ff", "autre", true);
+    return new Config('miner' , 3,        nbMiners, nbMiners, nbMiners, fullWork, "#ff00ff", "autre", strict);
 }
 function get_config_builder(level){
     //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
