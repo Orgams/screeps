@@ -42,6 +42,14 @@ let get_rooms_names = function(rooms) {
 	return names;
 }
 
+let get_struct_not_full_energy = function(room, strunctureType, taux_remplissage){
+    //info_perf.simpleLog(scriptName, strunctureType + taux_remplissage)
+
+    return room.find(FIND_MY_STRUCTURES, {
+        filter: (structure) =>  strunctureType.includes(structure.structureType) && structure.energy < structure.energyCapacity*(taux_remplissage|1)
+    });
+}
+
 module.exports = {
 	get_room: get_room,
 	get_room_keys: get_room_keys,
@@ -49,5 +57,6 @@ module.exports = {
 	get_my_room: get_my_room,
 	get_my_room_keys: get_my_room_keys,
 	get_nb_my_room: get_nb_my_room,
-	get_pos_center: get_pos_center
+	get_pos_center: get_pos_center,
+	get_struct_not_full_energy: get_struct_not_full_energy
 }
