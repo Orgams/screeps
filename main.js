@@ -68,6 +68,15 @@ module.exports.loop = function() {
 
             roomSources = room.find(FIND_SOURCES_ACTIVE);
             sources = sources.concat(roomSources);
+
+            // collecter la capaciter des extantions dans la salle
+            room_extention = room.find(FIND_MY_STRUCTURES, {filter: (structure) => structure.structureType == STRUCTURE_EXTENSION});
+            memoire.set("nb.extention", room_extention.length, room);
+            extentionCapacity=0;
+            for (extention of room_extention) {
+                extentionCapacity += extention.storeCapacity;
+            }
+            memoire.set("extentionCapacity", extentionCapacity, room);
         }
         let containers = _.filter(structs, (structure) => structure.structureType == STRUCTURE_CONTAINER)
 
