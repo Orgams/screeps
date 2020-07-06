@@ -58,36 +58,40 @@ module.exports.loop = function() {
     }
 
     // Initialiser la mémoire
-    if (Game.time % 60 == 0) {
-        let structs = [];
-        let sources = [];
-        for (room of Object.values(Game.rooms)) {
+    try{
+        if (Game.time % 60 == 0) {
+            let structs = [];
+            let sources = [];
+            for (room of Object.values(Game.rooms)) {
 
-            roomStruct = room.find(FIND_STRUCTURES);
-            structs = structs.concat(roomStruct);
+                roomStruct = room.find(FIND_STRUCTURES);
+                structs = structs.concat(roomStruct);
 
-            roomSources = room.find(FIND_SOURCES_ACTIVE);
-            sources = sources.concat(roomSources);
+                roomSources = room.find(FIND_SOURCES_ACTIVE);
+                sources = sources.concat(roomSources);
 
-            // collecter la capaciter des extantions dans la salle
-            room_extention = room.find(FIND_MY_STRUCTURES, {filter: (structure) => structure.structureType == STRUCTURE_EXTENSION});
-            memoire.set("nb.extention", room_extention.length, room);
-            extentionCapacity=0;
-            for (extention of room_extention) {
-                extentionCapacity += extention.storeCapacity;
+                // collecter la capaciter des extantions dans la salle
+                room_extention = room.find(FIND_MY_STRUCTURES, {filter: (structure) => structure.structureType == STRUCTURE_EXTENSION});
+                memoire.set("nb.extention", room_extention.length, room);
+                extentionCapacity=0;
+                for (extention of room_extention) {
+                    extentionCapacity += extention.storeCapacity;
+                }
+                memoire.set("extentionCapacity", extentionCapacity, room);
             }
-            memoire.set("extentionCapacity", extentionCapacity, room);
+            let containers = _.filter(structs, (structure) => structure.structureType == STRUCTURE_CONTAINER)
+
+            Memory["nb.containers"] = containers.length;
+            Memory["nb.sources"] = sources.length;
+
+            //Game.getObjectById
+            //Memory["structures"] = structs;
+            Memory["containers"] = containers;
+            Memory["sources"] = sources;
+            info_perf.log(scriptName, "Initialiser la mémoire");
         }
-        let containers = _.filter(structs, (structure) => structure.structureType == STRUCTURE_CONTAINER)
-
-        Memory["nb.containers"] = containers.length;
-        Memory["nb.sources"] = sources.length;
-
-        //Game.getObjectById
-        //Memory["structures"] = structs;
-        Memory["containers"] = containers;
-        Memory["sources"] = sources;
-        info_perf.log(scriptName, "Initialiser la mémoire");
+    } catch (error) {
+        info_perf.simpleLog(scriptName, "init memory : " + error);
     }
 
     try {
