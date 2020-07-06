@@ -62,6 +62,7 @@ module.exports.loop = function() {
         let structs = [];
         let sources = [];
         for (room of Object.values(Game.rooms)) {
+
             roomStruct = room.find(FIND_STRUCTURES);
             structs = structs.concat(roomStruct);
 

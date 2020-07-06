@@ -7,7 +7,7 @@ let mess;
 
 let actionHarvest = {
     do: function(creep, srcs) {
-        
+
         let scriptName = "action_harvest " + creep;
         //let debug = creep.room.name === "W3N24";
         info_perf.init(scriptName, false, creep.room);
@@ -92,13 +92,20 @@ let findTarget = function(creep, source) {
         });
         mess += "STRUCTURE targets : " + targets + "\n";
     }
-    
+
     if ([FIND_DROPPED_RESOURCES].includes(source)) {
-        targets = creep.room.find(FIND_DROPPED_RESOURCES);
+        targets = creep.room.find(FIND_DROPPED_RESOURCES, {
+            filter: (structure) => {
+                if (structure.store[RESOURCE_ENERGY] > 10) {
+                    return true;
+                }
+                return false;
+            }
+        });
         mess += "DROPPED_RESOURCES targets : " + targets + "\n";
     }
-    
-    
+
+
 
     if ([FIND_SOURCES_ACTIVE].includes(source)) {
 
