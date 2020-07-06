@@ -47,7 +47,7 @@ let actionHarvest = {
             info_perf.log(scriptName, "Impossible de récolter pour " + source);
         }
         mess += "Je ne peux pas récolter";
-        console.log(creep, "\n"+mess)
+        info_perf.log(creep, "\n"+mess)
         info_perf.finish(scriptName);
         return false;
 
