@@ -131,7 +131,7 @@ let bot = {
 
         // Dire attendre
         creep.say('Wait');
-        //actionMove.do(creep, Game.flags['Wait']);
+        actionMove.do(creep, Game.flags['Wait']);
         info_perf.log(scriptName, "Aller attendre");
         return false;
     }
