@@ -136,7 +136,7 @@ let fonc_manage_creep = function(room) {
 
 function get_config_transferer(level){
     //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
-    return new Config('transferer', 1,        1,   1,       3,   oneWorkTreeCarry, "#00ff00", "local", false);
+    return new Config('transferer', 1,        1,   1,       2,   oneWorkTreeCarry, "#00ff00", "local", false);
 }
 function get_config_janitor(level){
     //                 role,        priority, min, popOpti, max, model,             color,     range,  strict
