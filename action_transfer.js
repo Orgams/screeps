@@ -1,30 +1,32 @@
 let actionMove = require('action_move');
 
-let findStruct = function(creep, strunctureType, taux_remplissage){
+let findStruct = function(room, strunctureType, taux_remplissage){
     //info_perf.simpleLog(scriptName, strunctureType + taux_remplissage)
 
-    return creep.room.find(FIND_MY_STRUCTURES, {
+    return room.find(FIND_MY_STRUCTURES, {
         filter: (structure) =>  strunctureType.includes(structure.structureType) && structure.energy < structure.energyCapacity*(taux_remplissage|1)
     });
 }
 
 let do_out = function(creep){
-    
-    let hostileCreeps = creep.room.find(FIND_HOSTILE_CREEPS);
+
+    room = creep.room;
+
+    let hostileCreeps = room.find(FIND_HOSTILE_CREEPS);
     let targets = [];
 
     //Remplir d'énergie les tours s'il y a des enemies
-    if(hostileCreeps.length > 0) targets = findStruct(creep, [STRUCTURE_TOWER]);
-    
+    if(hostileCreeps.length > 0) targets = findStruct(room, [STRUCTURE_TOWER]);
+
     //Remplir d'énergie les structure
-    if(targets.length === 0) targets = findStruct(creep, [STRUCTURE_SPAWN, STRUCTURE_EXTENSION]);
-    
+    if(targets.length === 0) targets = findStruct(room, [STRUCTURE_SPAWN, STRUCTURE_EXTENSION]);
+
     //Remplir d'énergie les tours s'il n'y a rien d'autre àfaire
-    if(targets.length === 0) targets = findStruct(creep, [STRUCTURE_TOWER]);
-    
+    if(targets.length === 0) targets = findStruct(room, [STRUCTURE_TOWER]);
+
     let target = creep.pos.findClosestByRange(targets);
     if(target){
-        
+
         if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             actionMove.do(creep, target);
         }
