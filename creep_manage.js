@@ -28,7 +28,7 @@ let fonc_manage_creep = function(room) {
     configs.push(get_config_builder(level));
     configs.push(get_config_upgrader(level));
     configs.push(get_config_repairer(level));
-    //configs.push(get_config_claimer(level));
+    configs.push(get_config_claimer(level));
 
     info_perf.log(scriptName, "Init configs");
 
