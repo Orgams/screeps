@@ -17,8 +17,8 @@ let role = {
 			return;
 		}
 
-		if( Game.flags["room_to_claime"]){
-
+		if(Game.flags["room_to_claim"]){
+			actionMove.do(creep, Game.flags["room_to_claim"]);
 		} else {
 			// Dire attendre
 			creep.say('Wait');
