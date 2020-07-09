@@ -23,7 +23,25 @@ let role = {
 			same_room = flag_claim.room === creep.room;
 			info_perf.log(scriptName, "same_room : " + same_room + " (" + typeof same_room + ") ");
 			if (same_room){
+				let ret = creep.attackController(creep.room.controller)
+				info_perf.log(scriptName, "J'attaque le controlleur : "+ret);
 
+				if (ret == ERR_NOT_IN_RANGE) {
+					actionMove.do(creep, creep.room.controller);
+					info_perf.log(scriptName, "Je n'ai pas à porté, je m'approche");
+				}
+				ret = creep.claimController(creep.room.controller);
+				info_perf.log(scriptName, "Je réclame le controlleur : "+ret);
+				if (ret == ERR_NOT_IN_RANGE) {
+					creep.moveTo(creep.room.controller);
+					info_perf.log(scriptName, "Je n'ai pas à porté, je m'approche");
+				}
+				ret = creep.reserveController(creep.room.controller);
+				info_perf.log(scriptName, "Je réserve le controlleur : "+ret);
+				if (ret == ERR_NOT_IN_RANGE) {
+					creep.moveTo(creep.room.controller);
+					info_perf.log(scriptName, "Je n'ai pas à porté, je m'approche");
+				}
 			}else{
 				actionMove.do(creep, flag_claim);
 			}
@@ -62,25 +80,7 @@ let role = {
 		// 	info_perf.log(scriptName, "Je ne suis pas dans une salle à moi");
 		// 	if (creep.room.controller) {
 
-		// 		let ret = creep.attackController(creep.room.controller)
-		// 		info_perf.log(scriptName, "J'attaque le controlleur : "+ret);
 
-		// 		if (ret == ERR_NOT_IN_RANGE) {
-		// 			actionMove.do(creep, creep.room.controller);
-		// 			info_perf.log(scriptName, "je n'ai pas à porté, je m'approche");
-		// 		}
-		// 		ret = creep.claimController(creep.room.controller);
-		// 		info_perf.log(scriptName, "Je réclame le controlleur : "+ret);
-		// 		if (ret == ERR_NOT_IN_RANGE) {
-		// 			creep.moveTo(creep.room.controller);
-		// 			info_perf.log(scriptName, "je n'ai pas à porté, je m'approche");
-		// 		}
-		// 		ret = creep.reserveController(creep.room.controller);
-		// 		info_perf.log(scriptName, "Je réserve le controlleur : "+ret);
-		// 		if (ret == ERR_NOT_IN_RANGE) {
-		// 			creep.moveTo(creep.room.controller);
-		// 			info_perf.log(scriptName, "je n'ai pas à porté, je m'approche");
-		// 		}
 		// 	}
 		// }
 	}
