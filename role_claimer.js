@@ -17,7 +17,15 @@ let role = {
 			return;
 		}
 
-		info_perf.log(scriptName, Game.flags["room_to_claime"])
+		if( Game.flags["room_to_claime"]){
+
+		} else {
+			// Dire attendre
+			creep.say('Wait');
+			actionMove.do(creep, Game.flags['Wait']);
+			info_perf.log(scriptName, "Aller attendre");
+			return false;
+		}
 
 		// // Verifier si on peut controler plus de Salles
 		// if (creep.room.controller.my) {
