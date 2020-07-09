@@ -20,8 +20,13 @@ let role = {
 		let flag_claim = Game.flags["room_to_claim"]
 
 		if(flag_claim){
-			info_perf.log(scriptName, "flag_claim.room : " + flag_claim.room + " (" + typeof flag_claim.room + ") ");
-			actionMove.do(creep, flag_claim);
+			same_room = flag_claim.room === creep.room;
+			info_perf.log(scriptName, "same_room : " + same_room + " (" + typeof same_room + ") ");
+			if (same_room){
+
+			}else{
+				actionMove.do(creep, flag_claim);
+			}
 		} else {
 			// Dire attendre
 			// creep.say('Wait');
