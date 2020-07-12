@@ -1,5 +1,5 @@
 let action = {
-	do: function(creep, colorCreep){
+	do: function(creep){
 
 		let sources = creep.room.find(FIND_SOURCES_ACTIVE);
 		let source = creep.pos.findClosestByRange(sources);
