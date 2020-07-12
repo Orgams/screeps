@@ -64,7 +64,7 @@ let getRecur = function(obj, keyCur, keyParts) {
 
 	// Retourner la valeur
 	return obj[keyCur];
-	
+
 }
 
 let setRecur = function(obj, keyCur, keyParts, valeur) {
@@ -78,7 +78,7 @@ let setRecur = function(obj, keyCur, keyParts, valeur) {
 		keyCur = keyParts[0];
 		keyParts.shift(1);
 		return setRecur(obj, keyCur, keyParts, valeur);
-	} 
+	}
 	// Mettre à jour la valeur si elle n'est pas lock
 	else {
 		if (obj[keyCur+"lock"] !== true){

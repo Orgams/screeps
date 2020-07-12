@@ -11,132 +11,132 @@ let energyAvailable
 let scriptName = "creep_create";
 
 let add_part = function(part) {
-    let cost_part = BODYPART_COST[part];
-    if (costBody + cost_part <= energyAvailable && body.length < 50) {
-        body.push(part);
-        costBody += cost_part;
-        return true;
-    }
-    return false;
+	let cost_part = BODYPART_COST[part];
+	if (costBody + cost_part <= energyAvailable && body.length < 50) {
+		body.push(part);
+		costBody += cost_part;
+		return true;
+	}
+	return false;
 }
 
 let try_create_creep = function(config) {
 
 
-    info_perf.init(scriptName, false);
+	info_perf.init(scriptName, false);
 
-    let homes = [];
-    let home_spawns = [];
-    info_perf.log(scriptName, "Init variables");
+	let homes = [];
+	let home_spawns = [];
+	info_perf.log(scriptName, "Init variables");
 
-    if (config.range === "local") {
-        let creeps = info_creep.get(config.role);
-        let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
+	if (config.range === "local") {
+		let creeps = info_creep.get(config.role);
+		let creepsGroupByHome = _.groupBy(creeps, 'memory.home')
 
-        let myRoomKeys = info_room.get_my_room_keys();
+		let myRoomKeys = info_room.get_my_room_keys();
 
-        for (room_key of myRoomKeys) {
-            let creepsRoom = creepsGroupByHome[room_key];
-            let nbCreepsRoom;
-            if (creepsRoom !== undefined) {
-                nbCreepsRoom = creepsRoom.length;
-            } else {
-                nbCreepsRoom = 0;
-            }
-            let nb_max_creep_by_room = config.max / info_room.get_nb_my_room();
-            if (nbCreepsRoom < nb_max_creep_by_room) {
-                homes.push(room_key);
-            }
-        }
-        info_perf.log(scriptName, "Init liste home");
+		for (room_key of myRoomKeys) {
+			let creepsRoom = creepsGroupByHome[room_key];
+			let nbCreepsRoom;
+			if (creepsRoom !== undefined) {
+				nbCreepsRoom = creepsRoom.length;
+			} else {
+				nbCreepsRoom = 0;
+			}
+			let nb_max_creep_by_room = config.max / info_room.get_nb_my_room();
+			if (nbCreepsRoom < nb_max_creep_by_room) {
+				homes.push(room_key);
+			}
+		}
+		info_perf.log(scriptName, "Init liste home");
 
-        config.home = homes[0]
-        info_perf.log(scriptName, "Init home in config");
+		config.home = homes[0]
+		info_perf.log(scriptName, "Init home in config");
 
-        home_spawns = Game.rooms[config.home].find(FIND_STRUCTURES, {
-            filter: (structure) => structure.structureType == STRUCTURE_SPAWN
-        });
-        info_perf.log(scriptName, "Get home spawn");
-    }
-
-
-    let others_spawns = _.difference(Object.values(Game.spawns), home_spawns)
-    let spawns = home_spawns.concat(others_spawns);
-    info_perf.log(scriptName, "Get list spawn");
-
-    for (let spawn of spawns) {
-        let ret = create_creep(config, spawn);
-        if (ret === OK) {
-            return true;
-        }
-    }
+		home_spawns = Game.rooms[config.home].find(FIND_STRUCTURES, {
+			filter: (structure) => structure.structureType == STRUCTURE_SPAWN
+		});
+		info_perf.log(scriptName, "Get home spawn");
+	}
 
 
+	let others_spawns = _.difference(Object.values(Game.spawns), home_spawns)
+	let spawns = home_spawns.concat(others_spawns);
+	info_perf.log(scriptName, "Get list spawn");
 
-    info_perf.finish(scriptName);
-    return false;
+	for (let spawn of spawns) {
+		let ret = create_creep(config, spawn);
+		if (ret === OK) {
+			return true;
+		}
+	}
+
+
+
+	info_perf.finish(scriptName);
+	return false;
 }
 
 let create_creep = function(config, spawn) {
 
-    if (spawn == undefined) return;
-    if (config.strict == undefined) config.strict = false;
+	if (spawn == undefined) return;
+	if (config.strict == undefined) config.strict = false;
 
-    let ret = false;
+	let ret = false;
 
-    energyAvailable = spawn.room.energyAvailable;
-    costBody = 0;
-    body = [];
+	energyAvailable = spawn.room.energyAvailable;
+	costBody = 0;
+	body = [];
 
-    let okLaunchSpawn = false;
+	let okLaunchSpawn = false;
 
-    let message = config.role + ", home:" + config.home + "(" + spawn.room.name + ")";
+	let message = config.role + ", home:" + config.home + "(" + spawn.room.name + ")";
 
-    info_perf.log(scriptName, "Initialisation de variable");
+	info_perf.log(scriptName, "Initialisation de variable");
 
-    if (config.strict) {
-        config.model.forEach((module) => okLaunchSpawn = add_part(module))
-    } else {
-        let indexSpe = 0;
-        while (add_part(config.model[indexSpe])) {
-            indexSpe = (indexSpe + 1) % config.model.length;
-        }
-    }
-    info_perf.log(scriptName, "construction du body");
+	if (config.strict) {
+		config.model.forEach((module) => okLaunchSpawn = add_part(module))
+	} else {
+		let indexSpe = 0;
+		while (add_part(config.model[indexSpe])) {
+			indexSpe = (indexSpe + 1) % config.model.length;
+		}
+	}
+	info_perf.log(scriptName, "construction du body");
 
-    message += " (" + body.length + " parts) (" + costBody + "/" + energyAvailable + ")";
+	message += " (" + body.length + " parts) (" + costBody + "/" + energyAvailable + ")";
 
-    if (!config.strict) {
-        okLaunchSpawn = body.length >= 3
-        info_perf.log(scriptName, "vérification de la taille mini du body");
-    }
+	if (!config.strict) {
+		okLaunchSpawn = body.length >= 3
+		info_perf.log(scriptName, "vérification de la taille mini du body");
+	}
 
-    //message += "config.strict " + config.strict + " okLaunchSpawn " + okLaunchSpawn;
-    if (okLaunchSpawn) {
-        ret = spawn.spawnCreep(body, config.role + Game.time, {
-            memory: {
-                role: config.role,
-                color: config.color,
-                range: config.range,
-                home: config.home
-            }
-        });
-        message += " spaw du creep (ret=" + ret + ")"
-        info_perf.log(scriptName, "spaw du creep");
-    } else {
-        if (config.strict) {
-            message += " config.model non respecté (move," + config.model + ")";
-        } else {
-            message += " ressource insuffisante";
-        }
-        info_perf.log(scriptName, "message erreur");
-    }
+	//message += "config.strict " + config.strict + " okLaunchSpawn " + okLaunchSpawn;
+	if (okLaunchSpawn) {
+		ret = spawn.spawnCreep(body, config.role + Game.time, {
+			memory: {
+				role: config.role,
+				color: config.color,
+				range: config.range,
+				home: config.home
+			}
+		});
+		message += " spaw du creep (ret=" + ret + ")"
+		info_perf.log(scriptName, "spaw du creep");
+	} else {
+		if (config.strict) {
+			message += " config.model non respecté (move," + config.model + ")";
+		} else {
+			message += " ressource insuffisante";
+		}
+		info_perf.log(scriptName, "message erreur");
+	}
 
-    info_perf.simpleLog(scriptName, message);
-    info_perf.finish(scriptName);
-    return ret;
+	info_perf.simpleLog(scriptName, message);
+	info_perf.finish(scriptName);
+	return ret;
 }
 
 module.exports = {
-    try_create_creep: try_create_creep
+	try_create_creep: try_create_creep
 };

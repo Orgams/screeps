@@ -43,11 +43,11 @@ let get_rooms_names = function(rooms) {
 }
 
 let get_struct_not_full_energy = function(room, strunctureType, taux_remplissage){
-    //info_perf.simpleLog(scriptName, strunctureType + taux_remplissage)
+	//info_perf.simpleLog(scriptName, strunctureType + taux_remplissage)
 
-    return room.find(FIND_MY_STRUCTURES, {
-        filter: (structure) =>  strunctureType.includes(structure.structureType) && structure.energy < structure.energyCapacity*(taux_remplissage|1)
-    });
+	return room.find(FIND_MY_STRUCTURES, {
+		filter: (structure) =>  strunctureType.includes(structure.structureType) && structure.energy < structure.energyCapacity*(taux_remplissage|1)
+	});
 }
 
 module.exports = {
