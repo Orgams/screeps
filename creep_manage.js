@@ -8,6 +8,7 @@ const carryWork = [CARRY, WORK, MOVE, CARRY, MOVE, WORK, MOVE, MOVE];
 const oneWorkTreeCarry = [WORK, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE];
 const small = [CARRY, WORK, MOVE];
 const claim = [CLAIM, MOVE];
+const attack = [ATTACK, MOVE, ATTACK];
 
 let energy;
 
@@ -29,6 +30,8 @@ let fonc_manage_creep = function(room) {
 	configs.push(get_config_upgrader(level));
 	configs.push(get_config_repairer(level));
 	//configs.push(get_config_claimer(level));
+	configs.push(get_config_destroyer(level));
+
 
 	info_perf.log(scriptName, "Init configs");
 
@@ -177,6 +180,15 @@ function get_config_claimer(level){
 
 	//                 role,        priority, min, popOpti, max, model,             color,     range,  strict
 	return new Config('claimer'   , 7,        0,   0,       max, claim,            "#ffff00", "autre", true);
+}
+function get_config_destroyer(level){
+	max = 0;
+	if (Game.flags["destroy"]) {
+		max = 1;
+	}
+
+	//                 role,        priority, min, popOpti, max, model,             color,     range,  strict
+	return new Config('destroyer' , 8,        0,   0,       max, attack,           "#ffff00", "autre", true);
 }
 
 function Config(role, priority, min, popOpti, max, model, color, range, strict) {
