@@ -47,10 +47,10 @@ let role = {
 			}
 		} else {
 			// Dire attendre
-			// creep.say('Wait');
-			// actionMove.do(creep, Game.flags['Wait']);
-			// info_perf.log(scriptName, "Aller attendre");
-			// return false;
+			creep.say('Wait');
+			actionMove.do(creep, Game.flags['Wait']);
+			info_perf.log(scriptName, "Aller attendre");
+			return false;
 		}
 
 		// // Verifier si on peut controler plus de Salles

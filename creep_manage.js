@@ -29,7 +29,7 @@ let fonc_manage_creep = function(room) {
 	configs.push(get_config_builder(level));
 	configs.push(get_config_upgrader(level));
 	configs.push(get_config_repairer(level));
-	//configs.push(get_config_claimer(level));
+	configs.push(get_config_claimer(level));
 	configs.push(get_config_destroyer(level));
 
 
@@ -171,10 +171,11 @@ function get_config_repairer(level){
 	return new Config('repairer'  , 6,        0,   0,       1,   oneWorkTreeCarry, "#ff9900", "local", false);
 }
 function get_config_claimer(level){
+	let flag_claim = Game.flags["room_to_claim"]
 
 	// Initialiser la configuration du claimer
 	max = 0;
-	if (Game.gcl.level > info_room.get_nb_my_room()) {
+	if (flag_claim && Game.gcl.level > info_room.get_nb_my_room()) {
 		max = 1;
 	}
 
